@@ -1,13 +1,13 @@
 
 class User {
-  constructor(userObject){
-    this.id = userObject['id'],
-    this.name = name,
-    this.address = address,
-    this.email = email,
-    this.strideLength = strideLength,
-    this.dailyStepGoal = dailyStepGoal,
-    this.friends = friends;
+  constructor(data){
+    this.id = data['id'],
+    this.name = data['name'],
+    this.address = data['address'],
+    this.email = data['email'],
+    this.strideLength = data['strideLength'],
+    this.dailyStepGoal = data['dailyStepGoal'],
+    this.friends = data['friends'];
   }
 }
 
