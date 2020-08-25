@@ -9,6 +9,14 @@ class User {
     this.dailyStepGoal = data.dailyStepGoal,
     this.friends = data.friends;
   }
+  displayFirstName() {
+    // take this.name and nix the last name
+    // use the space as an indicator
+    let nameArray = this.name.split(' ')
+    let firstNameOnlyArray = nameArray.splice(0, 1)
+    let firstName = firstNameOnlyArray.toString()
+    return firstName
+  }
 }
 
 /*
