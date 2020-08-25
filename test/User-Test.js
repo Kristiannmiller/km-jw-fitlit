@@ -58,10 +58,10 @@ const userData = [
 
 describe('User', () => {
   // beforeEach(() => {
-  //   testUser1 = new User(data[0]);
-  //   testUser2 = new User(data[1]);
-  //   testUser3 = new User(data[2]);
-  //   testUser4 = new User(data[3]);
+  //   let testUser1 = new User(userData[0]);
+  //   let testUser2 = new User(userData[1]);
+  //   let testUser3 = new User(userData[2]);
+  //   let testUser4 = new User(userData[3]);
   // });
 
   it('should be a function', () => {
@@ -73,10 +73,14 @@ describe('User', () => {
     expect(testUser1).to.be.an.instanceof(User)
   });
 
-  it('should create a parameter for each users data', () => {
-    expect(testUser1.id).to.equal(15)
+  it('should create a key/value pair for each users data', () => {
+    let testUser1 = new User(userData[0]);
+    console.log(Object.keys(testUser1));
+    expect(Object.keys(testUser1)).to.deep.equal(['id', 'name', 'address', 'email', 'strideLength', 'dailyStepGoal', 'friends'])
   })
   it('it should be able to access another Users data from the datafile', () => {
+    let testUser1 = new User(userData[0]);
+    let testUser2 = new User(userData[1]);
     expect(testUser2.id).to.equal(26)
     expect(testUser2.name).to.equal('Greta Corkery')
   })
