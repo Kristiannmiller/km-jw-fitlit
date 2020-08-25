@@ -5,11 +5,17 @@ class UserRepository {
     this.data = data
     //access user data by id
     //the average step goal amoungst all users
-    
+
     }
-  }
+    findUserById(id) {
+      let foundUser = this.data.find(user => user.id === id)
+      return foundUser
+    }
 
-
+  // let futureKitties = kitties.map(kitty => {
+  //       kitty.age = kitty.age + 2
+  //       return kitty
+  // myObj = myArrayOfObjects.find(obj => obj.prop === ‘something’);
 /*
 {
   "id": 15,
@@ -27,7 +33,7 @@ class UserRepository {
   ]
 },
 */
-
+}
 if (typeof module !== 'undefined') {
   module.exports = UserRepository;
 } else {
