@@ -75,13 +75,11 @@ describe('User', () => {
 
   it('should create a key/value pair for each users data', () => {
     let testUser1 = new User(userData[0]);
-    console.log(Object.keys(testUser1));
     expect(Object.keys(testUser1)).to.deep.equal(['id', 'name', 'address', 'email', 'strideLength', 'dailyStepGoal', 'friends'])
   })
   it('it should be able to access another Users data from the datafile', () => {
-    let testUser1 = new User(userData[0]);
     let testUser2 = new User(userData[1]);
-    expect(testUser2.id).to.equal(26)
-    expect(testUser2.name).to.equal('Greta Corkery')
+    expect(testUser2.id).to.equal(20)
+    expect(testUser2.name).to.equal('Ora O\'Connell')
   })
 });
