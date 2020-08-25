@@ -77,9 +77,44 @@ describe('User', () => {
     let testUser1 = new User(userData[0]);
     expect(Object.keys(testUser1)).to.deep.equal(['id', 'name', 'address', 'email', 'strideLength', 'dailyStepGoal', 'friends'])
   })
-  it('it should be able to access another Users data from the datafile', () => {
+  // "id": 20,
+  // "name": "Ora O'Connell",
+  // "address": "79585 Tania Ports, North Lillie MI 38947-4029",
+  // "email": "Audreanne.Gulgowski6@yahoo.com",
+  // "strideLength": 3.4,
+  // "dailyStepGoal": 8000,
+  // "friends": [
+  //   15,
+  //   13,
+  //   26
+  // ]
+
+  it('should be able to have a id property', () => {
     let testUser2 = new User(userData[1]);
     expect(testUser2.id).to.equal(20)
+  })
+  it('should be able to have a name property', () => {
+    let testUser2 = new User(userData[1]);
     expect(testUser2.name).to.equal('Ora O\'Connell')
+  })
+  it('should be able to have an address property', () => {
+    let testUser2 = new User(userData[1]);
+    expect(testUser2.address).to.equal("79585 Tania Ports, North Lillie MI 38947-4029")
+  })
+  it('should be able to have an email property', () => {
+    let testUser2 = new User(userData[1]);
+    expect(testUser2.email).to.equal("Audreanne.Gulgowski6@yahoo.com")
+  })
+  it('should be able to have a strideLength property', () => {
+    let testUser2 = new User(userData[1]);
+    expect(testUser2.strideLength).to.equal(3.4)
+  })
+  it('should be able to have a dailyStepGoal property', () => {
+    let testUser2 = new User(userData[1]);
+    expect(testUser2.dailyStepGoal).to.equal(8000)
+  })
+  it('should be able to have a friends property', () => {
+    let testUser2 = new User(userData[1]);
+    expect(testUser2.friends).to.deep.equal([15, 13, 26])
   })
 });
