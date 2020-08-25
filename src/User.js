@@ -1,7 +1,7 @@
 
 class User {
-  constructor(id, name, address, email, strideLength, dailyStepGoal, friends){
-    this.id = id,
+  constructor(userObject){
+    this.id = userObject['id'],
     this.name = name,
     this.address = address,
     this.email = email,

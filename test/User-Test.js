@@ -6,6 +6,7 @@ let testUser
 
 describe('User', () => {
   beforeEach(() => {
+    testUser7 = new User(userData[1]);
     testUser = new User(15,'Ezequiel Feest', '78801 Lauryn Plain, Lake Elinor MN 27856-9054', 'Anthony_Toy@hotmail.com', 4.4, 5000, [26, 20]);
     testUser2 = new User(26, 'Greta Corkery', '99020 Botsford Knoll, Lake Cecil ID 44141', 'Virgil28@hotmail.com', 3, 12000, [15,13,20]);
     testUser3 = new User(13, 'Tom Schmeler', '1524 Clemmie River, Newtonbury RI 02849-3159', 'Leopoldo.Sauer@gmail.com', 3.2, 4000, [26,20])
