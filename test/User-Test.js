@@ -77,18 +77,6 @@ describe('User', () => {
     let testUser1 = new User(userData[0]);
     expect(Object.keys(testUser1)).to.deep.equal(['id', 'name', 'address', 'email', 'strideLength', 'dailyStepGoal', 'friends'])
   })
-  // "id": 20,
-  // "name": "Ora O'Connell",
-  // "address": "79585 Tania Ports, North Lillie MI 38947-4029",
-  // "email": "Audreanne.Gulgowski6@yahoo.com",
-  // "strideLength": 3.4,
-  // "dailyStepGoal": 8000,
-  // "friends": [
-  //   15,
-  //   13,
-  //   26
-  // ]
-
   it('should be able to have a id property', () => {
     let testUser2 = new User(userData[1]);
     expect(testUser2.id).to.equal(20)
@@ -116,5 +104,10 @@ describe('User', () => {
   it('should be able to have a friends property', () => {
     let testUser2 = new User(userData[1]);
     expect(testUser2.friends).to.deep.equal([15, 13, 26])
+  })
+  it('should return the first name of the User', () => {
+    let testUser1 = new User(userData[0]);
+
+    expect(testUser1.displayFirstName()).to.equal('Ezequiel')
   })
 });
