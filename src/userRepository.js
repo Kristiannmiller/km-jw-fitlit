@@ -3,6 +3,9 @@
 class UserRepository {
   constructor(data){
     this.data = data
+    //access user data by id
+    //the average step goal amoungst all users
+    
     }
   }
 

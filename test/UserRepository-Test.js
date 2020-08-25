@@ -55,17 +55,29 @@ const userData = [
   },
 ];
 
-
 describe('UserRepository', () => {
-  beforeEach(() => {
-    testRepository = new UserRepository;
-})
+  // beforeEach(() => {
+  //   testRepository = new UserRepository;
+  // })
 
   it('should be a function', () => {
     expect(UserRepository).to.be.a('function')
   });
 
   it('should be an instance of UserRepository', () => {
+    let testRepository = new UserRepository;
     expect(testRepository).to.be.an.instanceof(UserRepository);
   });
+
+  it('should hold on to all of the user objects', () => {
+    let testRepository = new UserRepository(userData);
+    expect(testRepository.data[0].id).to.equal(15)
+    expect(testRepository.data[1].id).to.equal(20)
+    expect(testRepository.data[2].id).to.equal(13)
+    expect(testRepository.data[3].id).to.equal(26)
+  })
+  it('should be able to access user data by id', () => {
+    let testRepository = new UserRepository(userData);
+    expect(testRepository.findUserById(15)).to.deep.equal(userData[0])
+  })
 });
