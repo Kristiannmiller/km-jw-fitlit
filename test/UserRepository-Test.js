@@ -5,9 +5,8 @@ const UserRepository = require('../src/UserRepository')
 let testRepository
 
 describe('UserRepository', () => {
-  beforeEach((done) => {
+  beforeEach(() => {
     testRepository = new UserRepository;
-done();
 })
 
   it('should be a function', () => {
