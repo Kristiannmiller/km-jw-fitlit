@@ -11,6 +11,11 @@ class UserRepository {
       let foundUser = this.data.find(user => user.id === id)
       return foundUser
     }
+    calculateAverageStepGoal() {
+      let allStepGoals = this.data.map(user => user.dailyStepGoal)
+      let averageStepGoal = allStepGoals.reduce((a, b) => (a + b)) / this.data.length
+      return averageStepGoal
+    }
 
   // let futureKitties = kitties.map(kitty => {
   //       kitty.age = kitty.age + 2
