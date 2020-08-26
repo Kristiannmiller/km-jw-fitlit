@@ -56,9 +56,7 @@ const userData = [
 ];
 
 describe('UserRepository', () => {
-  // beforeEach(() => {
-  //   testRepository = new UserRepository;
-  // })
+
 
   it('should be a function', () => {
     expect(UserRepository).to.be.a('function')
