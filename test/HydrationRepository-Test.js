@@ -30,4 +30,9 @@ describe('HydrationRepository', () => {
   it('should be a function', () => {
     expect(HydrationRepository).to.be.a('function')
   });
+
+  it('should be an instantiation of HydrationRepository', () => {
+    let testRepository = new HydrationRepository;
+    expect(testRepository).to.be.an.instanceof(HydrationRepository)
+  })
 });
