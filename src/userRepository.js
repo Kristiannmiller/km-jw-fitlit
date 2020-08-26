@@ -4,25 +4,19 @@ class UserRepository {
   constructor(data){
     this.data = data
     }
-  }
+    findUserById(id) {
+      let foundUser = this.data.find(user => user.id === id)
+      return foundUser
+    }
+    calculateAverageStepGoal() {
+      let allStepGoals = this.data.map(user => user.dailyStepGoal)
+      let averageStepGoal = allStepGoals.reduce((a, b) => (a + b)) / this.data.length
+      return averageStepGoal
+    }
 
-
-/*
-{
-  "id": 15,
-  "name": "Ezequiel Feest",
-  "address": "78801 Lauryn Plain, Lake Elinor MN 27856-9054",
-  "email": "Anthony_Toy@hotmail.com",
-  "strideLength": 4.4,
-  "dailyStepGoal": 5000,
-  "friends": [
-    10,
-    23,
-    35,
-    20,
-    5
-  ]
-},
-*/
-
-module.exports = UserRepository
+}
+if (typeof module !== 'undefined') {
+  module.exports = UserRepository;
+} else {
+  module.exports = UserRepository;
+}

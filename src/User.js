@@ -1,32 +1,24 @@
 
 class User {
-  constructor(id, name, address, email, strideLength, dailyStepGoal, friends){
-    this.id = id,
-    this.name = name,
-    this.address = address,
-    this.email = email,
-    this.strideLength = strideLength,
-    this.dailyStepGoal = dailyStepGoal,
-    this.friends = friends;
+  constructor(data){
+    this.id = data.id,
+    this.name = data.name,
+    this.address = data.address,
+    this.email = data.email,
+    this.strideLength = data.strideLength,
+    this.dailyStepGoal = data.dailyStepGoal,
+    this.friends = data.friends;
+  }
+  displayFirstName() {
+    let nameArray = this.name.split(' ')
+    let firstNameOnlyArray = nameArray.splice(0, 1)
+    let firstName = firstNameOnlyArray.toString()
+    return firstName
   }
 }
 
-/*
-{
-  "id": 15,
-  "name": "Ezequiel Feest",
-  "address": "78801 Lauryn Plain, Lake Elinor MN 27856-9054",
-  "email": "Anthony_Toy@hotmail.com",
-  "strideLength": 4.4,
-  "dailyStepGoal": 5000,
-  "friends": [
-    10,
-    23,
-    35,
-    20,
-    5
-  ]
-},
-*/
-
-module.exports = User
+if (typeof module !== 'undefined') {
+  module.exports = User;
+} else {
+  module.exports = User;
+}
