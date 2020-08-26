@@ -75,6 +75,20 @@ body {
   color: #444;
   border: 1px solid;
   border-color: #414143;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: .1fr .9fr;
+  padding: 0;
+  padding-left: 3px;
+  margin: 0;
+}
+.boxbName {
+  grid-column: 1;
+  grid-row: 1;
+}
+.boxbGraph {
+  grid-column: 1;
+  grid-row: 2;
 }
 .d {
   grid-column: 1 / span 2;
@@ -93,6 +107,14 @@ body {
   display: grid;
   grid-template-columns: 2;
   grid-auto-rows: 2;
+}
+.teamstats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid;
+  border-color: #414143;
+  font-size: 200%;
 }
 .e {
   grid-column: 3 / span 6;
@@ -136,6 +158,9 @@ body {
   color: #444;
   border: 1px solid;
   border-color: #414143;
+  padding: 0;
+  padding-left: 3px;
+  margin: 0;
 }
 .j {
   grid-column: 2 / span 1;
@@ -152,6 +177,9 @@ body {
   border: 1px solid;
   color: #444;
   border-color: #414143;
+  padding: 0;
+  padding-left: 3px;
+  margin: 0;
 }
 .i {
   grid-column: 3 /span 6;
@@ -160,6 +188,9 @@ body {
   border: 1px solid;
   color: #444;
   border-color: #414143;
+  padding-left: 3px;
+  padding-bottom: 40px;
+  padding-top: 0;
 }
 .l {
   grid-column: 3 / span 6;
@@ -175,19 +206,23 @@ body {
   grid-column: 1;
   background-color: #f9f9f9;
   color: #444;
+  font-size: 50%;
 }
 .n {
   grid-column: 2;
   background-color: #f9f9f9;
   color: #444;
+  font-size: 50%;
 }
 .o {
   grid-column: 3;
   background-color: #f9f9f9;
   color: #444;
+  font-size: 50%;
 }
 .p {
   grid-column: 4;
   background-color: #f9f9f9;
   color: #444;
+  font-size: 50%; 
 }
