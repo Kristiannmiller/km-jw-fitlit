@@ -1,4 +1,3 @@
-
 class User {
   constructor(data){
     this.id = data.id,
@@ -10,15 +9,17 @@ class User {
     this.friends = data.friends;
   }
   displayFirstName() {
-    let nameArray = this.name.split(' ')
-    let firstNameOnlyArray = nameArray.splice(0, 1)
-    let firstName = firstNameOnlyArray.toString()
+    let nameArray = this.name.split(' ') // ['Ezekiel', 'Feest']
+    const [firstName, lastName] = nameArray
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment
+    // let firstNameOnlyArray = nameArray.splice(0, 1)
+    // let firstName = firstNameOnlyArray.toString()
+    // console.log({firstName, lastName, foo})
     return firstName
   }
 }
 
+// ***** HEY! IF YOU'RE TESTING, USE THIS *****
 if (typeof module !== 'undefined') {
-  module.exports = User;
-} else {
   module.exports = User;
 }
