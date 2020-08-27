@@ -55,4 +55,10 @@ describe('UserHydration', () => {
     let userWaterStats = new UserHydration()
     expect(userWaterStats).to.be.an.instanceof(UserHydration)
   });
+  it('should calculate average fl oz per day consumed by the user', () => {
+    let testRepository = new HydrationRepository(userData)
+    userWaterIntake = testRepository.findUserById(4)
+    let userWaterStats = new UserHydration(userWaterIntake)
+    expect(calculateAverageWaterIntake()).to.equal(92.5)
+  });
 });
