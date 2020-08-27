@@ -1,12 +1,15 @@
 class UserHydration {
   constructor(userWaterIntake){
-    // this.id = data.id,
-    // this.date = data.name,
-    // this.numOunces = data.numOunces
+    this.userWaterIntake = userWaterIntake
+  }
+  calculateAverageWaterIntake() {
+    let average = this.userWaterIntake.reduce((sum, num) => {
+      sum += this.userWaterIntake[num].numOunces
+      return sum
+    }, 0)
+    return average / this.userWaterIntake.length
   }
 }
 if (typeof module !== 'undefined') {
-  module.exports = UserHydration;
-} else {
   module.exports = UserHydration;
 }

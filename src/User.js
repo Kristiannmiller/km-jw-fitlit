@@ -22,6 +22,4 @@ class User {
 // ***** HEY! IF YOU'RE TESTING, USE THIS *****
 if (typeof module !== 'undefined') {
   module.exports = User;
-} else {
-  module.exports = User;
 }
