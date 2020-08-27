@@ -69,6 +69,16 @@ const userData = [
     "date": "2019/06/21",
     "numOunces": 75
   },
+  {
+    "userID": 2,
+    "date": "2019/06/22",
+    "numOunces": 75
+  },
+  {
+    "userID": 2,
+    "date": "2019/06/23",
+    "numOunces": 75
+  },
 ];
 
 describe('UserHydration', () => {

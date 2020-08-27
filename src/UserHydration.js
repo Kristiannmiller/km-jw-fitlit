@@ -13,7 +13,15 @@ class UserHydration {
     let flozForDay = this.userWaterIntake.find(waterData => waterData.date === date)
     return flozForDay.numOunces
   }
-  
+  waterForWeek(endingDate){
+    let endingDateIndex = this.userWaterIntake.findIndex(waterData => waterData.date === endingDate)
+    let weekOfWater = this.userWaterIntake.slice(endingDateIndex-6, endingDateIndex+1)
+    let result = weekOfWater.reduce((weekData, day) => {
+      weekData[day.date] = day.numOunces
+      return weekData
+    }, {})
+    return result
+  }
 }
 if (typeof module !== 'undefined') {
   module.exports = UserHydration;
