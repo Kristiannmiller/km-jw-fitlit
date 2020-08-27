@@ -61,4 +61,12 @@ describe('UserHydration', () => {
     let userWaterStats = new UserHydration(userWaterIntake)
     expect(userWaterStats.calculateAverageWaterIntake()).to.equal(92.5)
   });
+  it('should return fl oz for a specified date', () => {
+    let testRepository = new HydrationRepository(userData)
+    userWaterIntake = testRepository.findUserById(4)
+    let userWaterStats = new UserHydration(userWaterIntake)
+
+    expect(userWaterStats.waterByDate("2019/06/15")).to.equal(85)
+  });
+
 });

@@ -10,6 +10,7 @@ class UserHydration {
     }, 0)
     return average / this.userWaterIntake.length
   }
+  
 }
 if (typeof module !== 'undefined') {
   module.exports = UserHydration;
