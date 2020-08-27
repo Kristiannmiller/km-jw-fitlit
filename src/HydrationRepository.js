@@ -3,7 +3,6 @@ class HydrationRepository {
     this.allUserData = allUserData
     }
     findUserById(id) {
-      //return an array of objects containing all user hydration stats
       let userWaterIntake = this.allUserData.filter(userData => userData.userID === id)
       return userWaterIntake
     }
