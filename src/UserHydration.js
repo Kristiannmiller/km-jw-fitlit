@@ -3,8 +3,9 @@ class UserHydration {
     this.userWaterIntake = userWaterIntake
   }
   calculateAverageWaterIntake() {
+    console.log(this.userWaterIntake);
     let average = this.userWaterIntake.reduce((sum, num) => {
-      sum += this.userWaterIntake[num].numOunces
+      sum += num.numOunces
       return sum
     }, 0)
     return average / this.userWaterIntake.length

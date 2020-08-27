@@ -59,6 +59,6 @@ describe('UserHydration', () => {
     let testRepository = new HydrationRepository(userData)
     userWaterIntake = testRepository.findUserById(4)
     let userWaterStats = new UserHydration(userWaterIntake)
-    expect(calculateAverageWaterIntake()).to.equal(92.5)
+    expect(userWaterStats.calculateAverageWaterIntake()).to.equal(92.5)
   });
 });
