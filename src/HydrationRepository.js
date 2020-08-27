@@ -1,10 +1,11 @@
 class HydrationRepository {
-  constructor(data){
-    this.data = data
+  constructor(allUserData){
+    this.allUserData = allUserData
     }
     findUserById(id) {
-      let foundUser = this.data.find(user => user.userID === id)
-      return foundUser
+      //return an array of objects containing all user hydration stats
+      let userWaterIntake = this.allUserData.filter(userData => userData.userID === id)
+      return userWaterIntake
     }
   }
   if (typeof module !== 'undefined') {
