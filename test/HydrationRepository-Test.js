@@ -46,7 +46,7 @@ describe('HydrationRepository', () => {
 
   it('should be able to access user data by id', () => {
     let testRepository = new HydrationRepository(userData);
-    expect(testRepository.findUserById(4)).to.deep.equal(userData[4])
+    expect(testRepository.findUserById(4)).to.deep.equal(userData[3])
   })
 
   // it('should be able to return the average step goal amongst all users', () => {
