@@ -43,7 +43,32 @@ const userData = [
     "userID": 4,
     "date": "2019/06/16",
     "numOunces": 100
-  }
+  },
+  {
+    "userID": 2,
+    "date": "2019/06/17",
+    "numOunces": 30
+  },
+  {
+    "userID": 2,
+    "date": "2019/06/18",
+    "numOunces": 50
+  },
+  {
+    "userID": 2,
+    "date": "2019/06/19",
+    "numOunces": 80
+  },
+  {
+    "userID": 2,
+    "date": "2019/06/20",
+    "numOunces": 75
+  },
+  {
+    "userID": 2,
+    "date": "2019/06/21",
+    "numOunces": 75
+  },
 ];
 
 describe('UserHydration', () => {
@@ -67,6 +92,14 @@ describe('UserHydration', () => {
     let userWaterStats = new UserHydration(userWaterIntake)
 
     expect(userWaterStats.waterByDate("2019/06/15")).to.equal(85)
+  });
+  it('should return fl oz for each day over a week', () => {
+    let testRepository = new HydrationRepository(userData)
+    userWaterIntake = testRepository.findUserById(2)
+    let userWaterStats = new UserHydration(userWaterIntake)
+
+    expect(userWaterStats.waterForWeek("2019/06/21")).to.deep.equal(
+      {"2019/06/15": 75, "2019/06/16": 25, "2019/06/17": 30, "2019/06/18": 50, "2019/06/19": 80, "2019/06/20": 75, "2019/06/21": 75})
   });
 
 });

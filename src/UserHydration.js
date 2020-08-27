@@ -13,6 +13,7 @@ class UserHydration {
     let flozForDay = this.userWaterIntake.find(waterData => waterData.date === date)
     return flozForDay.numOunces
   }
+  
 }
 if (typeof module !== 'undefined') {
   module.exports = UserHydration;
