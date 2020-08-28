@@ -9,6 +9,13 @@ class UserSleep {
     }, 0)
     return average / this.userSleepIntake.length
   }
+  calculateAverageSleepQuality() {
+    let average = this.userSleepIntake.reduce((sum, num) => {
+      sum += num.sleepQuality
+      return sum
+    }, 0)
+    return average / this.userSleepQuality.length
+  }
 }
 
 

@@ -96,7 +96,7 @@ describe('UserSleep', () => {
     expect(userSleepStats).to.be.an.instanceof(UserSleep)
   });
 
-  it ('should return number of hours slept for a specific user on a specific date', () => {
+  it ('should return average hours slept for all time for a given user', () => {
     let sleepRepository = new SleepRepository(sleepData)
     userSleepStats = sleepRepository.findUserById(1)
     let userSleepHours = new UserSleep(userSleepStats)
