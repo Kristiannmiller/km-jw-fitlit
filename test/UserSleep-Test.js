@@ -35,4 +35,10 @@ describe('UserSleep', () => {
   it('should be a function', () => {
     expect(UserSleep).to.be.a('function')
   });
+
+  it('should be an instantiation of UserSleep', () => {
+    let userSleepStats = new UserSleep()
+    expect(userSleepStats).to.be.an.instanceof(UserSleep)
+  });
+  
 })
