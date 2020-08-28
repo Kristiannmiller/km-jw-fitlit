@@ -1,7 +1,7 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const SleepRepository = require('../SleepRepository')
+const SleepRepository = require('../src/SleepRepository')
 const sleepData = [
   {
     "userID": 1,
@@ -41,7 +41,7 @@ describe('SleepRepository', () => {
   });
 
   it('should hold all of the user sleep objects', () => {
-    let testRepository = new SleepRepository(userData);
+    let testRepository = new SleepRepository(sleepData);
     expect(testRepository.allUserData[0].userID).to.equal(1)
     expect(testRepository.allUserData[1].userID).to.equal(2)
     expect(testRepository.allUserData[2].userID).to.equal(3)
