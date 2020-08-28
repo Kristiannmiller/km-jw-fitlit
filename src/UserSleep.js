@@ -26,7 +26,10 @@ class UserSleep {
     let sleepForDay =
     this.userSleepIntake.find(sleepData =>
     sleepData.date === date)
-    return sleepForDay.sleepQuality; 
+    return sleepForDay.sleepQuality;
+  }
+  calculateAverageWeeklySleepQuality() {
+    
   }
 }
 
