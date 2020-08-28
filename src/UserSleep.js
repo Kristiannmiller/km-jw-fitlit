@@ -14,7 +14,7 @@ class UserSleep {
       sum += num.sleepQuality
       return sum
     }, 0)
-    return average / this.userSleepQuality.length
+    return average / this.userSleepIntake.length
   }
 }
 
