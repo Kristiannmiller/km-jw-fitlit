@@ -30,5 +30,12 @@ const sleepData = [
   }
 ];
 
+describe('UserSleep', () => {
+
+  it('should be a function', () => {
+    expect(UserSleep).to.be.a('function')
+  });
+})
+
 
 ]
