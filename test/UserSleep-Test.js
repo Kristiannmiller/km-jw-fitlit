@@ -27,7 +27,7 @@ const sleepData = [
     "date": "2019/06/15",
     "hoursSlept": 5.4,
     "sleepQuality": 3
-  }
+  },
   {
     "userID": 4,
     "date": "2019/06/16",
@@ -97,10 +97,10 @@ describe('UserSleep', () => {
   });
 
   it ('should return number of hours slept for a specific user on a specific date', () => {
-    let sleepRepository = new SleepRepository(userSleepData)
+    let sleepRepository = new SleepRepository(sleepData)
     userSleepStats = sleepRepository.findUserById(1)
     let userSleepHours = new UserSleep(userSleepStats)
 
-    expect(userSleepstats.calculateAverageSleepHours()).to.equal(4.5)
+    expect(userSleepStats.calculateAverageSleepHours()).to.equal(4.5)
   });
 })
