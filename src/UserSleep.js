@@ -16,6 +16,7 @@ class UserSleep {
     }, 0)
     return average / this.userSleepIntake.length
   }
+  
 }
 
 
