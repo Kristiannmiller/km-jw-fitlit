@@ -16,6 +16,12 @@ class UserSleep {
     }, 0)
     return average / this.userSleepIntake.length
   }
+  calculateSleepByDate(date){
+    let sleepForDay =
+    this.userSleepIntake.find(sleepData =>
+    sleepData.date === date)
+    return sleepForDay.hoursSlept
+  }
   
 }
 
