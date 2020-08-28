@@ -1,6 +1,9 @@
 class UserSleep {
   constructor(userSleepIntake){
-    
+    this.userSleepIntake = userSleepIntake
+  }
+  calculateAverageSleepHours() {
+    let average = this.userSleepIntake
   }
 }
 
