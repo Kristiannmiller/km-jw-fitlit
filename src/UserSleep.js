@@ -3,7 +3,11 @@ class UserSleep {
     this.userSleepIntake = userSleepIntake
   }
   calculateAverageSleepHours() {
-    let average = this.userSleepIntake
+    let average = this.userSleepIntake.reduce((sum, num) => {
+      sum += num.hoursSlept
+      return sum
+    }, 0)
+    return average / this.userSleepIntake.length
   }
 }
 
