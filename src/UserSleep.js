@@ -10,5 +10,5 @@ class UserSleep {
 
 
 if (typeof module !== 'undefined') {
-  module.exports = UserHydration;
+  module.exports = UserSleep;
 }

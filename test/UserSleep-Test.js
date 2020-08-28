@@ -36,6 +36,3 @@ describe('UserSleep', () => {
     expect(UserSleep).to.be.a('function')
   });
 })
-
-
-]
