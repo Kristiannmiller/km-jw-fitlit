@@ -22,7 +22,12 @@ class UserSleep {
     sleepData.date === date)
     return sleepForDay.hoursSlept
   }
-  
+  calculateSleepQualityByDate(date){
+    let sleepForDay =
+    this.userSleepIntake.find(sleepData =>
+    sleepData.date === date)
+    return sleepForDay.sleepQuality; 
+  }
 }
 
 
