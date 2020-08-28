@@ -46,5 +46,12 @@ describe('SleepRepository', () => {
     expect(testRepository.allUserData[1].userID).to.equal(2)
     expect(testRepository.allUserData[2].userID).to.equal(3)
     expect(testRepository.allUserData[3].userID).to.equal(4)
-  })
+  });
+
+  it('should calculate the average sleep quality for all users', () => {
+    let testRepository = new SleepRepository(sleepData);
+
+    expect(testRepository.getSleepQualityAverage()).to.equal(3.65)
+
+});
 });
