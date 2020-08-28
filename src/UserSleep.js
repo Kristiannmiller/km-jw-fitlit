@@ -28,13 +28,24 @@ class UserSleep {
     sleepData.date === date)
     return sleepForDay.sleepQuality;
   }
-  calculateAverageWeeklySleepQuality(endingDate) {
+  calculateDailySleepHoursForWeek(endingDate) {
     let endingDateIndex =
     this.userSleepIntake.findIndex(sleepData =>
     sleepData.date === endingDate)
     let weekOfSleep = this.userSleepIntake.slice(endingDateIndex-6, endingDateIndex+1)
     let result = weekOfSleep.reduce((weekData, day) => {
       weekData[day.date] = day.hoursSlept
+      return weekData
+    }, {})
+    return result
+  }
+  calculateDailySleepQualityForWeek(endingDate){
+    let endingDateIndex =
+    this.userSleepIntake.findIndex(sleepData =>
+    sleepData.date === endingDate)
+    let weekOfSleep = this.userSleepIntake.slice(endingDateIndex-6, endingDateIndex+1)
+    let result = weekOfSleep.reduce((weekData, day) => {
+      weekData[day.date] = day.sleepQuality
       return weekData
     }, {})
     return result
