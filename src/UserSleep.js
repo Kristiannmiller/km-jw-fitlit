@@ -50,6 +50,18 @@ class UserSleep {
     }, {})
     return result
   }
+  calculateAverageWeeklySleepQuality(endingDate){
+    let endingDateIndex =
+    this.userSleepIntake.findIndex(sleepData =>
+    sleepData.date === endingDate)
+    let weekOfSleep = this.userSleepIntake.slice(endingDateIndex-6, endingDateIndex+1)
+    console.log(weekOfSleep)
+    let result = weekOfSleep.reduce((acc, currentValue) => {
+      acc += currentValue.sleepQuality
+      return acc
+    }, 0)
+    return parseFloat((result / weekOfSleep.length).toFixed(2))
+  }
 }
 
 
