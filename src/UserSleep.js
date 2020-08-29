@@ -14,13 +14,13 @@ class UserSleep {
       sum += num.sleepQuality
       return sum
     }, 0)
-    return average / this.userSleepIntake.length
+    return parseFloat((average / this.userSleepIntake.length).toFixed(2))
   }
   calculateSleepByDate(date){
     let sleepForDay =
     this.userSleepIntake.find(sleepData =>
     sleepData.date === date)
-    return sleepForDay.hoursSlept
+    return parseFloat((sleepForDay.hoursSlept).toFixed(2))
   }
   calculateSleepQualityByDate(date){
     let sleepForDay =

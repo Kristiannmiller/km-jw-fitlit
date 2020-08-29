@@ -438,7 +438,7 @@ describe('UserSleep', () => {
     userSleepStats = sleepRepository.findUserById(1)
     let userSleepQuality = new UserSleep(userSleepStats);
 
-    expect(userSleepQuality.calculateAverageSleepQuality()).to.equal(3.5)
+    expect(userSleepQuality.calculateAverageSleepQuality()).to.equal(2.79)
   });
 
   it ('should return the hours slept by a specific user on a specific date', () => {
