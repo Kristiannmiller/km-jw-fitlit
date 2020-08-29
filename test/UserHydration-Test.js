@@ -86,7 +86,7 @@ describe('UserHydration', () => {
   it('should be a function', () => {
     expect(UserHydration).to.be.a('function')
   });
-  it('should be an instation of UserHydration', () => {
+  it('should be an instantiation of UserHydration', () => {
     let userWaterStats = new UserHydration()
     expect(userWaterStats).to.be.an.instanceof(UserHydration)
   });
