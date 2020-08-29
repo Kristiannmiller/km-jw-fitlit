@@ -447,7 +447,7 @@ describe('SleepRepository', () => {
 
   it('should find all users who average a sleep quality greater than three for a given week', () => {
     let testRepository = new SleepRepository(sleepData);
-    expect(testRepository.findGoodSleepers('2019/06/23')).to.deep.equal([2,3,4])
+    expect(testRepository.findGoodSleepers('2019/06/23')).to.deep.equal([2,3])
   });
 
   it('should return the sleeper who slept the most for a given date', () => {
