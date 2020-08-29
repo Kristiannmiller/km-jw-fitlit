@@ -46,15 +46,18 @@ class SleepRepository {
     //our second function would return a new array of the user id and their average sleep quality over a
     //given week
     //another function will return only userids that average sleepquality of greater than 3 for the given week
-}
+  }
   findBestSleeper(date){
     const targetDateData = this.allUserData.filter(sleepData => sleepData.date === date)
     console.log(targetDateData)
     const bestSleeper = targetDateData.sort((a,b) => {
       return  b.hoursSlept - a.hoursSlept
     })
-    console.log (bestSleeper[0])
+    if (bestSleeper[0].hoursSlept == bestSleeper[1].hoursSlept){
+      return ("It's a tie between " + bestSleeper[0] + " and " + bestSleeper[1] +"!")
+    } else {
     return bestSleeper[0]
+    }
   }
 }
   if (typeof module !== 'undefined') {
