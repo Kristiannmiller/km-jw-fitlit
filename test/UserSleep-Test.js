@@ -461,7 +461,7 @@ describe('UserSleep', () => {
     userSleepStats = sleepRepository.findUserById(4)
     let userSleepData = new UserSleep(userSleepStats);
 
-    expect(userSleepData.calculateDailySleepHoursForWeek("2019/06/22")).to.deep.equal({"2019/06/16":4.1, "2019/06/17":4.1, "2019/06/18": 7.1, "2019/06/19":6.1, "2019/06/20":14, "2019/06/21":5.5, "2019/06/22": 5.0})
+    expect(userSleepData.calculateDailySleepHoursForWeek("2019/06/22")).to.deep.equal({"2019/06/16":8.3, "2019/06/17":5.7, "2019/06/18": 5.9, "2019/06/19":5.2, "2019/06/20":8.3, "2019/06/21":10.6, "2019/06/22": 7.7})
   });
   it ('should return the daily sleep quality for a given user each day over a week', () => {
     let sleepRepository = new SleepRepository(sleepData)
