@@ -17,16 +17,6 @@ class SleepRepository {
     //put them results into an array
     //.sort() on those results
     //return ... the ones more than 3.
-
-
-
-    selectWeek(endingDate){
-      // let endingWeekArray = this.allUserData.filter(endingDate => sleepData.date === endingDate){
-      //   //i want to run selectDay for each user in a floop that decrements 7 times
-      //   //I think we could use
-      // })
-    }
-
     getSleepQualityAverage(){
       let averageSleepQuality = this.allUserData.reduce((acc, user) => {
         acc += user.sleepQuality
@@ -59,27 +49,7 @@ class SleepRepository {
       }, 0)
       return allUserAverage
     }
-
-
-
-
-      //this.getAverageWeeklySleepQualityForUser()
-    //  const currentUser = this.allUserData.findUserById()
-      //this.allUserData.findUserById()
-        //7
-    //the sleepData contains an array of objects with all the users sleep information, including ID, and sleep quality, on any given night
-    //we want to  create an array of objects with 1 key value pair: userID, and sleepQuality average for a given week
-
-    //1.we want to start by selecting the week
-    //2. we want to return a shallow copy of the sleepData array that returns all userObjects for that week
-    //3. We will assign this array to a variable.
-    //4. we will use filter over this variable to return a shallower array of only the users whos Average sleepquality value is greater than 3.
-
-    //if our first function returns an array of all objects with a user id of blank,
-    //our second function would return a new array of the user id and their average sleep quality over a
-    //given week
-    //another function will return only userids that average sleepquality of greater than 3 for the given week
-
+    
   findBestSleeper(date){
     const targetDateData = this.allUserData.filter(sleepData => sleepData.date === date)
     const bestSleeper = targetDateData.sort((a,b) => {

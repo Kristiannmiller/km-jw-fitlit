@@ -7,7 +7,7 @@ class UserSleep {
       sum += num.hoursSlept
       return sum
     }, 0)
-    return average / this.userSleepIntake.length
+    return parseFloat((average / this.userSleepIntake.length).toFixed(2))
   }
   calculateAverageSleepQuality() {
     let average = this.userSleepIntake.reduce((sum, num) => {

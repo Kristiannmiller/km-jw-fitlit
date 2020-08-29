@@ -430,7 +430,7 @@ describe('UserSleep', () => {
     userSleepStats = sleepRepository.findUserById(1)
     let userSleepHours = new UserSleep(userSleepStats)
 
-    expect(userSleepHours.calculateAverageSleepHours()).to.equal(4.5)
+    expect(userSleepHours.calculateAverageSleepHours()).to.equal(7.41)
   });
 
   it ('should return average sleep quality for all time for a given user', () => {
