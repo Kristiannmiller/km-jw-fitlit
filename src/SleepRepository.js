@@ -33,23 +33,38 @@ class SleepRepository {
       }, 0)
       return averageSleepQualityForAUser
     }
+    calculateUniqueUsers(){
+      console.log("hi")
+      let uniqueUserArray = this.allUserData.reduce((acc, currentValue) => {
+        if (!acc.includes(currentValue.userID)){
+            acc.push(currentValue.userID)
+          }
+        return acc
+      },[])
+      console.log("this is what it is returning",uniqueUserArray)
+      return uniqueUserArray
+    }
 
-    findGoodSleepers (endingDate){
+        // let uniqueUsers = currentValue.userID.forEach(user => {
+        //   if (uniqueUserArray.includes(user.userID) === false){
+        //     acc.push(user.userID)
+        //   }
+
+    findGoodSleepers(endingDate){
       //call findUserById 4 times to get users 1-4 and all their week
       //call selectDay to filter each user's data into a week
       //call the getAverageWeeklySleepQualityForUser
       //filter the users who have a quality over 3
       //return those users
-
-      console.log("this is what it is returning", userArray)
-      let selectedDay = this.selectDay('2019/06/23')
-      let allUserAverage = selectedDay.reduce((acc, user) => {
-        acc += user.sleepQuality/7
-        return acc
-      }, 0)
-      return allUserAverage
+      this.calculateUniqueUsers()
+      // let selectedDay = this.selectDay('2019/06/23')
+      // let allUserAverage = selectedDay.reduce((acc, user) => {
+      //   acc += user.sleepQuality/7
+      //   return acc
+      // }, 0)
+      // return allUserAverage
     }
-    
+
   findBestSleeper(date){
     const targetDateData = this.allUserData.filter(sleepData => sleepData.date === date)
     const bestSleeper = targetDateData.sort((a,b) => {
