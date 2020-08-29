@@ -431,7 +431,7 @@ describe('SleepRepository', () => {
 
   it('should calculate the average sleep quality for all users', () => {
     let testRepository = new SleepRepository(sleepData);
-    expect(testRepository.getSleepQualityAverage()).to.equal(3.38)
+    expect(testRepository.getSleepQualityAverage()).to.equal(3.03)
 });
   it('should select a span of seven days', () => {
     let testRepository = new SleepRepository(sleepData);
