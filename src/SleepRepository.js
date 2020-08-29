@@ -12,7 +12,7 @@ class SleepRepository {
       console.log("this day", endingDateIndex)
       return week
     }
-    //separate all users by id into their own arrays
+    //filter the user data to include only unique IDs
     //have the weekly average thingy run on each of those arrays
     //put them results into an array
     //.sort() on those results
@@ -47,8 +47,10 @@ class SleepRepository {
     findGoodSleepers (endingDate){
       //call findUserById 4 times to get users 1-4 and all their week
       //call selectDay to filter each user's data into a week
-      //call reduce each time to get the average sleep sleepQuality
-      
+      //call the getAverageWeeklySleepQualityForUser
+      //filter the users who have a quality over 3
+      //return those users
+
       console.log("this is what it is returning", userArray)
       let selectedDay = this.selectDay('2019/06/23')
       let allUserAverage = selectedDay.reduce((acc, user) => {
