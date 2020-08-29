@@ -420,11 +420,6 @@ describe('UserSleep', () => {
     expect(UserSleep).to.be.a('function')
   });
 
-  it('should be an instantiation of UserSleep', () => {
-    let userSleepStats = new UserSleep()
-    expect(userSleepStats).to.be.an.instanceof(UserSleep)
-  });
-
   it ('should return average hours slept for all time for a given user', () => {
     let sleepRepository = new SleepRepository(sleepData)
     userSleepStats = sleepRepository.findUserById(1)

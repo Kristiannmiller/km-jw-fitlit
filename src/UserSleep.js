@@ -1,6 +1,6 @@
 class UserSleep {
   constructor(userSleepIntake){
-    this.userSleepIntake = userSleepIntake
+    this.userSleepIntake = userSleepIntake,
     this.userID = userSleepIntake[0].userID
   }
   calculateAverageSleepHours() {
@@ -56,7 +56,6 @@ class UserSleep {
     this.userSleepIntake.findIndex(sleepData =>
     sleepData.date === endingDate)
     let weekOfSleep = this.userSleepIntake.slice(endingDateIndex-6, endingDateIndex+1)
-    console.log(weekOfSleep)
     let result = weekOfSleep.reduce((acc, currentValue) => {
       acc += currentValue.sleepQuality
       return acc
