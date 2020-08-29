@@ -1,4 +1,15 @@
+/* ~~~~~ GLOBAL RULES ~~~~~ */
 
+/*=== Reset ===*/
+
+html, body, h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%
+}
 
 body {
   margin: 40px;
@@ -23,6 +34,8 @@ body {
   font-size: 150%;
 }
 
+/* ~~~~~ HEADER ~~~~~ */
+
 .a {
   grid-column: 1 /span 8;
   grid-row: 1;
@@ -44,13 +57,46 @@ body {
   width: 60%;
   font-size: 75%;
 }
-.photo {
-  grid-column: 1;
-  grid-row: 1 / span 2
+
+/*=== USER INFO ===*/
+
+.userProfilePhoto {
+  height: 10vh;
+  border-radius: 5vh;
 }
 .username {
   grid-column: 2;
   grid-row: 1
+}
+.userSteps {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+/*=== MENU OPTIONS ===*/
+
+.actMenu {
+  grid-column: 2;
+  font-family: 'Segoe UI'
+}
+.hydMenu{
+  grid-column: 3;
+  font-family: 'Segoe UI'
+}
+.slpMenu{
+  grid-column: 4;
+  font-family: 'Segoe UI'
+}
+
+
+
+.photo {
+  grid-column: 1;
+  grid-row: 1 / span 2
+}
+.steps {
+  grid-column: 2;
+  grid-row: 2;
 }
 .sidebarMenu {
   grid-column: 1;
@@ -62,22 +108,6 @@ body {
   padding: 0px 0px 15px 0px;
   color: #444;
   text-align: center;
-}
-.steps {
-  grid-column: 2;
-  grid-row: 2;
-}
-.r {
-  grid-column: 2;
-  font-family: 'Segoe UI'
-}
-.s{
-  grid-column: 3;
-  font-family: 'Segoe UI'
-}
-.t{
-  grid-column: 4;
-  font-family: 'Segoe UI'
 }
 .b {
   grid-column: 3 /span 6;
