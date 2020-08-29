@@ -9,8 +9,8 @@ class SleepRepository {
     selectWeek(endingDate){
       let endingDateIndex =
       this.allUserData.findIndex(sleepData => sleepData.date === endingDate)
+      console.log(endingDateIndex)
       let weekOfSleep = this.allUserData.slice(endingDateIndex-6, endingDateIndex+1)
-      console.log(weekOfSleep)
       return weekOfSleep
     }
     getSleepQualityAverage(){
@@ -22,14 +22,15 @@ class SleepRepository {
       return parseFloat(result)
     }
     getAverageWeeklySleepQualityForUser(id, endingDate){
-      selectWeek(endingDate)
+      //selectWeek(endingDate)
       let averageSleepQualityForUser = this.allUserData.id.reduce((acc, user) => {
         acc += user.sleepQuality
         return acc
       }, 0)/7
     }
     findGoodSleepers (endingDate){
-      this.selectWeek('2019/06/23')
+      console.log('this is the fifth test', this.selectWeek('2019/06/23'))
+      //this.getAverageWeeklySleepQualityForUser()
       const currentUser = this.allUserData.findUserById()
       this.allUserData.findUserById()
         /7
@@ -40,7 +41,21 @@ class SleepRepository {
     //2. we want to return a shallow copy of the sleepData array that returns all userObjects for that week
     //3. We will assign this array to a variable.
     //4. we will use filter over this variable to return a shallower array of only the users whos Average sleepquality value is greater than 3.
+
+    //if our first function returns an array of all objects with a user id of blank,
+    //our second function would return a new array of the user id and their average sleep quality over a
+    //given week
+    //another function will return only userids that average sleepquality of greater than 3 for the given week
 }
+  findBestSleeper(date){
+    const targetDateData = this.allUserData.filter(sleepData => sleepData.date === date)
+    console.log(targetDateData)
+    const bestSleeper = targetDateData.sort((a,b) => {
+      return  b.hoursSlept - a.hoursSlept
+    })
+    console.log (bestSleeper[0])
+    return bestSleeper[0]
+  }
 }
   if (typeof module !== 'undefined') {
     module.exports = SleepRepository;

@@ -22,6 +22,54 @@ const sleepData = [
     "sleepQuality": 4.7
   },
   {
+    "userID": 3,
+    "date": "2019/06/16",
+    "hoursSlept": 8.8,
+    "sleepQuality": 3.7
+  },
+  {
+    "userID": 3,
+    "date": "2019/06/17",
+    "hoursSlept": 5,
+    "sleepQuality": 3
+  },
+  {
+    "userID": 3,
+    "date": "2019/06/18",
+    "hoursSlept": 7,
+    "sleepQuality": 3
+  },
+  {
+    "userID": 3,
+    "date": "2019/06/19",
+    "hoursSlept": 7,
+    "sleepQuality": 1.4
+  },
+  {
+    "userID": 3,
+    "date": "2019/06/20",
+    "hoursSlept": 6.8,
+    "sleepQuality": 4.1
+  },
+  {
+    "userID": 3,
+    "date": "2019/06/21",
+    "hoursSlept": 10,
+    "sleepQuality": 4.7
+  },
+  {
+    "userID": 3,
+    "date": "2019/06/22",
+    "hoursSlept": 4.8,
+    "sleepQuality": 1.7
+  },
+  {
+    "userID": 3,
+    "date": "2019/06/23",
+    "hoursSlept": 4.5,
+    "sleepQuality": 4.7
+  },
+  {
     "userID": 4,
     "date": "2019/06/15",
     "hoursSlept": 5.4,
@@ -101,8 +149,14 @@ describe('SleepRepository', () => {
     let testRepository = new SleepRepository(sleepData);
     expect(testRepository.getSleepQualityAverage()).to.equal(3.43)
 });
+  it('should select a span of seven days')
   it('should find all users who average a sleep quality greater than three for a given week', () => {
     let testRepository = new SleepRepository(sleepData);
     expect(testRepository.findGoodSleepers()).to.deep.equal([2,3,4])
+  });
+
+  it('should return the sleeper who slept the most for a given date', () => {
+    let testRepository = new SleepRepository(sleepData);
+    expect(testRepository.findBestSleeper('2019/06/15')).to.equal(testRepository.allUserData[2])
   });
 });
