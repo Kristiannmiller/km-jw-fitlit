@@ -1,13 +1,15 @@
 // ********** GLOBAL VARIABLE **********
 var currentUser
+var currentUserRepository
 
 // ********** QUERIES  **********
 const profilePage = document.querySelector('.username');
 const myProfileLink = document.querySelector('.profileLink');
-const sideBar = document.querySelector('.d');
+const sideBarContents = document.querySelector('.sideBarContents');
+const userPhoto = document.getElementById('userPhoto')
 
 // ********** EVENT LISTENERS **********
-window.addEventListener("load", displayNewUser);
+window.addEventListener("load", updateUser);
 profilePage.addEventListener('click', displayProfile);
 myProfileLink.addEventListener('click', displayProfile);
 
@@ -17,25 +19,23 @@ myProfileLink.addEventListener('click', displayProfile);
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
-
-function displayNewUser() {
+function updateUser() {
+  uploadData()
+  displayUser()
+  displayTeamList()
+}
+function uploadData() {
   currentUserRepository = new UserRepository(userData)
   currentUser = new User(currentUserRepository.data[getRandomIndex(currentUserRepository.data)])
-  //create new instance of a User using the dataset and the getRandomIndex function
-  //create new instances of the User's friends using forEach method?
-  //
-  //get information for a new user to display on the dom
-  //
-
 }
 
-function accessProfile() {
+function displayUser() {
 
 }
 
 function displayProfile() {
-  sideBar.innerHTML = ''
-  sideBar.innerHTML =
+  sideBarContents.innerHTML = ''
+  sideBarContents.innerHTML =
   ``
   //get user info
   //interpolate user info into profile
