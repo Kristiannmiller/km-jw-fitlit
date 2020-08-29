@@ -3,14 +3,15 @@ var currentUser
 var currentUserRepository
 
 // ********** QUERIES  **********
-const profilePage = document.querySelector('.username');
+const userName = document.querySelector('.username');
 const myProfileLink = document.querySelector('.profileLink');
 const sideBarContents = document.querySelector('.sideBarContents');
 const userPhoto = document.getElementById('userPhoto')
+const userSteps = document.getElementById('userSteps')
 
 // ********** EVENT LISTENERS **********
 window.addEventListener("load", updateUser);
-profilePage.addEventListener('click', displayProfile);
+userName.addEventListener('click', displayProfile);
 myProfileLink.addEventListener('click', displayProfile);
 
 // ******** FUNCTIONS/EVENTHANDLERS **********
@@ -21,15 +22,17 @@ function getRandomIndex(array) {
 }
 function updateUser() {
   uploadData()
-  displayUser()
-  displayTeamList()
+  displayUserData()
+  // displayTeamList()
 }
 function uploadData() {
   currentUserRepository = new UserRepository(userData)
   currentUser = new User(currentUserRepository.data[getRandomIndex(currentUserRepository.data)])
 }
 
-function displayUser() {
+function displayUserData() {
+  userName.innerText = `${currentUser.name}`
+  userSteps.innerText = ``//***update when we do activity**
 
 }
 
