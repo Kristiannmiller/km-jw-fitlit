@@ -48,9 +48,20 @@ body {
   grid-column: 1;
   grid-row: 1 / span 2
 }
-.name {
+.username {
   grid-column: 2;
   grid-row: 1
+}
+.sidebarMenu {
+  grid-column: 1;
+  font-family: 'Segoe UI';
+  font-size: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 5px;
+  padding: 0px 0px 15px 0px;
+  color: #444;
+  text-align: center;
 }
 .steps {
   grid-column: 2;
@@ -101,7 +112,7 @@ body {
   font-size: 60%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: .25fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 .teammember {
   display: grid;
@@ -224,5 +235,5 @@ body {
   grid-column: 4;
   background-color: #f9f9f9;
   color: #444;
-  font-size: 50%; 
+  font-size: 50%;
 }

@@ -1,12 +1,14 @@
 // ********** GLOBAL VARIABLE **********
-var currentUser = {};
+var currentUser
 
 // ********** QUERIES  **********
-const profilePage = document.getElementById('#profileName');
-const sideBar = document.querySelector('.box d');
+const profilePage = document.querySelector('.username');
+const myProfileLink = document.querySelector('.profileLink');
+const sideBar = document.querySelector('.d');
 
 // ********** EVENT LISTENERS **********
 profilePage.addEventListener('click', displayProfile);
+myProfileLink.addEventListener('click', displayProfile);
 
 
 // ******** FUNCTIONS/EVENTHANDLERS **********
