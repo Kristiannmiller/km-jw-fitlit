@@ -440,11 +440,6 @@ describe('SleepRepository', () => {
     expect(testRepository.calculateUniqueUsers()).to.deep.equal([1,2,3,4])
   });
 
-  it('should select a span of seven days', () => {
-    let testRepository = new SleepRepository(sleepData);
-    expect(testRepository.selectDay('2019/06/23')).to.deep.equal(['2019/06/15', '2019/06/16', '2019/06/17', '2019/06/18', '2019/06/19', '2019/06/20', '2019/06/20', '2019/06/21', '2019/06/22'])
-  });
-
   it('should find all users who average a sleep quality greater than three for a given week', () => {
     let testRepository = new SleepRepository(sleepData);
     expect(testRepository.findGoodSleepers('2019/06/23')).to.deep.equal([2,3])

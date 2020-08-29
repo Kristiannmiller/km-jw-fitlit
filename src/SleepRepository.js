@@ -11,7 +11,6 @@ class SleepRepository {
     selectDay(endingDate){
       let endingDateIndex = this.allUserData.filter(sleepData => sleepData.date === endingDate)
       let week = this.allUserData.slice(endingDateIndex.date-6, endingDateIndex.date+1)
-      console.log("this day", endingDateIndex)
       return week
     }
     //filter the user data to include only unique IDs
@@ -30,7 +29,6 @@ class SleepRepository {
     getAverageWeeklySleepQualityForAUser(id, endingDate){
       let averageSleepQualityForAUser = this.allUserData.reduce((acc, user) => {
         acc += user.sleepQuality
-        console.log("this is what it is returning", acc)
         return acc/this.allUserData.length
       }, 0)
       return averageSleepQualityForAUser
