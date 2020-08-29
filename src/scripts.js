@@ -19,8 +19,8 @@ function getRandomIndex(array) {
 }
 
 function displayNewUser() {
-  currentUser = new User(userData[getRandomIndex(userData)])
-  console.log(currentUser)
+  currentUserRepository = new UserRepository(userData)
+  currentUser = new User(currentUserRepository.data[getRandomIndex(currentUserRepository.data)])
   //create new instance of a User using the dataset and the getRandomIndex function
   //create new instances of the User's friends using forEach method?
   //
