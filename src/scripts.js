@@ -33,7 +33,11 @@ function uploadData() {
 function displayUserData() {
   userName.innerText = `${currentUser.name}`
   userSteps.innerText = ``//***update when we do activity**
+  userPhoto.innerHTML = '<img class="userProfilePhoto" src="../assets/userImages/UserImage.jpg" alt="user profile image">'
+}
 
+function displayTeamList() {
+  
 }
 
 function displayProfile() {
