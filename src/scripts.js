@@ -8,12 +8,12 @@ const myProfileLink = document.querySelector('.profileLink');
 const sideBarContents = document.getElementById('sidebarContents');
 const userPhoto = document.getElementById('userPhoto')
 const userSteps = document.getElementById('userSteps')
-const viewTeamButton = document.getElementById('viewTeam')
+const viewTeamButton = document.querySelector('#viewTeam');
 
 // ********** EVENT LISTENERS **********
 window.addEventListener('load', updateUser);
 userName.addEventListener('click', displayProfile);
-viewTeamButton.addEventListener('click', displayTeamList);
+sideBarContents.addEventListener('click', displayTeamList);
 // myProfileLink.addEventListener('click', displayProfile);
 
 // ******** FUNCTIONS/EVENTHANDLERS **********
@@ -68,6 +68,6 @@ function displayProfile() {
     <div class="key profileEmail">EMAIL: ${currentUser.email}</div>
     <div class="key profileStride">STRIDE LENGTH: ${currentUser.strideLength}</div>
     <div class="key profileStepGoal">DAILY STEP GOAL: ${currentUser.dailyStepGoal}</div>
-    <button class="viewTeam" type="button">View My Team</button>
+    <button id="viewTeam" class="viewTeam">View My Team</button>
     </div>`
 }
