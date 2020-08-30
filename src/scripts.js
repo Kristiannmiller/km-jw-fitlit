@@ -16,6 +16,7 @@ const userPhoto = document.getElementById('userPhoto')
 const userSteps = document.getElementById('userSteps')
 const viewTeamButton = document.querySelector('#viewTeam');
 const ctx = document.getElementById('hydrationChartDay');
+const har = document.getElementById('hydrationChartWeek')
 const hydrationMenu = document.querySelector('.hydMenu');
 
 // ********** EVENT LISTENERS **********
@@ -90,12 +91,43 @@ function displayProfile() {
 }
 //****************CHHHHHHAAAARTS*****************//
 var hydrationChartDay = new Chart(ctx, {
-    type: 'bar',
+    type: 'horizontalBar',
     data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: ['Water'],
         datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            label: 'Fl oz',
+            data: [39],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+
+            ],
+            borderColor: [
+                'rgba(5, 99, 132, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    scaleOveride: true,
+                    minValue: 0,
+                    maxValue: 75,
+                    stepSize: 10,
+                    responsive: false
+                }
+            }]
+        }
+    }
+});
+var hydrationChartWeek = new Chart(har, {
+    type: 'horizontalBar',
+    data: {
+        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        datasets: [{
+            label: 'Weekly',
+            data: [120, 70, 69, 82, 200, 35, 84],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -119,7 +151,8 @@ var hydrationChartDay = new Chart(ctx, {
         scales: {
             yAxes: [{
                 ticks: {
-                    beginAtZero: true
+                    beginAtZero: true,
+
                 }
             }]
         }
