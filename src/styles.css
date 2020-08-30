@@ -118,6 +118,12 @@ body {
 }
 
 /*=== Team View ===*/
+.teamHeader {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: center;
+  font-size: 300%
+}
 
 .photo {
   grid-column: 1;
