@@ -48,7 +48,7 @@ function displayTeamList() {
   console.log('team list')
   sideBarContents.innerHTML =
   `<div class="teamHeader">My Team</div>
-  <div class="teamStepsHeader">Team Step Goal Average: ${currentUserRepository.calculateAverageStepGoal()}</div>
+  <div class="teamStepsHeader">FitLit Community Step Goal Average: ${allUserRepository.calculateAverageStepGoal()}</div>
   <div class="myStepsHeader">My Step Goal: ${currentUser.dailyStepGoal}</div>`
   currentUserRepository.data.forEach((friend, i) => {
     if (i > 0) {
