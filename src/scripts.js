@@ -8,14 +8,15 @@ const myProfileLink = document.querySelector('.profileLink');
 const sideBarContents = document.getElementById('sidebarContents');
 const userPhoto = document.getElementById('userPhoto')
 const userSteps = document.getElementById('userSteps')
+const viewTeamButton = document.getElementById('viewTeam')
 
 // ********** EVENT LISTENERS **********
 window.addEventListener('load', updateUser);
 userName.addEventListener('click', displayProfile);
+viewTeamButton.addEventListener('click', displayTeamList);
 // myProfileLink.addEventListener('click', displayProfile);
 
 // ******** FUNCTIONS/EVENTHANDLERS **********
-//create an info card on the dash with all the users info on the page
 
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
@@ -35,12 +36,13 @@ function uploadData() {
 }
 
 function displayUserData() {
-  userName.innerText = `${currentUser.name}`
+  userName.innerText = `Hello, ${currentUser.displayFirstName()}!`
   userSteps.innerText = ``// ***update when we do activity**
   userPhoto.innerHTML = '<img class="userProfilePhoto" src="../assets/userImages/UserImage.jpg" alt="user profile image">'
 }
 
 function displayTeamList() {
+  console.log('team list')
   sideBarContents.innerHTML = '<div class="teamHeader">My Team</div>'
   currentUserRepository.data.forEach((friend, i) => {
     if (i > 0) {
@@ -55,16 +57,17 @@ function displayTeamList() {
 }
 
 function displayProfile() {
+  let currentFirstName = currentUser.displayFirstName()
   sideBarContents.innerHTML = ''
   sideBarContents.innerHTML =
   `<div class="sidebarHeader">
     <img class="profileUserPhoto" src="../assets/userImages/UserImage.jpg" alt="user profile image"></div>
-    <div class="profileUser">${currentUser.name}</div>
+    <div class="profileUser">${currentFirstName}</div>
     <div class="key profileName">NAME: ${currentUser.name}</div>
     <div class="key profileAddress">ADDRESS: ${currentUser.address}</div>
     <div class="key profileEmail">EMAIL: ${currentUser.email}</div>
     <div class="key profileStride">STRIDE LENGTH: ${currentUser.strideLength}</div>
     <div class="key profileStepGoal">DAILY STEP GOAL: ${currentUser.dailyStepGoal}</div>
-    <div class="viewTeam" type="button">View My Team</div>
-  </div>`
+    <button class="viewTeam" type="button">View My Team</button>
+    </div>`
 }
