@@ -1,6 +1,7 @@
 // ********** GLOBAL VARIABLE **********
 var currentUser
 var currentUserRepository
+var allUserRepository
 
 // ********** QUERIES  **********
 const userName = document.querySelector('.username');
@@ -33,6 +34,8 @@ function uploadData() {
   currentUserTeam.unshift(currentUser) // NOTE: currentUser will always be at [0]
   // WE CAN CHANGE THIS IF WE NEED TO ^
   currentUserRepository = new UserRepository(currentUserTeam)
+  allUserRepository = new UserRepository(userData)
+  console.log(allUserRepository)
 }
 
 function displayUserData() {

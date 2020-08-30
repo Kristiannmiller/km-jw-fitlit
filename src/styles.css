@@ -124,14 +124,12 @@ body {
   justify-self: center;
   font-size: 300%
 }
-
 .teamStepsHeader {
   grid-column: 1;
   grid-row: 2;
   justify-self: center;
   font-size: 200%
 }
-
 .myStepsHeader {
   grid-column: 1;
   grid-row: 3;
@@ -143,7 +141,6 @@ body {
   grid-template-columns: 2;
   grid-auto-rows: 2;
 }
-
 .photo {
   grid-column: 1;
   grid-row: 1 / span 2
@@ -173,12 +170,10 @@ body {
   justify-self: center;
   font-size: 300%
 }
-
 .profileName {
   grid-column: 1;
   grid-row: 3;
 }
-
 .profileAddress {
   grid-column: 1;
   grid-row: 4;
@@ -195,12 +190,10 @@ body {
   grid-column: 1;
   grid-row: 7;
 }
-
 .key {
   font-size: 200%;
   justify-self: left;
 }
-
 .profileUserPhoto {
   height: 20vh;
   border-radius: 10vh;
