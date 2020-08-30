@@ -18,6 +18,8 @@ const viewTeamButton = document.querySelector('#viewTeam');
 const ctx = document.getElementById('hydrationChartDay');
 const har = document.getElementById('hydrationChartWeek')
 const hydrationMenu = document.querySelector('.hydMenu');
+const hydrationWrapper = document.querySelector('.hydrationWrapper')
+const mainBody = document.querySelector('.mainbody')
 
 // ********** EVENT LISTENERS **********
 window.addEventListener('load', updateUser);
@@ -52,8 +54,15 @@ function displayUserData() {
   userSteps.innerText = `${currentUser.dailyStepGoal}`// ***update when we do activity**
   userPhoto.innerHTML = '<img class="userProfilePhoto" src="../assets/userImages/UserImage.jpg" alt="user profile image">'
 }
-function displayHydrationData() {
-
+function displayHydrationData(event) {
+  console.log('you clicked me')
+  hydrationWrapper.classList.remove('hidden')
+  document.querySelector('.e').classList.add('hidden')
+  document.querySelector('.b').classList.add('hidden')
+  document.querySelector('.g').classList.add('hidden')
+  document.querySelector('.h').classList.add('hidden')
+  document.querySelector('.i').classList.add('hidden')
+  document.querySelector('.l').classList.add('hidden')
 }
 
 function displayTeamList() {
