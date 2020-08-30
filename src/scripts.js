@@ -37,13 +37,16 @@ function uploadData() {
 
 function displayUserData() {
   userName.innerText = `Hello, ${currentUser.displayFirstName()}!`
-  userSteps.innerText = ``// ***update when we do activity**
+  userSteps.innerText = `${currentUser.dailyStepGoal}`// ***update when we do activity**
   userPhoto.innerHTML = '<img class="userProfilePhoto" src="../assets/userImages/UserImage.jpg" alt="user profile image">'
 }
 
 function displayTeamList() {
   console.log('team list')
-  sideBarContents.innerHTML = '<div class="teamHeader">My Team</div>'
+  sideBarContents.innerHTML =
+  `<div class="teamHeader">My Team</div>
+  <div class="teamStepsHeader">Team Step Goal Average: ${currentUserRepository.calculateAverageStepGoal()}</div>
+  <div class="myStepsHeader">My Step Goal: ${currentUser.dailyStepGoal}</div>`
   currentUserRepository.data.forEach((friend, i) => {
     if (i > 0) {
       sideBarContents.innerHTML +=

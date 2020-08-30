@@ -125,6 +125,20 @@ body {
   font-size: 300%
 }
 
+.teamStepsHeader {
+  grid-column: 1;
+  grid-row: 2;
+  justify-self: center;
+  font-size: 200%
+}
+
+.myStepsHeader {
+  grid-column: 1;
+  grid-row: 3;
+  justify-self: center;
+  font-size: 200%
+}
+
 .photo {
   grid-column: 1;
   grid-row: 1 / span 2
