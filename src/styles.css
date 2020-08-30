@@ -1,9 +1,21 @@
+/*=== Reset ===*/
 
+html, body, h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%
+}
+
+/* ~~~~~ GLOBAL RULES ~~~~~ */
 
 body {
   margin: 40px;
   font-family: Tahoma;
-  background-color: #f9f9f9
+  background-color: #f9f9f9;
+  display: grid
 }
 
 .wrapper {
@@ -23,6 +35,8 @@ body {
   font-size: 150%;
 }
 
+/* ~~~~~ HEADER ~~~~~ */
+
 .a {
   grid-column: 1 /span 8;
   grid-row: 1;
@@ -35,7 +49,9 @@ body {
   height: 50%;
 }
 
-.q {
+/*=== User Info ===*/
+
+.userInfo {
   grid-column: 1;
   font-family: 'Segoe UI';
   display: grid;
@@ -44,30 +60,222 @@ body {
   width: 60%;
   font-size: 75%;
 }
+.userProfilePhoto {
+  height: 10vh;
+  border-radius: 5vh;
+}
+.username {
+  grid-column: 2;
+  grid-row: 1
+}
+.userSteps {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+/*=== Menu Options ===*/
+
+.actMenu {
+  grid-column: 2;
+  font-family: 'Segoe UI'
+}
+.hydMenu{
+  grid-column: 3;
+  font-family: 'Segoe UI'
+}
+.slpMenu{
+  grid-column: 4;
+  font-family: 'Segoe UI'
+}
+
+/* ~~~~~ SIDEBAR ~~~~~ */
+
+.sidebarHeader {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  font-family: 'Segoe UI';
+  font-size: 25px;
+  display: grid;
+  grid-template-rows: .25fr 1fr;
+  grid-gap: 5px;
+  padding: 0px 0px 15px 0px;
+  color: #444;
+  text-align: center;
+  align-items: center;
+}
+.d {
+  grid-column: 1 / span 2;
+  grid-row: 2 / span 7;
+  border: 1px solid;
+  border-color: #414143;
+  color: #444;
+  background-color: #fff;
+  width: 80%;
+  font-size: 60%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 20vh 10vh 10vh 10vh 10vh 10vh 10vh 10vh;
+}
+
+/*=== Team View ===*/
+.teamHeader {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: center;
+  font-size: 300%
+}
+
+.teamStepsHeader {
+  grid-column: 1;
+  grid-row: 2;
+  justify-self: center;
+  font-size: 200%
+}
+
+.myStepsHeader {
+  grid-column: 1;
+  grid-row: 3;
+  justify-self: center;
+  font-size: 200%
+}
+.teammember {
+  display: grid;
+  grid-template-columns: 2;
+  grid-auto-rows: 2;
+}
+
 .photo {
   grid-column: 1;
   grid-row: 1 / span 2
 }
-.name {
-  grid-column: 2;
-  grid-row: 1
+.teamImage{
+  height: 8vh;
+  border-radius: 5vh;
 }
 .steps {
   grid-column: 2;
   grid-row: 2;
 }
-.r {
-  grid-column: 2;
-  font-family: 'Segoe UI'
+.teamstats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid;
+  border-color: #414143;
+  font-size: 200%;
 }
-.s{
-  grid-column: 3;
-  font-family: 'Segoe UI'
+
+/*=== Profile View ===*/
+
+.profileUser {
+  grid-column: 1;
+  grid-row: 2;
+  justify-self: center;
+  font-size: 300%
 }
-.t{
-  grid-column: 4;
-  font-family: 'Segoe UI'
+
+.profileName {
+  grid-column: 1;
+  grid-row: 3;
 }
+
+.profileAddress {
+  grid-column: 1;
+  grid-row: 4;
+}
+.profileEmail {
+  grid-column: 1;
+  grid-row: 5;
+}
+.profileStride {
+  grid-column: 1;
+  grid-row: 6;
+}
+.profileStepGoal {
+  grid-column: 1;
+  grid-row: 7;
+}
+
+.key {
+  font-size: 200%;
+  justify-self: left;
+}
+
+.profileUserPhoto {
+  height: 20vh;
+  border-radius: 10vh;
+  justify-self: center
+}
+.viewTeam {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid;
+  border-color: #414143;
+  font-size: 200%;
+  grid-column: 1;
+  grid-row: 8;
+}
+
+/* ~~~~~ MAIN WIDGETS ~~~~~ */
+
+.e {
+  grid-column: 3 / span 6;
+  grid-row: 2 / span 4;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 10px;
+  color: #444;
+  background-color: #f9f9f9;
+}
+
+/*=== Daily Steps ===*/
+
+.widgetA {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+/*=== Daily Activity Hours ===*/
+.widgetB {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+/*=== Daily Miles ===*/
+.widgetC {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+/*=== Daily Stairs ===*/
+.widgetD {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+/* ~~~~~ WEEKLY STATISTICS ~~~~~ */
+
+.graphTitle {
+  grid-column: 1;
+  grid-row: 1;
+}
+.graph {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+/*=== Steps for week ===*/
+
 .b {
   grid-column: 3 /span 6;
   grid-row: 6;
@@ -82,74 +290,8 @@ body {
   padding-left: 3px;
   margin: 0;
 }
-.boxbName {
-  grid-column: 1;
-  grid-row: 1;
-}
-.boxbGraph {
-  grid-column: 1;
-  grid-row: 2;
-}
-.d {
-  grid-column: 1 / span 2;
-  grid-row: 2 / span 9;
-  border: 1px solid;
-  border-color: #414143;
-  color: #444;
-  background-color: #fff;
-  width: 80%;
-  font-size: 60%;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-}
-.teammember {
-  display: grid;
-  grid-template-columns: 2;
-  grid-auto-rows: 2;
-}
-.teamstats {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid;
-  border-color: #414143;
-  font-size: 200%;
-}
-.e {
-  grid-column: 3 / span 6;
-  grid-row: 2 / span 4;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-gap: 10px;
-  color: #444;
-  background-color: #f9f9f9;
-}
-.widgetA {
-  display: flex;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-}
-.widgetB {
-   display: flex;
-   align-items: center;
-   align-content: center;
-   justify-content: center;
-}
-.widgetC {
-  display: flex;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-}
-.widgetD {
-  display: flex;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-}
+
+/*=== Active Minutes for week ===*/
 
 .h {
   grid-column: 3 / span 6;
@@ -162,14 +304,9 @@ body {
   padding-left: 3px;
   margin: 0;
 }
-.j {
-  grid-column: 2 / span 1;
-  grid-row: 4 / span 2;
-}
-.k {
-  grid-column: 3 / span 1;
-  grid-row: 4 / span 2;
-}
+
+/*=== Miles for week ===*/
+
 .g {
   grid-column: 3 / span 6;
   grid-row: 8 / span 1;
@@ -181,6 +318,9 @@ body {
   padding-left: 3px;
   margin: 0;
 }
+
+/*=== Stairs for week ===*/
+
 .i {
   grid-column: 3 /span 6;
   grid-row: 9 / span 1;
@@ -192,6 +332,9 @@ body {
   padding-bottom: 40px;
   padding-top: 0;
 }
+
+/* ~~~~~ ALL TIME STATISTICS ~~~~~ */
+
 .l {
   grid-column: 3 / span 6;
   grid-row: 10 / span 1;
@@ -200,29 +343,36 @@ body {
   grid-gap: 10px;
   background-color: #f9f9f9;
   color: #444;
-
 }
+
+/*=== Steps record ===*/
 .m {
   grid-column: 1;
   background-color: #f9f9f9;
   color: #444;
   font-size: 50%;
 }
+
+/*=== Active Minutes record ===*/
 .n {
   grid-column: 2;
   background-color: #f9f9f9;
   color: #444;
   font-size: 50%;
 }
+
+/*=== Miles record ===*/
 .o {
   grid-column: 3;
   background-color: #f9f9f9;
   color: #444;
   font-size: 50%;
 }
+
+/*=== Stairs record ===*/
 .p {
   grid-column: 4;
   background-color: #f9f9f9;
   color: #444;
-  font-size: 50%; 
+  font-size: 50%;
 }
