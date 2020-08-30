@@ -26,8 +26,10 @@ function updateUser() {
   // displayTeamList()
 }
 function uploadData() {
-  currentUserRepository = new UserRepository(userData)
-  currentUser = new User(currentUserRepository.data[getRandomIndex(currentUserRepository.data)])
+  currentUser = new User(userData[getRandomIndex(userData)])
+  currentUserTeam = currentUser.friends.map(friend => userData[friend-1])
+  currentUserTeam.unshift(currentUser)
+  currentUserRepository = new UserRepository(currentUserTeam)
 }
 
 function displayUserData() {
@@ -37,7 +39,7 @@ function displayUserData() {
 }
 
 function displayTeamList() {
-  
+
 }
 
 function displayProfile() {
