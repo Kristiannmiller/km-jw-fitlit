@@ -211,6 +211,14 @@ body {
 }
 
 /* ~~~~~ MAIN WIDGETS ~~~~~ */
+.mainbody{
+  grid-column: 3 / span 6;
+  grid-row: 2 / span 4;
+}
+.hydrationWrapper{
+  height: 100%;
+
+}
 
 .e {
   grid-column: 3 / span 6;

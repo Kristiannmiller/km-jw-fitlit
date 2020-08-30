@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <link href="styles.css" rel ="stylesheet" type="text/css">
     <link rel="reset" type="text/css" href="src/reset.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,8 +60,16 @@
         <div class="teamstats" type="button">TeamStats</div> -->
         </div>
       </div>
-    <div class="box e">
+  <article class="mainbody">
+    <div class="hydrationWrapper">
+      <div class="hydrationToday">
+        <canvas id="hydrationChartDay" width="100" height="100"></canvas>
+      </div>
+    <div class="hydrationWeek">
+    </div>
+      <!-- <div class="box e">
       <div class="widgetA">Steps</div>
+        <canvas id="myChart" width="10" height="10"></canvas>
       <div class="widgetB">Activity</div>
       <div class="widgetC">Miles Run</div>
       <div class="widgetD">Stairs Climbed</div>
@@ -87,7 +96,10 @@
         <div class="box o">Best Miles</div>
         <div class="box p">Best Stairs</div>
       </div>
+  </div> -->
   </div>
+</article>
+    <!-- <script src="path/to/chartjs/dist/Chart.js"></script> -->
     <script type="text/javascript" src="../src/HydrationRepository.js"></script>
     <script type="text/javascript" src="../src/User.js"></script>
     <script type="text/javascript" src="../src/UserHydration.js"></script>
