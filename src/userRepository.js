@@ -9,7 +9,7 @@ class UserRepository {
     calculateAverageStepGoal() {
       let allStepGoals = this.data.map(user => user.dailyStepGoal)
       let averageStepGoal = allStepGoals.reduce((a, b) => (a + b)) / this.data.length
-      return averageStepGoal
+      return averageStepGoal.toFixed(0)
     }
 
 }
