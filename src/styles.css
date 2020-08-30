@@ -138,6 +138,11 @@ body {
   justify-self: center;
   font-size: 200%
 }
+.teammember {
+  display: grid;
+  grid-template-columns: 2;
+  grid-auto-rows: 2;
+}
 
 .photo {
   grid-column: 1;
@@ -212,6 +217,65 @@ body {
   grid-row: 8;
 }
 
+/* ~~~~~ MAIN WIDGETS ~~~~~ */
+
+.e {
+  grid-column: 3 / span 6;
+  grid-row: 2 / span 4;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 10px;
+  color: #444;
+  background-color: #f9f9f9;
+}
+
+/*=== Daily Steps ===*/
+
+.widgetA {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+/*=== Daily Activity Hours ===*/
+.widgetB {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+/*=== Daily Miles ===*/
+.widgetC {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+/*=== Daily Stairs ===*/
+.widgetD {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+/* ~~~~~ WEEKLY STATISTICS ~~~~~ */
+
+.graphTitle {
+  grid-column: 1;
+  grid-row: 1;
+}
+.graph {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+/*=== Steps for week ===*/
+
 .b {
   grid-column: 3 /span 6;
   grid-row: 6;
@@ -226,53 +290,8 @@ body {
   padding-left: 3px;
   margin: 0;
 }
-.boxbName {
-  grid-column: 1;
-  grid-row: 1;
-}
-.boxbGraph {
-  grid-column: 1;
-  grid-row: 2;
-}
-.teammember {
-  display: grid;
-  grid-template-columns: 2;
-  grid-auto-rows: 2;
-}
-.e {
-  grid-column: 3 / span 6;
-  grid-row: 2 / span 4;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-gap: 10px;
-  color: #444;
-  background-color: #f9f9f9;
-}
-.widgetA {
-  display: flex;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-}
-.widgetB {
-   display: flex;
-   align-items: center;
-   align-content: center;
-   justify-content: center;
-}
-.widgetC {
-  display: flex;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-}
-.widgetD {
-  display: flex;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-}
+
+/*=== Active Minutes for week ===*/
 
 .h {
   grid-column: 3 / span 6;
@@ -285,14 +304,9 @@ body {
   padding-left: 3px;
   margin: 0;
 }
-.j {
-  grid-column: 2 / span 1;
-  grid-row: 4 / span 2;
-}
-.k {
-  grid-column: 3 / span 1;
-  grid-row: 4 / span 2;
-}
+
+/*=== Miles for week ===*/
+
 .g {
   grid-column: 3 / span 6;
   grid-row: 8 / span 1;
@@ -304,6 +318,9 @@ body {
   padding-left: 3px;
   margin: 0;
 }
+
+/*=== Stairs for week ===*/
+
 .i {
   grid-column: 3 /span 6;
   grid-row: 9 / span 1;
@@ -315,6 +332,9 @@ body {
   padding-bottom: 40px;
   padding-top: 0;
 }
+
+/* ~~~~~ ALL TIME STATISTICS ~~~~~ */
+
 .l {
   grid-column: 3 / span 6;
   grid-row: 10 / span 1;
@@ -323,26 +343,33 @@ body {
   grid-gap: 10px;
   background-color: #f9f9f9;
   color: #444;
-
 }
+
+/*=== Steps record ===*/
 .m {
   grid-column: 1;
   background-color: #f9f9f9;
   color: #444;
   font-size: 50%;
 }
+
+/*=== Active Minutes record ===*/
 .n {
   grid-column: 2;
   background-color: #f9f9f9;
   color: #444;
   font-size: 50%;
 }
+
+/*=== Miles record ===*/
 .o {
   grid-column: 3;
   background-color: #f9f9f9;
   color: #444;
   font-size: 50%;
 }
+
+/*=== Stairs record ===*/
 .p {
   grid-column: 4;
   background-color: #f9f9f9;
