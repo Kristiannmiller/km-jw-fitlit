@@ -20,8 +20,6 @@ const sideBarContents = document.getElementById('sidebarContents');
 const userPhoto = document.getElementById('userPhoto')
 const userSteps = document.getElementById('userSteps')
 const viewTeamButton = document.querySelector('#viewTeam');
-const ctx = document.getElementById('hydrationChartDay');
-const har = document.getElementById('hydrationChartWeek')
 const hydrationMenu = document.querySelector('.hydMenu');
 const hydrationWrapper = document.querySelector('.hydrationWrapper')
 const mainBody = document.querySelector('.mainbody')
@@ -92,17 +90,96 @@ function displayActivityData() {
         <div class="box p">Best Stairs</div>
       </div>`
 }
+
+function displayHydrationCharts(){
+  let ctx
+  let har
+  mainBody.innerHTML = `<div class="hydrationWrapper">
+    <div class="hydrationToday">
+      <canvas id="hydrationChartDay" width="100" height="100"></canvas>
+    </div>
+  <div class="hydrationWeek">
+      <canvas id="hydrationChartWeek" width="100" height="100"></canvas>
+  </div>
+  </div>`
+  ctx = document.getElementById('hydrationChartDay');
+  har = document.getElementById('hydrationChartWeek')
+  
+  var hydrationChartDay = new Chart(ctx, {
+      type: 'horizontalBar',
+      data: {
+          labels: ['Water'],
+          datasets: [{
+              label: 'Fl oz',
+              data: [39],
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+
+              ],
+              borderColor: [
+                  'rgba(5, 99, 132, 1)',
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              xAxes: [{
+                  ticks: {
+                      scaleOveride: true,
+                      min: 0,
+                      max: 75,
+                      stepSize: 10,
+                      responsive: false
+                  }
+              }]
+          }
+      }
+  });
+  var hydrationChartWeek = new Chart(har, {
+      type: 'horizontalBar',
+      data: {
+          labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+          datasets: [{
+              label: 'Weekly',
+              data: [120, 70, 69, 82, 200, 35, 84],
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              yAxes: [{
+                  ticks: {
+                      beginAtZero: true,
+
+                  }
+              }]
+          }
+      }
+  });
+
+}
+
 function displayHydrationData(event) {
-   = new hydration
-  mainBody.innerHTML = `
-
-
-
-
-
-
-
-  `
+  displayHydrationCharts()
+  allUserHydrationRepository = new HydrationRepository(hydrationData)
+  console.log('This is my favorite ', allUserHydrationRepository)
   // hydrationWrapper.classList.remove('hidden')
   // document.querySelector('.e').classList.add('hidden')
   // document.querySelector('.b').classList.add('hidden')
@@ -147,71 +224,3 @@ function displayProfile() {
 }
 //****************CHHHHHHAAAARTS*****************//
 //put into function that instantiates chart and inserts innerHTML dynamically rather than hiding and displaying stuff that's already there
-var hydrationChartDay = new Chart(ctx, {
-    type: 'horizontalBar',
-    data: {
-        labels: ['Water'],
-        datasets: [{
-            label: 'Fl oz',
-            data: [39],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-
-            ],
-            borderColor: [
-                'rgba(5, 99, 132, 1)',
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            xAxes: [{
-                ticks: {
-                    scaleOveride: true,
-                    min: 0,
-                    max: 75,
-                    stepSize: 10,
-                    responsive: false
-                }
-            }]
-        }
-    }
-});
-var hydrationChartWeek = new Chart(har, {
-    type: 'horizontalBar',
-    data: {
-        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-        datasets: [{
-            label: 'Weekly',
-            data: [120, 70, 69, 82, 200, 35, 84],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true,
-
-                }
-            }]
-        }
-    }
-});
