@@ -91,7 +91,7 @@ function displayActivityData() {
       </div>`
 }
 
-function displayHydrationCharts(){
+function displayHydrationCharts(user){
   let ctx
   let har
   mainBody.innerHTML = `<div class="hydrationWrapper">
@@ -104,14 +104,16 @@ function displayHydrationCharts(){
   </div>`
   ctx = document.getElementById('hydrationChartDay');
   har = document.getElementById('hydrationChartWeek')
-  
+  let allUserHydrationRepository = new HydrationRepository(hydrationData)
+  currentUserHydration = new UserHydration(allUserHydrationRepository.findUserById(currentUser.id))
+  let numOunces = currentUserHydration.userWaterIntake[currentUserHydration.userWaterIntake.length-1].numOunces
   var hydrationChartDay = new Chart(ctx, {
       type: 'horizontalBar',
       data: {
           labels: ['Water'],
           datasets: [{
               label: 'Fl oz',
-              data: [39],
+              data: [numOunces],
               backgroundColor: [
                   'rgba(255, 99, 132, 0.2)',
 
@@ -173,12 +175,12 @@ function displayHydrationCharts(){
           }
       }
   });
-
 }
 
 function displayHydrationData(event) {
   displayHydrationCharts()
   allUserHydrationRepository = new HydrationRepository(hydrationData)
+  currentUserHydration = new UserHydration(allUserHydrationRepository.findUserById(currentUser.id))
   console.log('This is my favorite ', allUserHydrationRepository)
   // hydrationWrapper.classList.remove('hidden')
   // document.querySelector('.e').classList.add('hidden')
