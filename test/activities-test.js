@@ -1,7 +1,8 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const User = require('../src/User')
+const User = require('../src/User')//DO WE NEED THIS TO CHECK STRIDELENGTH?
+const Activity = require('../src/Activity')
 const activityData = [
   {
     "userID": 1,
@@ -450,6 +451,19 @@ describe('Activity', () => {
   });
   it('should be able to track the flights of stairs climbed', () => {
     let testActivity1 = new Activity(activityData[0]);
-    expect(testActivity1.flightsOfStairs).to.equal(16); 
+    expect(testActivity1.flightsOfStairs).to.equal(16);
   });
+  it('should be able to track the number of miles the user has walked for a specific date', () => {
+  let testActivity1 = new Activity(activityData[0]);
+  let userData1 = new User(userData[0]);
+  expect(testActivity1.calculateMiles('6/15/19')).to.equal(2.91)
+  });
+  it('should be able to track the number of minutes a given user was active for a specific date as specified by UserId', () => {
+  let testActivity1 = new Activity(activityData[0]);
+  let userData1 = new User(userData[0]);
+  expect(testActivity1.calculateMinActive('6/15/19')).to.equal(140)
+  });
+  it('should be able to calculate how many minutes active the user averaged for a given week', () => {
+    let testActivity1 = new Activity(activityData[0])
+  })
 })
