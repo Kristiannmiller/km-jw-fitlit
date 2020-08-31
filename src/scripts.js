@@ -2,7 +2,7 @@
 
 // ********** PACKAGES **********
 // var Chart = require('../node_modules/chart.js/dist/Chart.js');
-let now = moment('2019/06/15').format('YYYY/DD/MM')
+let now = moment('2019/06/15').format('YYYY/MM/DD')
 console.log(now);
 
 // ********** GLOBAL VARIABLE **********
@@ -106,6 +106,7 @@ function displayHydrationCharts(user){
   har = document.getElementById('hydrationChartWeek')
   let allUserHydrationRepository = new HydrationRepository(hydrationData)
   currentUserHydration = new UserHydration(allUserHydrationRepository.findUserById(currentUser.id))
+  console.log(currentUserHydration)
   let numOunces = currentUserHydration.userWaterIntake[currentUserHydration.userWaterIntake.length-1].numOunces
   var hydrationChartDay = new Chart(ctx, {
       type: 'horizontalBar',
@@ -113,13 +114,13 @@ function displayHydrationCharts(user){
           labels: ['Water'],
           datasets: [{
               label: 'Fl oz',
-              data: [numOunces],
+              data: [currentUserHydration.waterByDate(now)],
               backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(116, 204, 195, 1)',
 
               ],
               borderColor: [
-                  'rgba(5, 99, 132, 1)',
+                  'rgba(58, 156, 147, 1)',
               ],
               borderWidth: 1
           }]
@@ -130,7 +131,7 @@ function displayHydrationCharts(user){
                   ticks: {
                       scaleOveride: true,
                       min: 0,
-                      max: 75,
+                      max: 150,
                       stepSize: 10,
                       responsive: false
                   }
