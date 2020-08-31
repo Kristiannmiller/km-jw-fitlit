@@ -3,6 +3,7 @@
 // ********** PACKAGES **********
 // var Chart = require('../node_modules/chart.js/dist/Chart.js');
 let now = moment('2019/06/15').format('YYYY/MM/DD')
+let weekEnd = moment('2019/06/21').format('YYYY/MM/DD')
 console.log(now);
 
 // ********** GLOBAL VARIABLE **********
@@ -111,7 +112,7 @@ function displayHydrationCharts(user){
   var hydrationChartDay = new Chart(ctx, {
       type: 'horizontalBar',
       data: {
-          labels: ['Water'],
+          labels: [moment(now).format('MM/DD/YYYY')],
           datasets: [{
               label: 'Fl oz',
               data: [currentUserHydration.waterByDate(now)],
@@ -142,10 +143,10 @@ function displayHydrationCharts(user){
   var hydrationChartWeek = new Chart(har, {
       type: 'horizontalBar',
       data: {
-          labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+          labels: [moment(weekEnd).subtract(6, 'days').calendar(), moment(weekEnd).subtract(5, 'days').calendar(), moment(weekEnd).subtract(4, 'days').calendar(), moment(weekEnd).subtract(3, 'days').calendar(), moment(weekEnd).subtract(2, 'days').calendar(), moment(weekEnd).subtract(1, 'days').calendar(), moment(weekEnd).calendar()],
           datasets: [{
-              label: 'Weekly',
-              data: [120, 70, 69, 82, 200, 35, 84],
+              label: 'Fl Oz',
+              data: currentUserHydration.waterForWeek(weekEnd),
               backgroundColor: [
                   'rgba(255, 99, 132, 0.2)',
                   'rgba(54, 162, 235, 0.2)',
