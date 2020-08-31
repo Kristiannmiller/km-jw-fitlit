@@ -2,12 +2,16 @@
 
 // ********** PACKAGES **********
 // var Chart = require('../node_modules/chart.js/dist/Chart.js');
-let now = moment('2019/06/15');
-console.log(now.format("06/15/2019", 'MM/DD/YYYY'))// import {moment} from '../node_modules/moment/src/moment.js'
+let now = moment('2019/06/15').format('YYYY/DD/MM')
+console.log(now);
+
 // ********** GLOBAL VARIABLE **********
 var currentUser
 var currentUserRepository
 var allUserRepository
+var allUserHydrationRepository
+var allUserSleepRepository
+var allUserActivityRepository
 
 // ********** QUERIES  **********
 const userName = document.querySelector('.username');
@@ -34,10 +38,12 @@ hydrationMenu.addEventListener('click', displayHydrationData)
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
+
 function updateUser() {
   uploadData()
   displayUserData()
   displayTeamList()
+  displayActivityData()
 }
 
 function uploadData() {
@@ -55,14 +61,55 @@ function displayUserData() {
   userSteps.innerText = `${currentUser.dailyStepGoal}`// ***update when we do activity**
   userPhoto.innerHTML = '<img class="userProfilePhoto" src="../assets/userImages/UserImage.jpg" alt="user profile image">'
 }
+
+function displayActivityData() {
+  mainBody.innerHTML = `<div class="box e"> Today's Activity
+      <div class="widgetA">Steps</div>
+      <div class="widgetB">Activity</div>
+      <div class="widgetC">Miles Run</div>
+      <div class="widgetD">Stairs Climbed</div>
+    </div>
+    <div class="box b">
+        <div class="graphTitle">Name</div>
+        <div class="graph">Steps Done Walked</div>
+      </div>
+      <div class="box h">
+        <div class="graphTitle">Name</div>
+        <div class="graph">Minutes Active</div>
+      </div>
+      <div class="box g">
+          <div class="graphTitle">Name</div>
+          <div class="graph">Miles Runned</div>
+        </div>
+      <div class="box i">
+        <div class="graphTitle">Name</div>
+        <div class="graph">Stairs Clombed</div>
+      </div>
+      <div class="box l">
+        <div class="box m">Best Steps</div>
+        <div class="box n">Best Min/active</div>
+        <div class="box o">Best Miles</div>
+        <div class="box p">Best Stairs</div>
+      </div>`
+}
 function displayHydrationData(event) {
-  hydrationWrapper.classList.remove('hidden')
-  document.querySelector('.e').classList.add('hidden')
-  document.querySelector('.b').classList.add('hidden')
-  document.querySelector('.g').classList.add('hidden')
-  document.querySelector('.h').classList.add('hidden')
-  document.querySelector('.i').classList.add('hidden')
-  document.querySelector('.l').classList.add('hidden')
+   = new hydration
+  mainBody.innerHTML = `
+
+
+
+
+
+
+
+  `
+  // hydrationWrapper.classList.remove('hidden')
+  // document.querySelector('.e').classList.add('hidden')
+  // document.querySelector('.b').classList.add('hidden')
+  // document.querySelector('.g').classList.add('hidden')
+  // document.querySelector('.h').classList.add('hidden')
+  // document.querySelector('.i').classList.add('hidden')
+  // document.querySelector('.l').classList.add('hidden')
 }
 
 function displayTeamList() {
