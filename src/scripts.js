@@ -118,11 +118,11 @@ var hydrationChartDay = new Chart(ctx, {
     },
     options: {
         scales: {
-            yAxes: [{
+            xAxes: [{
                 ticks: {
                     scaleOveride: true,
-                    minValue: 0,
-                    maxValue: 75,
+                    min: 0,
+                    max: 75,
                     stepSize: 10,
                     responsive: false
                 }
