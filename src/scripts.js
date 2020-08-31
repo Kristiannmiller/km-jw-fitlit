@@ -1,8 +1,9 @@
 
 
 // ********** PACKAGES **********
-// const Chart = require('../node_modules/chart.js/dist/Chart.js');
-
+// var Chart = require('../node_modules/chart.js/dist/Chart.js');
+let now = moment('2019/06/15');
+console.log(now.format("06/15/2019", 'MM/DD/YYYY'))// import {moment} from '../node_modules/moment/src/moment.js'
 // ********** GLOBAL VARIABLE **********
 var currentUser
 var currentUserRepository
@@ -55,7 +56,6 @@ function displayUserData() {
   userPhoto.innerHTML = '<img class="userProfilePhoto" src="../assets/userImages/UserImage.jpg" alt="user profile image">'
 }
 function displayHydrationData(event) {
-  console.log('you clicked me')
   hydrationWrapper.classList.remove('hidden')
   document.querySelector('.e').classList.add('hidden')
   document.querySelector('.b').classList.add('hidden')
@@ -99,6 +99,7 @@ function displayProfile() {
     </div>`
 }
 //****************CHHHHHHAAAARTS*****************//
+//put into function that instantiates chart and inserts innerHTML dynamically rather than hiding and displaying stuff that's already there
 var hydrationChartDay = new Chart(ctx, {
     type: 'horizontalBar',
     data: {
