@@ -2,11 +2,16 @@ class UserActivity {
   constructor(userActivity){
     this.userActivity = userActivity
   }
-  calculateMiles(date){
+  calculateMiles(id, date){
+    let milesPerDate = this.userActivity.find
 
+    //we need to access this data from two different databases
   }
-  calculateMinActive(id, date){
-
+  calculateMinActive(date){
+    let minPerDay = this.userActivity.find(minActive => {
+      minActive.date === date)
+      return parseFloat((minPerDay.minutesActive).toFixed(2))
+    })
   }
   calculateAvgMinActivePerWeek(endingDate){
     let endingDateIndex = this.userActivity.findIndex(activityData => activityData.date === endingDate)
