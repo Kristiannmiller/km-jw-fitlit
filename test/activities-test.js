@@ -428,10 +428,28 @@ describe('Activity', () => {
   it('should be a function', () => {
     expect(Activity).to.be.a('function')
   });
-
   it('should be an instance of Activity', () => {
-    let testActivity1 = new Activity(activityData[0
-    ]);
-    expect(testActivity1).to.be.an.instanceof(Activity)
-  })
-} )
+    let testActivity1 = new Activity(activityData[0]);
+    expect(testActivity1).to.be.an.instanceof(Activity);
+  });
+  it('should be able to have a userID property', () => {
+    let testActivity1 = new Activity(activityData[0]);
+    expect(testActivity1.userID).to.equal(1);
+  });
+  it('should be able to have a date property', () => {
+    let testActivity1 = new Activity(activityData[0]);
+    expect(testActivity1.date).to.equal("2019/06/15");
+  });
+  it('should be able to count the number of steps', () => {
+    let testActivity1 = new Activity(activityData[0]);
+    expect(testActivity1.numSteps).to.equal(3577);
+  });
+  it('should be able to track the number of minutes active', () => {
+    let testActivity1 = new Activity(activityData[0]);
+    expect(testActivity1.minutesActive).to.equal(140);
+  });
+  it('should be able to track the flights of stairs climbed', () => {
+    let testActivity1 = new Activity(activityData[0]);
+    expect(testActivity1.flightsOfStairs).to.equal(16); 
+  });
+})
