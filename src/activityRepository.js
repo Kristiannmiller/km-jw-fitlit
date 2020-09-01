@@ -9,10 +9,15 @@ class ActivityRepository {
       acc += user.flightsOfStairs
       return acc
     }, 0)
-    return (averageStairsClimbed/dateDate.date.length)
+    return (averageStairsClimbed/dateData.date.length)
   }
   calculateAverageStepsTakenbyDate(date){
-    
+    const targetDateData = this.allActivityData.filter(dateData => dateData.date === date)
+    const averageStepsTaken = targetDateData.reduce((acc, user) => {
+      acc += user.numSteps
+      return acc
+    }, 0)
+    return (averageStepsTaken/dateData.length)
   }
   calculateAverageMinutesActivebyDate(date){
 
