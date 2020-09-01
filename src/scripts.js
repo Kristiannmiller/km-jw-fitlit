@@ -1,7 +1,8 @@
 // ********** PACKAGES **********
-// var Chart = require('../node_modules/chart.js/dist/Chart.js');
+// import datepicker from 'js-datepicker'
 let now = moment('2019/09/22').format('YYYY/MM/DD')
 let weekEnd = moment('2019/09/22').format('YYYY/MM/DD')
+// const picker = datepicker(selector, options)
 
 // ********** GLOBAL VARIABLES **********
 var currentUser
@@ -139,11 +140,13 @@ function displayHydrationData(event) {
 function displayHydrationPage() {
   mainBody.innerHTML = `<div class="hydrationWrapper">
     <div class="hydrationToday">
+      <form action="">
+        <input type="date" min="2019-06-15" max="2019-09-22"/>
+      </form>
       <canvas id="hydrationChartDay" width="100" height="100"></canvas>
     </div>
   <div class="hydrationWeek">
       <canvas id="hydrationChartWeek" width="100" height="100"></canvas>
-  </div>
   </div>`
 }
 
@@ -242,7 +245,6 @@ function displaySleepData(event) {
   displayWeeklySleepHoursChart(currentUserSleep, allUserSleepRepository)
   displayWeeklySleepQualityChart(currentUserSleep, allUserSleepRepository)
 }
-
 function displaySleepPage() {
   mainBody.innerHTML = `<div class="sleepWrapper">
     <div class="sleepToday">
@@ -288,7 +290,6 @@ function displayDailySleepHoursChart(currentUserSleep, allUserSleepRepository) {
       }
   });
 };
-
 function displayDailySleepQualityChart(currentUserSleep, allUserSleepRepository) {
   let sleepQualDaily = document.getElementById('dailySleepQualityChart');
   let sleepQualChartDay = new Chart(sleepQualDaily, {
