@@ -91,10 +91,21 @@ function displayActivityData() {
         <div class="box p">Best Stairs</div>
       </div>`
 }
-
-function displayHydrationCharts(user){
-  let ctx
-  let har
+function displayHydrationData(event) {
+  displayHydrationPage()
+  allUserHydrationRepository = new HydrationRepository(hydrationData)
+  currentUserHydration = new UserHydration(allUserHydrationRepository.findUserById(currentUser.id))
+  displayDailyHydrationChart(currentUserHydration, allUserHydrationRepository)
+  displayWeeklyHydrationChart(currentUserHydration, allUserHydrationRepository)
+  // hydrationWrapper.classList.remove('hidden')
+  // document.querySelector('.e').classList.add('hidden')
+  // document.querySelector('.b').classList.add('hidden')
+  // document.querySelector('.g').classList.add('hidden')
+  // document.querySelector('.h').classList.add('hidden')
+  // document.querySelector('.i').classList.add('hidden')
+  // document.querySelector('.l').classList.add('hidden')
+}
+function displayHydrationPage() {
   mainBody.innerHTML = `<div class="hydrationWrapper">
     <div class="hydrationToday">
       <canvas id="hydrationChartDay" width="100" height="100"></canvas>
@@ -103,13 +114,60 @@ function displayHydrationCharts(user){
       <canvas id="hydrationChartWeek" width="100" height="100"></canvas>
   </div>
   </div>`
-  ctx = document.getElementById('hydrationChartDay');
-  har = document.getElementById('hydrationChartWeek')
-  let allUserHydrationRepository = new HydrationRepository(hydrationData)
-  currentUserHydration = new UserHydration(allUserHydrationRepository.findUserById(currentUser.id))
-  console.log(currentUserHydration)
-  let numOunces = currentUserHydration.userWaterIntake[currentUserHydration.userWaterIntake.length-1].numOunces
-  var hydrationChartDay = new Chart(ctx, {
+}
+
+function generateWeekDates() {
+  let week = ['day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7'];
+  let currentWeek = week.map((day, i) => {
+    return moment(weekEnd).subtract((6 - i), 'days').calendar()
+  });
+  return currentWeek
+}
+
+function displayWeeklyHydrationChart(currentUserHydration, allUserHydrationRepository) {
+  let currentWeek = generateWeekDates()
+  let har = document.getElementById('hydrationChartWeek')
+  let hydrationChartWeek = new Chart(har, {
+    type: 'horizontalBar',
+    data: {
+      labels: currentWeek,
+      datasets: [{
+        label: 'Fl Oz',
+        data: currentUserHydration.waterForWeek(weekEnd),
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+          }
+        }]
+      }
+    }
+  })
+}
+
+function displayDailyHydrationChart(currentUserHydration, allUserHydrationRepository) {
+  let ctx = document.getElementById('hydrationChartDay');
+  let hydrationChartDay = new Chart(ctx, {
       type: 'horizontalBar',
       data: {
           labels: [moment(now).format('MM/DD/YYYY')],
@@ -140,58 +198,9 @@ function displayHydrationCharts(user){
           }
       }
   });
-  var hydrationChartWeek = new Chart(har, {
-      type: 'horizontalBar',
-      data: {
-          labels: [moment(weekEnd).subtract(6, 'days').calendar(), moment(weekEnd).subtract(5, 'days').calendar(), moment(weekEnd).subtract(4, 'days').calendar(), moment(weekEnd).subtract(3, 'days').calendar(), moment(weekEnd).subtract(2, 'days').calendar(), moment(weekEnd).subtract(1, 'days').calendar(), moment(weekEnd).calendar()],
-          datasets: [{
-              label: 'Fl Oz',
-              data: currentUserHydration.waterForWeek(weekEnd),
-              backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-              ],
-              borderColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-              ],
-              borderWidth: 1
-          }]
-      },
-      options: {
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero: true,
-
-                  }
-              }]
-          }
-      }
-  });
 }
 
-function displayHydrationData(event) {
-  displayHydrationCharts()
-  allUserHydrationRepository = new HydrationRepository(hydrationData)
-  currentUserHydration = new UserHydration(allUserHydrationRepository.findUserById(currentUser.id))
-  console.log('This is my favorite ', allUserHydrationRepository)
-  // hydrationWrapper.classList.remove('hidden')
-  // document.querySelector('.e').classList.add('hidden')
-  // document.querySelector('.b').classList.add('hidden')
-  // document.querySelector('.g').classList.add('hidden')
-  // document.querySelector('.h').classList.add('hidden')
-  // document.querySelector('.i').classList.add('hidden')
-  // document.querySelector('.l').classList.add('hidden')
-}
+
 
 function displayTeamList() {
   console.log('team list')
