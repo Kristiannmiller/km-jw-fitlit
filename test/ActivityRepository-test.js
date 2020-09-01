@@ -507,7 +507,7 @@ describe('ActivityRepository', () => {
   });
   it('should calculate the average minutes active for all users on a specific date', () => {
     let testRepository = new ActivityRepository(activityData);
-    expect(testRepository.calculateMinActive('2019/06/15')).to.equal(127)
+    expect(testRepository.calculateAverageMinutesActivebyDate('2019/06/15')).to.equal(127)
   });
   it('should calculate the best stair climber of all users on a given date', () => {
     let testRepository = new ActivityRepository(activityData);

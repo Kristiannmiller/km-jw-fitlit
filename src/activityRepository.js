@@ -31,7 +31,7 @@ class ActivityRepository {
       acc += user.minutesActive
       return acc
     }, 0)
-    return (averageMinActive/activityData.length)
+    return (averageMinActive/targetDateData.length)
   }
   findBestClimber(date){
     const targetDateData = this.allActivityData.filter(dateData => dateData.date === date)
