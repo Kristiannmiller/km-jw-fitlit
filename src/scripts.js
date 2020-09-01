@@ -1,11 +1,9 @@
-
-
 // ********** PACKAGES **********
 // var Chart = require('../node_modules/chart.js/dist/Chart.js');
 let now = moment('2019/09/22').format('YYYY/MM/DD')
 let weekEnd = moment('2019/09/22').format('YYYY/MM/DD')
 
-// ********** GLOBAL VARIABLE **********
+// ********** GLOBAL VARIABLES **********
 var currentUser
 var currentUserRepository
 var allUserRepository
@@ -23,13 +21,14 @@ const viewTeamButton = document.querySelector('#viewTeam');
 const hydrationMenu = document.querySelector('.hydMenu');
 const hydrationWrapper = document.querySelector('.hydrationWrapper')
 const mainBody = document.querySelector('.mainbody')
+const sleepMenu = document.querySelector('.slpMenu')
 
 // ********** EVENT LISTENERS **********
 window.addEventListener('load', updateUser);
 userName.addEventListener('click', displayProfile);
 sideBarContents.addEventListener('click', displayTeamList);
-// myProfileLink.addEventListener('click', displayProfile);
-hydrationMenu.addEventListener('click', displayHydrationData)
+hydrationMenu.addEventListener('click', displayHydrationData);
+sleepMenu.addEventListener('click', displaySleepData);
 
 // ******** FUNCTIONS/EVENTHANDLERS **********
 
@@ -230,3 +229,5 @@ function displayDailyHydrationChart(currentUserHydration, allUserHydrationReposi
       }
   });
 }
+
+// ====== Hydration View ====== //
