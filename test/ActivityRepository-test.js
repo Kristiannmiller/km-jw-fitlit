@@ -503,7 +503,7 @@ describe('ActivityRepository', () => {
   });
   it ('should calculate the average number of steps taken by all users on a given date', () => {
     let testRepository = new ActivityRepository(activityData);
-    expect(testRepository.calculateAverageStepsTaken('2019/06/15')).to.equal(4689.75)
+    expect(testRepository.calculateAverageStepsTakenbyDate('2019/06/15')).to.equal(4689.75)
   });
   it('should calculate the average minutes active for all users on a specific date', () => {
     let testRepository = new ActivityRepository(activityData);
