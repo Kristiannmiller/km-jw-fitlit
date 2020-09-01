@@ -14,11 +14,11 @@ class UserActivity {
   calculateAvgMinActivePerWeek(endingDate){
     let endingDateIndex = this.userActivity.findIndex(activityData => activityData.date === endingDate)
     let weekOfActivity = this.userActivity.slice(endingDateIndex-6, endingDateIndex+1)
-    let result = weekOfActitivty.reduce((activityData, day) => {
-      activityData[day.date] = day.minutesActive
-      return activityData
-    }, {})
-    return result
+    let result = weekOfActivity.reduce((acc, currentValue) => {
+      acc += currentValue.minutesActive
+      return acc
+    }, 0)
+    return parseFloat((result/weekOfActivity.length).toFixed(2))
   }
   // calculateStepGoalAchieved(date){
   //   let stepGoalsAchieved = this.userActivity.find(goalAchieved => {

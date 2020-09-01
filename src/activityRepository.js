@@ -4,7 +4,7 @@ class ActivityRepository {
     this.allActivityData = allActivityData
   }
   findUserById(id) {
-    let userActivityData = this.allActivityData.map.filter(activityData => activityData.userID === id)
+    let userActivityData = this.allActivityData.filter(activityData => activityData.userID === id)
     return userActivityData
   }
   calculateAverageStairsClimbedbyDate(date){
