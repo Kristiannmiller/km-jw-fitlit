@@ -1,8 +1,8 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const UsesActivities = require('../src/UserActivities')
-const ActivityRepository = require('../src/activityRepository')
+const UsesActivities = require('../src/UserActivity')
+const ActivityRepository = require('../src/ActivityRepository')
 const activityData = [
   {
     "userID": 1,
