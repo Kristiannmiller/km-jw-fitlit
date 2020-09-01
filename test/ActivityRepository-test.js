@@ -496,5 +496,10 @@ decribe('ActivityRepository,' () => {
   it ('should calculate the average stairs climbed by all users on a given date', () => {
     expect(testRepository.calculateAverageStairsClimbedbyDate(6/15/19)).to.equal(22.75)
   });
-  
+  it ('should calculate the average number of steps taken by all users on a given date', () => {
+    expect(testRepository.calculateAverageStepsTaken(6/15/19)).to.equal(4689.75)
+  });
+  it('should calculate the average minutes active for all users on a specific date', () => {
+    expect(testRepository.calculateMinActive(6/15/19)).to.equal(127)
+  });
 })
