@@ -1,8 +1,8 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const User = require('../src/User')//DO WE NEED THIS TO CHECK STRIDELENGTH?
-const Activity = require('../src/Activity')
+const ActivityRepository = require('../src/activityRepository')
+const UserActivity = require('../src/UserActivities')
 const activityData = [
   {
     "userID": 1,
@@ -424,46 +424,47 @@ const activityData = [
     "flightsOfStairs": 33
   }
 ];
-describe('Activity', () => {
+describe('UserActivity', () => {
 
   it('should be a function', () => {
-    expect(Activity).to.be.a('function')
+    expect(UserActivity).to.be.a('function')
   });
   it('should be an instance of Activity', () => {
-    let testActivity1 = new Activity(activityData[0]);
-    expect(testActivity1).to.be.an.instanceof(Activity);
+    let testActivity1 = new UserActivity(activityData[0]);
+    activity
+    expect(testActivity1).to.be.an.instanceof(UserActivity);
   });
   it('should be able to have a userID property', () => {
-    let testActivity1 = new Activity(activityData[0]);
+    let testActivity1 = new UserActivity(activityData[0]);
     expect(testActivity1.userID).to.equal(1);
   });
   it('should be able to have a date property', () => {
-    let testActivity1 = new Activity(activityData[0]);
+    let testActivity1 = new UserActivity(activityData[0]);
     expect(testActivity1.date).to.equal("2019/06/15");
   });
   it('should be able to count the number of steps', () => {
-    let testActivity1 = new Activity(activityData[0]);
+    let testActivity1 = new UserActivity(activityData[0]);
     expect(testActivity1.numSteps).to.equal(3577);
   });
   it('should be able to track the number of minutes active', () => {
-    let testActivity1 = new Activity(activityData[0]);
+    let testActivity1 = new UserActivity(activityData[0]);
     expect(testActivity1.minutesActive).to.equal(140);
   });
   it('should be able to track the flights of stairs climbed', () => {
-    let testActivity1 = new Activity(activityData[0]);
+    let testActivity1 = new UserActivity(activityData[0]);
     expect(testActivity1.flightsOfStairs).to.equal(16);
   });
   it('should be able to track the number of miles the user has walked for a specific date', () => {
-  let testActivity1 = new Activity(activityData[0]);
+  let testActivity1 = new UserActivity(activityData[0]);
   let userData1 = new User(userData[0]);
   expect(testActivity1.calculateMiles('6/15/19')).to.equal(2.91)
   });
   it('should be able to track the number of minutes a given user was active for a specific date as specified by UserId', () => {
-  let testActivity1 = new Activity(activityData[0]);
+  let testActivity1 = new UserActivity(activityData[0]);
   let userData1 = new User(userData[0]);
   expect(testActivity1.calculateMinActive('6/15/19')).to.equal(140)
   });
   it('should be able to calculate how many minutes active the user averaged for a given week', () => {
-    let testActivity1 = new Activity(activityData[0])
+    let testActivity1 = new UserActivity(activityData[0])
   })
 })

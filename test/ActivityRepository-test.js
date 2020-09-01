@@ -1,8 +1,8 @@
 const chai = require('chai');
 const expect = chai.expect;
 
+const UsesActivities = require('../src/UserActivities')
 const ActivityRepository = require('../src/activityRepository')
-const UserActivities = require('../src/UserActivities')
 const activityData = [
   {
     "userID": 1,
@@ -480,7 +480,7 @@ const activityData = [
     "flightsOfStairs": 42
   }
 ];
-decribe('ActivityRepository,' () => {
+describe('ActivityRepository', () => {
 
   it('should be a function', () => {
     expect(ActivityRepository).to.be.a('function')
@@ -494,15 +494,19 @@ decribe('ActivityRepository,' () => {
     expect(testRepository.allActivityData).to.equal(activityData)
   });
   it ('should calculate the average stairs climbed by all users on a given date', () => {
-    expect(testRepository.calculateAverageStairsClimbedbyDate(6/15/19)).to.equal(22.75)
+    let testRepository = new ActivityRepository(activityData);
+    expect(testRepository.calculateAverageStairsClimbedbyDate('6/15/19')).to.equal(22.75)
   });
   it ('should calculate the average number of steps taken by all users on a given date', () => {
-    expect(testRepository.calculateAverageStepsTaken(6/15/19)).to.equal(4689.75)
+    let testRepository = new ActivityRepository(activityData);
+    expect(testRepository.calculateAverageStepsTaken('6/15/19')).to.equal(4689.75)
   });
   it('should calculate the average minutes active for all users on a specific date', () => {
-    expect(testRepository.calculateMinActive(6/15/19)).to.equal(127)
+    let testRepository = new ActivityRepository(activityData);
+    expect(testRepository.calculateMinActive('6/15/19')).to.equal(127)
   });
   it('should calculate the best stair climber of all users on a given date', () => {
-    expect(testRepository.findBestClimber(6/15/19)).to.equal(testRepository.allActivityData[2].userId)
-  }); 
+    let testRepository = new ActivityRepository(activityData);
+    expect(testRepository.findBestClimber('6/15/19')).to.equal(testRepository.activityData[2].userId)
+  });
 })

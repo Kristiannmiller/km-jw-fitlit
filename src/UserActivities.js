@@ -9,7 +9,7 @@ class UserActivity {
   }
   calculateMinActive(date){
     let minPerDay = this.userActivity.find(minActive => {
-      minActive.date === date)
+      minActive.date === date
       return parseFloat((minPerDay.minutesActive).toFixed(2))
     })
   }
@@ -22,15 +22,19 @@ class UserActivity {
     }, {})
     return result
   }
-  calculateStepGoalAchieved(date){
-    let stepGoalsAchieved = this.userActivity.find(goalAchieved => {
-      goalAchieved.date > 
-    })
-  }
+  // calculateStepGoalAchieved(date){
+  //   let stepGoalsAchieved = this.userActivity.find(goalAchieved => {
+  //     goalAchieved.date >
+  //   })
+  // }
   calculateDaysGoalExceeded(user){
 
   }
   calculateMostStairsClimbed(user, date){
 
   }
+}
+
+if (typeof module !== 'undefined') {
+  module.exports = UserActivity;
 }

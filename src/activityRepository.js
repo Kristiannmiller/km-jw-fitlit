@@ -1,31 +1,40 @@
+
 class ActivityRepository {
   constructor(allActivityData){
-    this.allActivityData = allACtivityData
+    this.allActivityData = allActivityData
   }
-
+  findUserById(id) {
+    let userActivityData = this.allActivityData.map.filter(activityData => activityData.userID === id)
+    return userActivityData
+  }
   calculateAverageStairsClimbedbyDate(date){
-    const targetDateData = this.allActivityData.filter(dateData => dateData.date === date)
+    console.log("You're logging nothing", allActivityData)
+    const targetDateData = this.allActivityData.filter(activityData => activityData.date === date)
+    console.log(targetDateData)
     const averageStairsClimbed = targetDateData.reduce((acc, user) => {
       acc += user.flightsOfStairs
+      console.log(acc)
       return acc
     }, 0)
-    return (averageStairsClimbed/dateData.date.length)
+    return (averageStairsClimbed/activityData.date.length)
   }
   calculateAverageStepsTakenbyDate(date){
-    const targetDateData = this.allActivityData.filter(dateData => dateData.date === date)
+    const targetDateData = this.allActivityData.filter(activityData => activityData.date === date)
+    console.log(activityData)
     const averageStepsTaken = targetDateData.reduce((acc, user) => {
       acc += user.numSteps
+      console.log(acc)
       return acc
     }, 0)
-    return (averageStepsTaken/dateData.length)
+    return (averageStepsTaken/activityData.length)
   }
   calculateAverageMinutesActivebyDate(date){
-    const targetDateData = this.allActivityData.filter(dateData => dateData.date === date)
+    const targetDateData = this.allActivityData.filter(activityData => activityData.date === date)
     const averageMinActive = targetDateData.reduce((acc, user) => {
       acc += user.minutesActive
       return acc
     }, 0)
-    return (averageMinActive/dateData.length)
+    return (averageMinActive/activityData.length)
   }
   findBestClimber(date){
     const targetDateData = this.allActivityData.filter(dateData => dateData.date === date)
