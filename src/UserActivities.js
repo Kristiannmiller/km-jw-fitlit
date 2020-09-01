@@ -23,7 +23,9 @@ class UserActivity {
     return result
   }
   calculateStepGoalAchieved(date){
-
+    let stepGoalsAchieved = this.userActivity.find(goalAchieved => {
+      goalAchieved.date > 
+    })
   }
   calculateDaysGoalExceeded(user){
 
