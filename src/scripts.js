@@ -9,6 +9,7 @@ var currentUserRepository
 var allUserRepository
 var allUserHydrationRepository
 var allUserSleepRepository
+var currentUserSleep
 var allUserActivityRepository
 
 // ********** QUERIES  **********
@@ -230,4 +231,60 @@ function displayDailyHydrationChart(currentUserHydration, allUserHydrationReposi
   });
 }
 
-// ====== Hydration View ====== //
+// ====== Sleep View ====== //
+
+function displaySleepData(event) {
+  displaySleepPage()
+  allUserSleepRepository = new SleepRepository(sleepData)
+  currentUserSleep = new UserSleep(allUserSleepRepository.findUserById(currentUser.id))
+  displayDailySleepHoursChart(currentUserSleep, allUserSleepRepository)
+  displayDailySleepQualityChart(currentUserSleep, allUserSleepRepository)
+  displayWeeklySleepHoursChart(currentUserSleep, allUserSleepRepository)
+  displayWeeklySleepQualityChart(currentUserSleep, allUserSleepRepository)
+}
+
+function displaySleepPage() {
+  mainBody.innerHTML = `<div class="sleepWrapper">
+    <div class="sleepToday">
+      <canvas id="dailySleepHoursChart" width="100" height="100"></canvas>
+      <canvas id="dailySleepQualityChart" width="100" height="100"></canvas>
+    </div>
+    <div class="sleepThisWeek">
+      <canvas id="weeklySleepHoursChart" width="100" height="100"></canvas>
+      <canvas id="weeklySleepQualityChart" width="100" height="100"></canvas>
+    </div>
+  </div>`
+}
+function displayDailySleepHoursChart(currentUserSleep, allUserSleepRepository) {
+  let sleepHrsDaily = document.getElementById('dailySleepHoursChart');
+  let hydrationChartDay = new Chart(sleepHrsDaily, {
+      type: 'horizontalBar',
+      data: {
+          labels: [moment(now).format('MM/DD/YYYY')],
+          datasets: [{
+              label: 'Hours of Sleep',
+              data: [currentUserSleep.calculateSleepByDate(now)],
+              backgroundColor: [
+                  'rgba(116, 204, 195, 1)',
+              ],
+              borderColor: [
+                  'rgba(58, 156, 147, 1)',
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              xAxes: [{
+                  ticks: {
+                      scaleOveride: true,
+                      min: 0,
+                      max: 15,
+                      stepSize: 1,
+                      responsive: false
+                  }
+              }]
+          }
+      }
+  });
+};
