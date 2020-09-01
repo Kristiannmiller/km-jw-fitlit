@@ -257,7 +257,7 @@ function displaySleepPage() {
 }
 function displayDailySleepHoursChart(currentUserSleep, allUserSleepRepository) {
   let sleepHrsDaily = document.getElementById('dailySleepHoursChart');
-  let hydrationChartDay = new Chart(sleepHrsDaily, {
+  let sleepHoursChartDay = new Chart(sleepHrsDaily, {
       type: 'horizontalBar',
       data: {
           labels: [moment(now).format('MM/DD/YYYY')],
@@ -280,6 +280,40 @@ function displayDailySleepHoursChart(currentUserSleep, allUserSleepRepository) {
                       scaleOveride: true,
                       min: 0,
                       max: 15,
+                      stepSize: 1,
+                      responsive: false
+                  }
+              }]
+          }
+      }
+  });
+};
+
+function displayDailySleepQualityChart(currentUserSleep, allUserSleepRepository) {
+  let sleepQualDaily = document.getElementById('dailySleepQualityChart');
+  let sleepQualChartDay = new Chart(sleepQualDaily, {
+      type: 'horizontalBar',
+      data: {
+          labels: [moment(now).format('MM/DD/YYYY')],
+          datasets: [{
+              label: 'Quality of Sleep',
+              data: [currentUserSleep.calculateSleepQualityByDate(now)],
+              backgroundColor: [
+                  'rgba(116, 204, 195, 1)',
+              ],
+              borderColor: [
+                  'rgba(58, 156, 147, 1)',
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              xAxes: [{
+                  ticks: {
+                      scaleOveride: true,
+                      min: 0,
+                      max: 5,
                       stepSize: 1,
                       responsive: false
                   }
