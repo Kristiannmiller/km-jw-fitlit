@@ -1,7 +1,7 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const UsesActivities = require('../src/UserActivity')
+const UserActivity = require('../src/UserActivity')
 const ActivityRepository = require('../src/ActivityRepository')
 const activityData = [
   {
@@ -492,6 +492,10 @@ describe('ActivityRepository', () => {
   it('should hold all of the user activity objects', () => {
     let testRepository = new ActivityRepository(activityData);
     expect(testRepository.allActivityData).to.equal(activityData)
+  });
+  it('should be able to access all activity data by a users id', () => {
+    let testRepository = new ActivityRepository(userData);
+    expect(testRepository.findUserById(3)).to.deep.equal([userData[2], userData[6], userData[10], userData[14], userData[18], userData[22]])
   });
   it ('should calculate the average stairs climbed by all users on a given date', () => {
     let testRepository = new ActivityRepository(activityData);
