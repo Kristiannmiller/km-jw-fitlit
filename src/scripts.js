@@ -2,9 +2,8 @@
 
 // ********** PACKAGES **********
 // var Chart = require('../node_modules/chart.js/dist/Chart.js');
-let now = moment('2019/06/15').format('YYYY/MM/DD')
-let weekEnd = moment('2019/06/21').format('YYYY/MM/DD')
-console.log(now);
+let now = moment('2019/09/22').format('YYYY/MM/DD')
+let weekEnd = moment('2019/09/22').format('YYYY/MM/DD')
 
 // ********** GLOBAL VARIABLE **********
 var currentUser
@@ -231,8 +230,3 @@ function displayDailyHydrationChart(currentUserHydration, allUserHydrationReposi
       }
   });
 }
-
-
-
-//****************CHHHHHHAAAARTS*****************//
-//put into function that instantiates chart and inserts innerHTML dynamically rather than hiding and displaying stuff that's already there
