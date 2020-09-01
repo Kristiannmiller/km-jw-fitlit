@@ -502,4 +502,7 @@ decribe('ActivityRepository,' () => {
   it('should calculate the average minutes active for all users on a specific date', () => {
     expect(testRepository.calculateMinActive(6/15/19)).to.equal(127)
   });
+  it('should calculate the best stair climber of all users on a given date', () => {
+    expect(testRepository.findBestClimber(6/15/19)).to.equal(testRepository.allActivityData[2].userId)
+  }); 
 })
