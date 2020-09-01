@@ -25,56 +25,22 @@
       </div>
       <div id="sidebarContents" class="box d">
         <div class="sidebarHeader">
-          <!-- <img class="profileUserPhoto" src="../assets/userImages/UserImage.jpg" alt="user profile image"></div>
-          <div class="profileUser">UserID</div>
-          <div class="key profileName">NAME: Firstname Lastname</div>
-          <div class="key profileAddress">ADDRESS: 1846 Oxley Street, South Pasadena, CA 91030-9870</div>
-          <div class="key profileEmail">EMAIL: peewee.herman@gmail.com</div>
-          <div class="key profileStride">STRIDE LENGTH: 4.5</div>
-          <div class="key profileStepGoal">DAILY STEP GOAL: 10,000</div> -->
-          <!-- <button id="viewTeam" class="viewTeam" type="button">View My Team</button> -->
-        <!-- </div>
-        <div class="profileUser">My Team</div>
-        <div class="teammember">
-          <div class="photo sidebar"><img class="teamImage" src="../assets/userImages/TeamImage1.jpg" alt="teamMate1 profile image"></div>
-          <div class="name sidebar">Name</div>
-          <div class="steps sidebar">Steps Taken</div>
-        </div>
-        <div class="teammember">
-          <div class="photo sidebar">photo</div>
-          <div class="name sidebar">Name</div>
-          <div class="steps sidebar">Steps Taken</div>
-        </div>
-        <div class="teammember">
-          <div class="photo sidebar">photo</div>
-          <div class="name sidebar">Name</div>
-          <div class="steps sidebar">Steps Taken</div>
-        </div>
-        <div class="teammember">
-          <div class="photo sidebar">photo</div>
-          <div class="name sidebar">Name</div>
-          <div class="steps sidebar">Steps Taken</div>
-        </div>
-        <div class="teammember">
-          <div class="photo sidebar">photo</div>
-          <div class="name sidebar">Name</div>
-          <div class="steps sidebar">Steps Taken</div>
-        </div>
-        <div class="teamstats" type="button">TeamStats</div> -->
         </div>
       </div>
   <section class="mainbody">
-    <section>Daily Statistics
+    <section>
+      <h1>Daily Statistics</h1>
       <form action="daily-datepicker">
-        <label for="activityDay">Select Date:</label>
+        <label for="dailyCharts">Select Date:</label>
         <input class="dayCal" id="daySelector" type="date" min="2019-06-15" max="2019-09-22"/>
       </form>
       <section class="dailyWidgets">
       </section>
     </section>
-    <section>Weekly Statistics
+    <section>
+      <h1>Weekly Statistics</h1>
       <form action="weekly-datepicker">
-        <label for="activityWeek">Select Week End Date:</label>
+        <label for="weeklyCharts">Select Week End Date:</label>
         <input class="weekCal" id="weekSelector" type="date" min="2019-06-21" max="2019-09-22"/>
       </form>
       <section class="weeklyWidgets">
@@ -82,67 +48,7 @@
     </section>
     <section class="allTime">
     </section>
-    <!-- <div class="sleepWrapper">
-      <div class="sleepToday">
-        <canvas id="dailySleepHoursChart" width="100" height="100"></canvas>
-        <canvas id="dailySleepQualityChart" width="100" height="100"></canvas>
-      </div>
-      <div class="sleepThisWeek">
-        <canvas id="weeklySleepHoursChart" width="100" height="100"></canvas>
-        <canvas id="weeklySleepQualityChart" width="100" height="100"></canvas>
-      </div>
-    </div> -->
-    <!-- <div class="hydrationWrapper">
-      <div class="hydrationToday">
-        <form action="">
-          <input type="date">
-        </form>
-        <canvas id="hydrationChartDay" width="100" height="100"></canvas>
-      </div>
-    <div class="hydrationWeek">
-        <canvas id="hydrationChartWeek" width="100" height="100"></canvas>
-    </div>
-    </div> -->
-      <!-- <div class="box e"> -->
-        <!-- <form action="datepicker">
-          <label for="activityDay">Select Date:</label>
-          <input class="calendar" id="actDay" type="date" min="2019-06-15" max="2019-09-22"/>
-        </form> -->
-      <!-- <div class="widgetA">Steps</div>
-        <canvas id="myChart" width="10" height="10"></canvas>
-      <div class="widgetB">Activity</div>
-      <div class="widgetC">Miles Run</div>
-      <div class="widgetD">Stairs Climbed</div>
-    </div>
-    <div class="box b"> -->
-      <!-- <form action="datepicker">
-        <label for="activityWeek">Select Date:</label>
-        <input class="calendar" id="actWeek" type="date" min="2019-06-15" max="2019-09-22"/>
-      </form> -->
-        <!-- <div class="graphTitle">Name</div>
-        <div class="graph">Steps Done Walked</div>
-      </div>
-      <div class="box h">
-        <div class="graphTitle">Name</div>
-        <div class="graph">Minutes Active</div>
-      </div>
-      <div class="box g">
-          <div class="graphTitle">Name</div>
-          <div class="graph">Miles Runned</div>
-        </div>
-      <div class="box i">
-        <div class="graphTitle">Name</div>
-        <div class="graph">Stairs Clombed</div>
-      </div>
-      <div class="box l">
-        <div class="box m">Best Steps</div>
-        <div class="box n">Best Min/active</div>
-        <div class="box o">Best Miles</div>
-        <div class="box p">Best Stairs</div>
-      </div>
-  </div> -->
 </section>
-    <!-- <script src="path/to/chartjs/dist/Chart.js"></script> -->
     <script type="text/javascript" src="../src/HydrationRepository.js"></script>
     <script type="text/javascript" src="../src/User.js"></script>
     <script type="text/javascript" src="../src/UserHydration.js"></script>

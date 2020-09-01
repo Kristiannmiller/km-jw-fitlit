@@ -13,7 +13,7 @@ var allUserHydrationRepository
 var allUserSleepRepository
 var currentUserSleep
 var allUserActivityRepository
-var currentPage
+var currentPage = 'activity'
 
 // ********** QUERIES  **********
 const userName = document.querySelector('.username');
