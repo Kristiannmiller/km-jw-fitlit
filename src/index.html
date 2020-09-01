@@ -63,7 +63,25 @@
         <div class="teamstats" type="button">TeamStats</div> -->
         </div>
       </div>
-  <article class="mainbody">
+  <section class="mainbody">
+    <section>Daily Statistics
+      <form action="daily-datepicker">
+        <label for="activityDay">Select Date:</label>
+        <input class="dayCal" id="daySelector" type="date" min="2019-06-15" max="2019-09-22"/>
+      </form>
+      <section class="dailyWidgets">
+      </section>
+    </section>
+    <section>Weekly Statistics
+      <form action="weekly-datepicker">
+        <label for="activityWeek">Select Week End Date:</label>
+        <input class="weekCal" id="weekSelector" type="date" min="2019-06-21" max="2019-09-22"/>
+      </form>
+      <section class="weeklyWidgets">
+      </section>
+    </section>
+    <section class="allTime">
+    </section>
     <!-- <div class="sleepWrapper">
       <div class="sleepToday">
         <canvas id="dailySleepHoursChart" width="100" height="100"></canvas>
@@ -84,16 +102,24 @@
     <div class="hydrationWeek">
         <canvas id="hydrationChartWeek" width="100" height="100"></canvas>
     </div>
-    </div>
-      <div class="box e">
-      <div class="widgetA">Steps</div>
+    </div> -->
+      <!-- <div class="box e"> -->
+        <!-- <form action="datepicker">
+          <label for="activityDay">Select Date:</label>
+          <input class="calendar" id="actDay" type="date" min="2019-06-15" max="2019-09-22"/>
+        </form> -->
+      <!-- <div class="widgetA">Steps</div>
         <canvas id="myChart" width="10" height="10"></canvas>
       <div class="widgetB">Activity</div>
       <div class="widgetC">Miles Run</div>
       <div class="widgetD">Stairs Climbed</div>
     </div>
-    <div class="box b">
-        <div class="graphTitle">Name</div>
+    <div class="box b"> -->
+      <!-- <form action="datepicker">
+        <label for="activityWeek">Select Date:</label>
+        <input class="calendar" id="actWeek" type="date" min="2019-06-15" max="2019-09-22"/>
+      </form> -->
+        <!-- <div class="graphTitle">Name</div>
         <div class="graph">Steps Done Walked</div>
       </div>
       <div class="box h">
@@ -115,7 +141,7 @@
         <div class="box p">Best Stairs</div>
       </div>
   </div> -->
-</article>
+</section>
     <!-- <script src="path/to/chartjs/dist/Chart.js"></script> -->
     <script type="text/javascript" src="../src/HydrationRepository.js"></script>
     <script type="text/javascript" src="../src/User.js"></script>

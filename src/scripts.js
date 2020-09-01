@@ -23,8 +23,12 @@ const userSteps = document.getElementById('userSteps')
 const viewTeamButton = document.querySelector('#viewTeam');
 const hydrationMenu = document.querySelector('.hydMenu');
 const hydrationWrapper = document.querySelector('.hydrationWrapper')
-const mainBody = document.querySelector('.mainbody')
+const dailySection = document.querySelector('.dailyWidgets')
+const weeklySection = document.querySelector('.weeklyWidgets')
+const allTimeSection = document.querySelector('.allTime')
 const sleepMenu = document.querySelector('.slpMenu')
+const dailyCalendar = document.querySelector('.dayCal')
+const weeklyCalendar = document.querySelector('.weekCal')
 
 // ********** EVENT LISTENERS **********
 window.addEventListener('load', updateUser);
@@ -32,11 +36,17 @@ userName.addEventListener('click', displayProfile);
 sideBarContents.addEventListener('click', displayTeamList);
 hydrationMenu.addEventListener('click', displayHydrationData);
 sleepMenu.addEventListener('click', displaySleepData);
-
+dailyCalendar.addEventListener('click', changeDate);
+weeklyCalendar.addEventListener('click', changeDate);
 // ******** FUNCTIONS/EVENTHANDLERS **********
 
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
+}
+
+function changeDate(event){
+
+  console.log(dailyCalendar.input)
 }
 
 // ==== ONLOAD ==== //
@@ -63,34 +73,34 @@ function displayUserData() {
 }
 
 function displayActivityData() {
-  mainBody.innerHTML = `<div class="box e"> Today's Activity
+  dailySection.innerHTML = `<div class="box e"> Daily Activity
       <div class="widgetA">Steps</div>
       <div class="widgetB">Activity</div>
       <div class="widgetC">Miles Run</div>
       <div class="widgetD">Stairs Climbed</div>
     </div>
-    <div class="box b">
+    <div class="box b">`
+  weeklySection.innerHTML = `<div class="graphTitle">Name</div>
+      <div class="graph">Steps Done Walked</div>
+    </div>
+    <div class="box h">
+      <div class="graphTitle">Name</div>
+      <div class="graph">Minutes Active</div>
+    </div>
+    <div class="box g">
         <div class="graphTitle">Name</div>
-        <div class="graph">Steps Done Walked</div>
+        <div class="graph">Miles Runned</div>
       </div>
-      <div class="box h">
-        <div class="graphTitle">Name</div>
-        <div class="graph">Minutes Active</div>
-      </div>
-      <div class="box g">
-          <div class="graphTitle">Name</div>
-          <div class="graph">Miles Runned</div>
-        </div>
-      <div class="box i">
-        <div class="graphTitle">Name</div>
-        <div class="graph">Stairs Clombed</div>
-      </div>
-      <div class="box l">
-        <div class="box m">Best Steps</div>
-        <div class="box n">Best Min/active</div>
-        <div class="box o">Best Miles</div>
-        <div class="box p">Best Stairs</div>
-      </div>`
+    <div class="box i">
+      <div class="graphTitle">Name</div>
+      <div class="graph">Stairs Clombed</div>
+    </div>`
+  allTimeSection.innerHTML = `Personal Bests<div class="box l">
+    <div class="box m">Best Steps</div>
+    <div class="box n">Best Min/active</div>
+    <div class="box o">Best Miles</div>
+    <div class="box p">Best Stairs</div>
+  </div>`
 }
 
 // *** sidebar display *** //
@@ -139,21 +149,14 @@ function displayHydrationData(event) {
 }
 
 function displayHydrationPage() {
-  mainBody.innerHTML = `<div class="hydrationWrapper">
+  dailySection.innerHTML = `<div class="hydrationWrapper">
     <div class="hydrationToday">
-      <form action="">
-        <label for="hydDay">Select Date:</label>
-        <input id="hydDay" type="date" min="2019-06-15" max="2019-09-22"/>
-      </form>
       <canvas id="hydrationChartDay" width="100" height="100"></canvas>
-    </div>
-  <div class="hydrationWeek">
-      <form action="">
-        <label for="hydWeek">Select Week End Date:</label>
-        <input id="hydWeek" type="date" min="2019-06-15" max="2019-09-22"/>
-      </form>
-      <canvas id="hydrationChartWeek" width="100" height="100"></canvas>
-  </div>`
+    </div>`
+  weeklySection.innerHTML = `<div class="hydrationWeek">
+        <canvas id="hydrationChartWeek" width="100" height="100"></canvas>
+    </div>`
+  allTimeSection.innerHTML = ``
 }
 
 function generateWeekDates() {
@@ -251,16 +254,20 @@ function displaySleepData(event) {
   displayWeeklySleepQualityChart(currentUserSleep, allUserSleepRepository)
 }
 function displaySleepPage() {
-  mainBody.innerHTML = `<div class="sleepWrapper">
+  dailySection.innerHTML = `<div class="sleepWrapper">
     <div class="sleepToday">
       <canvas id="dailySleepHoursChart" width="100" height="100"></canvas>
       <canvas id="dailySleepQualityChart" width="100" height="100"></canvas>
-    </div>
-    <div class="sleepThisWeek">
-      <canvas id="weeklySleepHoursChart" width="100" height="100"></canvas>
-      <canvas id="weeklySleepQualityChart" width="100" height="100"></canvas>
-    </div>
-  </div>`
+    </div>`
+  weeklySection.innerHTML = `<div class="sleepThisWeek">
+        <canvas id="weeklySleepHoursChart" width="100" height="100"></canvas>
+        <canvas id="weeklySleepQualityChart" width="100" height="100"></canvas>
+      </div>
+    </div>`
+  allTimeSection.innerHTML = `Weekly Summary<div class="box l">
+      <div class="box m">Average Sleep Hours</div>
+      <div class="box n">Average Sleep Quality</div>
+    </div>`
 }
 function displayDailySleepHoursChart(currentUserSleep, allUserSleepRepository) {
   let sleepHrsDaily = document.getElementById('dailySleepHoursChart');
@@ -407,3 +414,4 @@ function displayWeeklySleepQualityChart(currentUserSleep, allUserSleepRepository
     }
   })
 }
+// ====== Activity View ====== //
