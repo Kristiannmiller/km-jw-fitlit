@@ -2,6 +2,7 @@
 // import datepicker from 'js-datepicker'
 let now = moment('2019/09/22').format('YYYY/MM/DD')
 let weekEnd = moment('2019/09/22').format('YYYY/MM/DD')
+Chart.defaults.global.legend.display = false
 // const picker = datepicker(selector, options)
 
 // ********** GLOBAL VARIABLES **********
@@ -141,11 +142,16 @@ function displayHydrationPage() {
   mainBody.innerHTML = `<div class="hydrationWrapper">
     <div class="hydrationToday">
       <form action="">
-        <input type="date" min="2019-06-15" max="2019-09-22"/>
+        <label for="hydDay">Select Date:</label>
+        <input id="hydDay" type="date" min="2019-06-15" max="2019-09-22"/>
       </form>
       <canvas id="hydrationChartDay" width="100" height="100"></canvas>
     </div>
   <div class="hydrationWeek">
+      <form action="">
+        <label for="hydWeek">Select Week End Date:</label>
+        <input id="hydWeek" type="date" min="2019-06-15" max="2019-09-22"/>
+      </form>
       <canvas id="hydrationChartWeek" width="100" height="100"></canvas>
   </div>`
 }
@@ -166,7 +172,6 @@ function displayWeeklyHydrationChart(currentUserHydration, allUserHydrationRepos
     data: {
       labels: currentWeek,
       datasets: [{
-        label: 'Fl Oz',
         data: currentUserHydration.waterForWeek(weekEnd),
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
@@ -264,7 +269,6 @@ function displayDailySleepHoursChart(currentUserSleep, allUserSleepRepository) {
       data: {
           labels: [moment(now).format('MM/DD/YYYY')],
           datasets: [{
-              label: 'Hours of Sleep',
               data: [currentUserSleep.calculateSleepByDate(now)],
               backgroundColor: [
                   'rgba(116, 204, 195, 1)',
