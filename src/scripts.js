@@ -38,6 +38,8 @@ function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
 
+// ==== ONLOAD ==== //
+
 function updateUser() {
   uploadData()
   displayUserData()
@@ -49,10 +51,8 @@ function uploadData() {
   currentUser = new User(userData[getRandomIndex(userData)])
   currentUserTeam = currentUser.friends.map(friend => userData[friend-1])
   currentUserTeam.unshift(currentUser) // NOTE: currentUser will always be at [0]
-  // WE CAN CHANGE THIS IF WE NEED TO ^
   currentUserRepository = new UserRepository(currentUserTeam)
   allUserRepository = new UserRepository(userData)
-  console.log(allUserRepository)
 }
 
 function displayUserData() {
@@ -91,20 +91,52 @@ function displayActivityData() {
         <div class="box p">Best Stairs</div>
       </div>`
 }
+
+// *** sidebar display *** //
+
+function displayTeamList() {
+  sideBarContents.innerHTML =
+  `<div class="teamHeader">My Team</div>
+  <div class="teamStepsHeader">FitLit Community Step Goal Average: ${allUserRepository.calculateAverageStepGoal()}</div>
+  <div class="myStepsHeader">My Step Goal: ${currentUser.dailyStepGoal}</div>`
+  currentUserRepository.data.forEach((friend, i) => {
+    if (i > 0) {
+      sideBarContents.innerHTML +=
+      `<div class="teammember">
+      <div class="photo sidebar"><img class="teamImage" src="../assets/userImages/TeamImage${i}.jpg" alt="teamMate${i} profile image"></div>
+      <div class="name sidebar">${friend.name}</div>
+      <div class="steps sidebar">${friend.dailyStepGoal}</div>
+      </div>`
+    } i++
+  })
+}
+
+function displayProfile() {
+  let currentFirstName = currentUser.displayFirstName()
+  sideBarContents.innerHTML = ''
+  sideBarContents.innerHTML =
+  `<div class="sidebarHeader">
+  <img class="profileUserPhoto" src="../assets/userImages/UserImage.jpg" alt="user profile image"></div>
+  <div class="profileUser">${currentFirstName}</div>
+  <div class="key profileName">NAME: ${currentUser.name}</div>
+  <div class="key profileAddress">ADDRESS: ${currentUser.address}</div>
+  <div class="key profileEmail">EMAIL: ${currentUser.email}</div>
+  <div class="key profileStride">STRIDE LENGTH: ${currentUser.strideLength}</div>
+  <div class="key profileStepGoal">DAILY STEP GOAL: ${currentUser.dailyStepGoal}</div>
+  <button id="viewTeam" class="viewTeam">View My Team</button>
+  </div>`
+}
+
+// ====== Hydration View ====== //
+
 function displayHydrationData(event) {
   displayHydrationPage()
   allUserHydrationRepository = new HydrationRepository(hydrationData)
   currentUserHydration = new UserHydration(allUserHydrationRepository.findUserById(currentUser.id))
   displayDailyHydrationChart(currentUserHydration, allUserHydrationRepository)
   displayWeeklyHydrationChart(currentUserHydration, allUserHydrationRepository)
-  // hydrationWrapper.classList.remove('hidden')
-  // document.querySelector('.e').classList.add('hidden')
-  // document.querySelector('.b').classList.add('hidden')
-  // document.querySelector('.g').classList.add('hidden')
-  // document.querySelector('.h').classList.add('hidden')
-  // document.querySelector('.i').classList.add('hidden')
-  // document.querySelector('.l').classList.add('hidden')
 }
+
 function displayHydrationPage() {
   mainBody.innerHTML = `<div class="hydrationWrapper">
     <div class="hydrationToday">
@@ -202,38 +234,5 @@ function displayDailyHydrationChart(currentUserHydration, allUserHydrationReposi
 
 
 
-function displayTeamList() {
-  console.log('team list')
-  sideBarContents.innerHTML =
-  `<div class="teamHeader">My Team</div>
-  <div class="teamStepsHeader">FitLit Community Step Goal Average: ${allUserRepository.calculateAverageStepGoal()}</div>
-  <div class="myStepsHeader">My Step Goal: ${currentUser.dailyStepGoal}</div>`
-  currentUserRepository.data.forEach((friend, i) => {
-    if (i > 0) {
-      sideBarContents.innerHTML +=
-      `<div class="teammember">
-      <div class="photo sidebar"><img class="teamImage" src="../assets/userImages/TeamImage${i}.jpg" alt="teamMate${i} profile image"></div>
-      <div class="name sidebar">${friend.name}</div>
-      <div class="steps sidebar">${friend.dailyStepGoal}</div>
-      </div>`
-    } i++
-  })
-}
-
-function displayProfile() {
-  let currentFirstName = currentUser.displayFirstName()
-  sideBarContents.innerHTML = ''
-  sideBarContents.innerHTML =
-  `<div class="sidebarHeader">
-    <img class="profileUserPhoto" src="../assets/userImages/UserImage.jpg" alt="user profile image"></div>
-    <div class="profileUser">${currentFirstName}</div>
-    <div class="key profileName">NAME: ${currentUser.name}</div>
-    <div class="key profileAddress">ADDRESS: ${currentUser.address}</div>
-    <div class="key profileEmail">EMAIL: ${currentUser.email}</div>
-    <div class="key profileStride">STRIDE LENGTH: ${currentUser.strideLength}</div>
-    <div class="key profileStepGoal">DAILY STEP GOAL: ${currentUser.dailyStepGoal}</div>
-    <button id="viewTeam" class="viewTeam">View My Team</button>
-    </div>`
-}
 //****************CHHHHHHAAAARTS*****************//
 //put into function that instantiates chart and inserts innerHTML dynamically rather than hiding and displaying stuff that's already there
