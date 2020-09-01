@@ -13,6 +13,7 @@ var allUserHydrationRepository
 var allUserSleepRepository
 var currentUserSleep
 var allUserActivityRepository
+var currentPage
 
 // ********** QUERIES  **********
 const userName = document.querySelector('.username');
@@ -36,8 +37,8 @@ userName.addEventListener('click', displayProfile);
 sideBarContents.addEventListener('click', displayTeamList);
 hydrationMenu.addEventListener('click', displayHydrationData);
 sleepMenu.addEventListener('click', displaySleepData);
-dailyCalendar.addEventListener('click', changeDate);
-weeklyCalendar.addEventListener('click', changeDate);
+dailyCalendar.addEventListener('input', changeDate);
+weeklyCalendar.addEventListener('input', changeDate);
 // ******** FUNCTIONS/EVENTHANDLERS **********
 
 function getRandomIndex(array) {
@@ -45,8 +46,21 @@ function getRandomIndex(array) {
 }
 
 function changeDate(event){
+  event.preventDefault()
+  if(event.target === dailyCalendar) {
+    now = moment(`${dailyCalendar.value}`).format('YYYY/MM/DD')
+  } else if(event.target === weeklyCalendar) {
+    weekEnd = moment(`${weeklyCalendar.value}`).format('YYYY/MM/DD')
+  }
+  refreshPageData(event);
+}
 
-  console.log(dailyCalendar.input)
+function refreshPageData(event) {
+  if(currentPage === 'hydration') {
+    displayHydrationData()
+  } else if(currentPage === 'sleep') {
+    displaySleepData()
+  }
 }
 
 // ==== ONLOAD ==== //
@@ -101,6 +115,7 @@ function displayActivityData() {
     <div class="box o">Best Miles</div>
     <div class="box p">Best Stairs</div>
   </div>`
+  currentPage = 'activity'
 }
 
 // *** sidebar display *** //
@@ -140,7 +155,7 @@ function displayProfile() {
 
 // ====== Hydration View ====== //
 
-function displayHydrationData(event) {
+function displayHydrationData() {
   displayHydrationPage()
   allUserHydrationRepository = new HydrationRepository(hydrationData)
   currentUserHydration = new UserHydration(allUserHydrationRepository.findUserById(currentUser.id))
@@ -157,6 +172,7 @@ function displayHydrationPage() {
         <canvas id="hydrationChartWeek" width="100" height="100"></canvas>
     </div>`
   allTimeSection.innerHTML = ``
+  currentPage = 'hydration'
 }
 
 function generateWeekDates() {
@@ -268,6 +284,7 @@ function displaySleepPage() {
       <div class="box m">Average Sleep Hours</div>
       <div class="box n">Average Sleep Quality</div>
     </div>`
+  currentPage = 'sleep'
 }
 function displayDailySleepHoursChart(currentUserSleep, allUserSleepRepository) {
   let sleepHrsDaily = document.getElementById('dailySleepHoursChart');
