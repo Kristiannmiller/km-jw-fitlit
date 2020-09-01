@@ -447,10 +447,6 @@ describe('UserActivity', () => {
     let testActivity1 = new UserActivity(activityData[0]);
     expect(testActivity1.numSteps).to.equal(3577);
   });
-  it.skip('should be able to track the flights of stairs climbed', () => {
-    let testActivity1 = new UserActivity(activityData[0]);
-    expect(testActivity1.flightsOfStairs).to.equal(16);
-  });
   it.skip('should be able to track the number of miles the user has walked for a specific date', () => {
   let testActivity1 = new UserActivity(activityData[0]);
   let userData1 = new User(userData[0]);

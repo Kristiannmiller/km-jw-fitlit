@@ -21,12 +21,13 @@ class UserActivity {
     return parseFloat((result/weekOfActivity.length).toFixed(2))
   }
   // calculateStepGoalAchieved(date){
-  //   let stepGoalsAchieved = this.userActivity.find(goalAchieved => {
+  //   let stepGoalsAchieved = this.userActivity.find(goalAchieved =>
   //     goalAchieved.date >
-  //   })
+  //   )
   // }
-  calculateDaysGoalExceeded(user){
 
+  calculateDaysGoalExceeded(){
+    let stepGoalsAchieved = this.userActivity.filter(goalAchieved => goalAchieved)
   }
   calculateMostStairsClimbed(user, date){
 

@@ -8,15 +8,12 @@ class ActivityRepository {
     return userActivityData
   }
   calculateAverageStairsClimbedbyDate(date){
-    console.log("You're logging nothing", allActivityData)
-    const targetDateData = this.allActivityData.filter(activityData => activityData.date === date)
-    console.log(targetDateData)
-    const averageStairsClimbed = targetDateData.reduce((acc, user) => {
+    let targetDateData = this.allActivityData.filter(activityData => activityData.date === date)
+    let averageStairsClimbed = targetDateData.reduce((acc, user) => {
       acc += user.flightsOfStairs
-      console.log(acc)
       return acc
     }, 0)
-    return (averageStairsClimbed/activityData.date.length)
+    return (averageStairsClimbed/targetDateData.length)
   }
   calculateAverageStepsTakenbyDate(date){
     const targetDateData = this.allActivityData.filter(activityData => activityData.date === date)
