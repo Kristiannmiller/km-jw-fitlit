@@ -17,10 +17,8 @@ class ActivityRepository {
   }
   calculateAverageStepsTakenbyDate(date){
     const targetDateData = this.allActivityData.filter(activityData => activityData.date === date)
-    console.log(targetDateData)
     const averageStepsTaken = targetDateData.reduce((acc, user) => {
       acc += user.numSteps
-      console.log(acc)
       return acc
     }, 0)
     return (averageStepsTaken/targetDateData.length)
@@ -38,13 +36,9 @@ class ActivityRepository {
     const bestClimber = targetDateData.sort((a,b) => {
       return b.flightsOfStairs - a.flightsOfStairs
     })
-    if (bestClimber[0].flightsOfStairs == bestClimber[1].flightsOfStairs){
-      return ("It's a tie between " + bestClimber[0] + " and " + bestClimber[1] +"!")
-    } else {
-      return bestClimber[0]
+    return bestClimber[0]
     }
   }
-}
 if (typeof module !== 'undefined') {
   module.exports = ActivityRepository;
 }

@@ -511,6 +511,6 @@ describe('ActivityRepository', () => {
   });
   it('should calculate the best stair climber of all users on a given date', () => {
     let testRepository = new ActivityRepository(activityData);
-    expect(testRepository.findBestClimber('2019/06/15')).to.equal(testRepository.activityData[2].userId)
+    expect(testRepository.findBestClimber('2019/06/15')).to.deep.equal(testRepository.allActivityData[2])
   });
 })
