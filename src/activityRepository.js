@@ -20,16 +20,25 @@ class ActivityRepository {
     return (averageStepsTaken/dateData.length)
   }
   calculateAverageMinutesActivebyDate(date){
-    const targetDateDate = this.ActivityData.filter(dateData => dateData.date === date)
+    const targetDateData = this.allActivityData.filter(dateData => dateData.date === date)
     const averageMinActive = targetDateData.reduce((acc, user) => {
       acc += user.minutesActive
       return acc
     }, 0)
     return (averageMinActive/dateData.length)
   }
-  calculateTotalStepsTakenbyDate(date){
-
+  findBestClimber(date){
+    const targetDateData = this.allActivityData.filter(dateData => dateData.date === date)
+    const bestClimber = targetDateData.sort((a,b) => {
+      return b.flightsOfStairs - a.flightsOfStairs
+    })
+    if (bestClimber[0].flightsOfStairs == bestClimber[1].flightsOfStairs){
+      return ("It's a tie between " + bestClimber[0] + " and " + bestClimber[1] +"!")
+    } else {
+      return bestClimber[0]
+    }
   }
+}
 if (typeof module !== 'undefined') {
   module.exports = ActivityRepository;
 }
