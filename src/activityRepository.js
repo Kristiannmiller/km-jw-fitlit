@@ -20,7 +20,12 @@ class ActivityRepository {
     return (averageStepsTaken/dateData.length)
   }
   calculateAverageMinutesActivebyDate(date){
-
+    const targetDateDate = this.ActivityData.filter(dateData => dateData.date === date)
+    const averageMinActive = targetDateData.reduce((acc, user) => {
+      acc += user.minutesActive
+      return acc
+    }, 0)
+    return (averageMinActive/dateData.length)
   }
   calculateTotalStepsTakenbyDate(date){
 
