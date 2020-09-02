@@ -1,12 +1,16 @@
+const User = require('../src/User')
+const UserRepository = require('../src/UserRepository')
 
 class UserActivity {
-  constructor(userActivity){
+  constructor(userActivity, user){
     this.userActivity = userActivity;
+    this.user = user;
   }
-
-  milesWalked(date, user) {
+  calculateMiles(date, user) {
     let dateData = this.userActivity.find(oneDate => oneDate.date == date);
+    console.log(dateData)
     let stepsNeeded = 5280/user.strideLength;
+    console.log(typeof(user.strideLength))
     let roundedStepsNeeded = Math.floor(stepsNeeded);
     let milesWalked = dateData.numSteps/roundedStepsNeeded;
     let roundedMilesWalked = Math.floor(milesWalked);
@@ -34,6 +38,10 @@ class UserActivity {
     let stepGoalsAchieved = this.userActivity.find(goalAchieved =>
       goalAchieved.date > user.dailyStepGoal
     )
+  }
+  calculateStairsByDate(date) {
+    let stairsPerDay = this.userActivity.find(stairRecord => stairRecord.date === date)
+    return parseFloat((stairsPerDay.flightsOfStairs).toFixed(2))
   }
 
   calculateDaysGoalExceeded(){

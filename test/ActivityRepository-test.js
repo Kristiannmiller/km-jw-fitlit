@@ -2,7 +2,7 @@ const chai = require('chai');
 const expect = chai.expect;
 
 const ActivityRepository = require('../src/ActivityRepository')
-const UserActivity = require('../src/UserActivity')
+
 const activityData = [
   {
     "userID": 1,
@@ -499,7 +499,7 @@ describe('ActivityRepository', () => {
   });
   it ('should calculate the average stairs climbed by all users on a given date', () => {
     let testRepository = new ActivityRepository(activityData);
-    expect(testRepository.calculateAverageStairsClimbedbyDate('2019/06/15')).to.equal(22.75)
+    expect(testRepository.calculateAverageStairsClimbedbyDate('2019/06/15')).to.equal(23)
   });
   it ('should calculate the average number of steps taken by all users on a given date', () => {
     let testRepository = new ActivityRepository(activityData);

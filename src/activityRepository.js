@@ -1,21 +1,22 @@
 
 class ActivityRepository {
-  constructor(allActivityData){
+  constructor(allActivityData, userData) {
     this.allActivityData = allActivityData
+    this.userData = userData
   }
   findUserById(id) {
     let userActivityData = this.allActivityData.filter(activityData => activityData.userID === id)
     return userActivityData
   }
-  calculateAverageStairsClimbedbyDate(date){
+  calculateAverageStairsClimbedbyDate(date) {
     let targetDateData = this.allActivityData.filter(activityData => activityData.date === date)
     let averageStairsClimbed = targetDateData.reduce((acc, user) => {
       acc += user.flightsOfStairs
       return acc
     }, 0)
-    return (averageStairsClimbed/targetDateData.length)
+    return Math.ceil((averageStairsClimbed) / targetDateData.length)
   }
-  calculateAverageStepsTakenbyDate(date){
+  calculateAverageStepsTakenbyDate(date) {
     const targetDateData = this.allActivityData.filter(activityData => activityData.date === date)
     const averageStepsTaken = targetDateData.reduce((acc, user) => {
       acc += user.numSteps
@@ -23,7 +24,7 @@ class ActivityRepository {
     }, 0)
     return (averageStepsTaken/targetDateData.length)
   }
-  calculateAverageMinutesActivebyDate(date){
+  calculateAverageMinutesActivebyDate(date) {
     const targetDateData = this.allActivityData.filter(activityData => activityData.date === date)
     const averageMinActive = targetDateData.reduce((acc, user) => {
       acc += user.minutesActive
@@ -31,14 +32,14 @@ class ActivityRepository {
     }, 0)
     return (averageMinActive/targetDateData.length)
   }
-  findBestClimber(date){
+  findBestClimber(date) {
     const targetDateData = this.allActivityData.filter(dateData => dateData.date === date)
-    const bestClimber = targetDateData.sort((a,b) => {
+    const bestClimber = targetDateData.sort((a, b) => {
       return b.flightsOfStairs - a.flightsOfStairs
     })
     return bestClimber[0]
-    }
   }
+}
 if (typeof module !== 'undefined') {
   module.exports = ActivityRepository;
 }
