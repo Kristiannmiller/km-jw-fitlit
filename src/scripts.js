@@ -492,9 +492,8 @@ function displayActivityPage(currentUserActivity, allUserActivityRepository) {
   <div class="widgetD"><h5 id="stepsCounter">25 FLIGHTS!</h5>
     <canvas id="dailyStairsClimbedWidget" width="100" height="100"></canvas>
     </div>
-  </div>
-  <div class="box b">`
-  weeklySection.innerHTML = `<div class="graphTitle">Name</div>
+  </div>`
+  weeklySection.innerHTML = `<div class="box b"><div class="graphTitle">Name</div>
   <div class="graph">Steps Done Walked</div>
   </div>
   <div class="box h">
