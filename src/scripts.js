@@ -413,7 +413,7 @@ function displayWeeklySleepQualityChart(currentUserSleep, allUserSleepRepository
 function displayAllTimeSleepHoursChart(currentUserSleep, allUserSleepRepository) {
   let allTimeSleepHrs = document.getElementById('allTimeSleepHoursChart');
   let averageSleepHours = currentUserSleep.calculateAverageSleepHours()
-  let dailyActiveMinutesWidget = new Chart(allTimeSleepHrs, {
+  let allTimeSleepHoursWidget = new Chart(allTimeSleepHrs, {
     type: 'doughnut',
     data: {
       labels: ['Average User', 'Your Average Sleep Hours'],
@@ -434,7 +434,29 @@ function displayAllTimeSleepHoursChart(currentUserSleep, allUserSleepRepository)
   })
 }
 function displayAllTimeSleepQualityChart(currentUserSleep, allUserSleepRepository) {
-  
+  let allTimeSleepQuality = document.getElementById('allTimeSleepQualityChart');
+  let averageSleepQuality = currentUserSleep.calculateAverageSleepQuality()
+  let remainder
+  5 - averageSleepQuality > 0 ? remainder = 5 - averageSleepQuality : remainder = 0
+  let allTimeSleepQualityWidget = new Chart(allTimeSleepQuality, {
+    type: 'doughnut',
+    data: {
+      labels: ['remaining', 'Average Sleep Quality'],
+      datasets: [{
+        data: [remainder, averageSleepQuality],
+        backgroundColor: [
+          'rgba(249, 249, 249, 1)',
+          'rgba(116, 204, 195, 1)'
+        ],
+        borderColor: [
+          'rgba(204, 204, 204, 1)',
+          'rgba(116, 204, 195, 1)'
+        ],
+        borderWidth: 1,
+      }]
+    },
+    options: {}
+  })
 }
 
 // ====== Activity View ====== //
