@@ -477,6 +477,7 @@ function displayActivityData(event) {
   displayAllTimeStepsChart(currentUserActivity, allUserActivityRepository)
   displayAllTimeActiveMinutesChart(currentUserActivity, allUserActivityRepository)
   displayAllTimeMilesChart(currentUserActivity, allUserActivityRepository)
+  displayAllTimeStairsChart(currentUserActivity, allUserActivityRepository)
 }
 function displayActivityPage(currentUserActivity, allUserActivityRepository) {
   // IN WIDGET A: ${currentUserActivity.calculateStepsByDate(now)}
@@ -488,6 +489,7 @@ function displayActivityPage(currentUserActivity, allUserActivityRepository) {
   // IN BOX M: ${currentUserActivity.findStepsRecord()}
   // IN BOX N: ${currentUserActivity.findActiveMinRecord()}
   // IN BOX 0: ${currentUserActivity.findMilesRecord()}
+  // IN BOX P: ${currentUserActivity.findStairsRecord()}
   dailySection.innerHTML = `<div class="box e">
   <div class="widgetA"><h5 id="stepsCounter">1000 STEPS!</h5>
     <canvas id="dailyStepsWidget" width="100" height="100"></canvas>
@@ -535,12 +537,16 @@ function displayActivityPage(currentUserActivity, allUserActivityRepository) {
     <h5 class="smallGraphText">Your Active Mins / Day Record</h5>
     <h5 class="smallGraphText">300 minutes</h5>
     <canvas id="allTimeActiveMinutesRecord" width="100" height="100"></canvas>
-  </div>  
+  </div>
   <div class="box o">
     <h5 class="smallGraphText">Your Miles / Day Record</h5>
     <h5 class="smallGraphText">50 miles</h5>
     <canvas id="allTimeMilesRecord" width="100" height="100"></canvas>
+    </div>
   <div class="box p">
+    <h5 class="smallGraphText">Your Stairs / Day Record</h5>
+    <h5 class="smallGraphText">30 flights</h5>
+    <canvas id="allTimeStairsRecord" width="100" height="100"></canvas>
   </div>`
   currentPage = 'activity'
 }
@@ -884,6 +890,30 @@ function displayAllTimeMilesChart(currentUserActivity, allUserActivityRepository
       labels: ['', 'Best Daily Miles'],
       datasets: [{
         data: [0, bestMiles],
+        backgroundColor: [
+          'rgba(249, 249, 249, 1)',
+          'rgba(116, 204, 195, 1)'
+        ],
+        borderColor: [
+          'rgba(204, 204, 204, 1)',
+          'rgba(116, 204, 195, 1)'
+        ],
+        borderWidth: 1,
+      }]
+    },
+    options: {}
+  })
+}
+function displayAllTimeStairsChart(currentUserActivity, allUserActivityRepository) {
+  let allTimeStairs = document.getElementById('allTimeStairsRecord');
+  //let bestStairs = currentUserActivity.findStairsRecord()
+  let bestStairs = 30
+  let allTimeStairsWidget = new Chart(allTimeStairs, {
+    type: 'doughnut',
+    data: {
+      labels: ['', 'Best Daily Stairs'],
+      datasets: [{
+        data: [0, bestStairs],
         backgroundColor: [
           'rgba(249, 249, 249, 1)',
           'rgba(116, 204, 195, 1)'
