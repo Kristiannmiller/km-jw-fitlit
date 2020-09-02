@@ -231,9 +231,9 @@ function displayDailyHydrationChart(currentUserHydration, allUserHydrationReposi
 // ====== Sleep View ====== //
 
 function displaySleepData(event) {
-  displaySleepPage()
   allUserSleepRepository = new SleepRepository(sleepData)
   currentUserSleep = new UserSleep(allUserSleepRepository.findUserById(currentUser.id))
+  displaySleepPage(currentUserSleep, allUserSleepRepository)
   displayDailySleepHoursChart(currentUserSleep, allUserSleepRepository)
   displayDailySleepQualityChart(currentUserSleep, allUserSleepRepository)
   displayWeeklySleepHoursChart(currentUserSleep, allUserSleepRepository)
@@ -241,7 +241,7 @@ function displaySleepData(event) {
   displayAllTimeSleepHoursChart(currentUserSleep, allUserSleepRepository)
   displayAllTimeSleepQualityChart(currentUserSleep, allUserSleepRepository)
 }
-function displaySleepPage() {
+function displaySleepPage(currentUserSleep, allUserSleepRepository) {
   dailySection.innerHTML = `<div class="sleepWrapper">
     <div class="sleepToday">
       <canvas id="dailySleepHoursChart" width="100" height="100"></canvas>
@@ -254,11 +254,13 @@ function displaySleepPage() {
     </div>`
   allTimeSection.innerHTML = `<h1>All Time Statistics</h1>
     <div class="box l">
-      <div class="box m"><h5>Average Sleep Hours</h5>
+      <div class="box m"><h5 class="smallGraphText">Average Sleep</h5>
+      <h5 class="smallGraphText">${currentUserSleep.calculateAverageSleepHours()} hours</h5>
       <canvas id="allTimeSleepHoursChart" width="100" height="100"></canvas>
       </div>
-      <div class="box n"><h5>Average Sleep Quality</h5>
-      <canvas id="allTimeSleepHoursChart" width="100" height="100"></canvas>
+      <div class="box n"><h5 class="smallGraphText">Average Sleep Quality</h5>
+      <h5 class="smallGraphText">${currentUserSleep.calculateAverageSleepQuality()} / 5</h5>
+      <canvas id="allTimeSleepQualityChart" width="100" height="100"></canvas>
       </div>
     </div>`
   currentPage = 'sleep'
@@ -409,8 +411,32 @@ function displayWeeklySleepQualityChart(currentUserSleep, allUserSleepRepository
   })
 }
 function displayAllTimeSleepHoursChart(currentUserSleep, allUserSleepRepository) {
-
+  let allTimeSleepHrs = document.getElementById('allTimeSleepHoursChart');
+  let averageSleepHours = currentUserSleep.calculateAverageSleepHours()
+  let dailyActiveMinutesWidget = new Chart(allTimeSleepHrs, {
+    type: 'doughnut',
+    data: {
+      labels: ['Average User', 'Your Average Sleep Hours'],
+      datasets: [{
+        data: [0, averageSleepHours],
+        backgroundColor: [
+          'rgba(249, 249, 249, 1)',
+          'rgba(116, 204, 195, 1)'
+        ],
+        borderColor: [
+          'rgba(204, 204, 204, 1)',
+          'rgba(116, 204, 195, 1)'
+        ],
+        borderWidth: 1,
+      }]
+    },
+    options: {}
+  })
 }
+function displayAllTimeSleepQualityChart(currentUserSleep, allUserSleepRepository) {
+  
+}
+
 // ====== Activity View ====== //
 
 function displayActivityData(event) {

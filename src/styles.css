@@ -220,6 +220,11 @@ body {
   grid-row: 2 / span 4;
 }
 
+.smallGraphText {
+  text-align: center;
+  margin: 8px;
+}
+
 .hydrationWrapper{
   height: 100%;
 }
