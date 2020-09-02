@@ -543,7 +543,7 @@ function displayDailyStepsChart(currentUserActivity, allUserActivityRepository) 
   let stepsDay = document.getElementById('dailyStepsWidget');
   // THIS GOES IN THE DATASETS AFTER METHOD IS COMPLETE
   // let stepsSoFar = currentUserActivity.calculateStepsByDate(now)
-  // let stepsToGo = currentUser.dailyStepGoal - currentUserActivity.calculateStepsByDate(now)
+  // let stepsToGo = currentUser.dailyStepGoal - stepsSoFar > 0 ? stepsToGo = currentUser.dailyStepGoal - stepsSoFar : stepsToGo = 0
   let stepsSoFar = 8000
   let stepsToGo = 2000
   let dailyStepsWidget = new Chart(stepsDay, {
