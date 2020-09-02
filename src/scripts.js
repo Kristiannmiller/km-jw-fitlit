@@ -479,6 +479,7 @@ function displayActivityPage(currentUserActivity, allUserActivityRepository) {
   // IN WIDGET A: ${currentUserActivity.calculateStepsByDate(now)}
   // IN WIDGET C: ${currentUserActivity.calculateMiles(now)}
   // IN WIDGET D: ${currentUserActivity.calculateStairsByDate(now)}
+  // IN BOX B: ${currentUserActivity.calculateAverageWeeklySteps()}
   dailySection.innerHTML = `<div class="box e">
   <div class="widgetA"><h5 id="stepsCounter">1000 STEPS!</h5>
     <canvas id="dailyStepsWidget" width="100" height="100"></canvas>
@@ -494,7 +495,7 @@ function displayActivityPage(currentUserActivity, allUserActivityRepository) {
     </div>
   </div>`
   weeklySection.innerHTML = `<div class="box b"><div class="graphTitle"></div>
-  <h5 id="stepsCounter">Steps for the week ending on ${weekEnd}</h5>
+  <h5 id="stepsCounter">You averaged 3000 steps for the week ending on ${weekEnd}</h5>
   <div class="graph">
     <canvas id="weeklyStepsChart" width="100" height="100"></canvas>
   </div>
@@ -637,7 +638,7 @@ function displayWeeklyStepsChart(currentUserActivity, allUserActivityRepository)
   let stepsData = [1209, 4000, 6000, 5236, 8875, 10394, 15398]
   // let stepsData = currentUserActivity.calculateStepsForWeek(weekEnd)
   let stepsChartWeek = new Chart(stepsWeek, {
-    type: 'horizontalBar',
+    type: 'bar',
     data: {
       labels: currentWeek,
       datasets: [{
