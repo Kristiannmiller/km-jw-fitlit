@@ -238,6 +238,8 @@ function displaySleepData(event) {
   displayDailySleepQualityChart(currentUserSleep, allUserSleepRepository)
   displayWeeklySleepHoursChart(currentUserSleep, allUserSleepRepository)
   displayWeeklySleepQualityChart(currentUserSleep, allUserSleepRepository)
+  displayAllTimeSleepHoursChart(currentUserSleep, allUserSleepRepository)
+  displayAllTimeSleepQualityChart(currentUserSleep, allUserSleepRepository)
 }
 function displaySleepPage() {
   dailySection.innerHTML = `<div class="sleepWrapper">
@@ -250,9 +252,14 @@ function displaySleepPage() {
         <canvas id="weeklySleepQualityChart" width="100" height="100"></canvas>
       </div>
     </div>`
-  allTimeSection.innerHTML = `Weekly Summary<div class="box l">
-      <div class="box m">Average Sleep Hours</div>
-      <div class="box n">Average Sleep Quality</div>
+  allTimeSection.innerHTML = `<h1>All Time Statistics</h1>
+    <div class="box l">
+      <div class="box m"><h5>Average Sleep Hours</h5>
+      <canvas id="allTimeSleepHoursChart" width="100" height="100"></canvas>
+      </div>
+      <div class="box n"><h5>Average Sleep Quality</h5>
+      <canvas id="allTimeSleepHoursChart" width="100" height="100"></canvas>
+      </div>
     </div>`
   currentPage = 'sleep'
 }
@@ -401,6 +408,9 @@ function displayWeeklySleepQualityChart(currentUserSleep, allUserSleepRepository
     }
   })
 }
+function displayAllTimeSleepHoursChart(currentUserSleep, allUserSleepRepository) {
+
+}
 // ====== Activity View ====== //
 
 function displayActivityData(event) {
@@ -408,7 +418,7 @@ function displayActivityData(event) {
   allUserActivityRepository = new ActivityRepository(activityData)
   currentUserActivity = new UserActivity(allUserActivityRepository.findUserById(currentUser.id))
   displayDailyStepsChart(currentUserActivity, allUserActivityRepository)
-  // displayDailySleepQualityChart(currentUserSleep, allUserSleepRepository)
+  displayDailyActiveMinutesChart(currentUserActivity, allUserActivityRepository)
   // displayWeeklySleepHoursChart(currentUserSleep, allUserSleepRepository)
   // displayWeeklySleepQualityChart(currentUserSleep, allUserSleepRepository)
 }
@@ -454,8 +464,34 @@ function displayActivityPage() {
   currentPage = 'activity'
 }
 
+function displayDailyActiveMinutesChart(currentUserActivity, allUserActivityRepository) {
+  let activeMins = document.getElementById('dailyActiveMinutesWidget');
+  // THIS GOES IN THE DATASETS AFTER METHOD IS COMPLETE
+  // let stepsSoFar = currentUserActivity.calculateStepsByDate(now)
+  // let stepsToGo = currentUser.dailyStepGoal - currentUserActivity.calculateStepsByDate(now)
+  let minsSoFar = currentUserActivity.calculateMinActive(now)
+  let averageUserMins = 300 // YOU LEFT OFF HERE!
+  let dailyActiveMinutesWidget = new Chart(activeMins, {
+    type: 'doughnut',
+    data: {
+      labels: ['Average User', 'Minutes so far'],
+      datasets: [{
+        data: [averageUserMins, minsSoFar],
+        backgroundColor: [
+          'rgba(249, 249, 249, 1)',
+          'rgba(116, 204, 195, 1)'
+        ],
+        borderColor: [
+          'rgba(204, 204, 204, 1)',
+          'rgba(116, 204, 195, 1)'
+        ],
+        borderWidth: 1,
+      }]
+    },
+    options: {}
+  })
+}
 function displayDailyStepsChart(currentUserActivity, allUserActivityRepository) {
-  console.log(currentUserActivity)
   let stepsDay = document.getElementById('dailyStepsWidget');
   // THIS GOES IN THE DATASETS AFTER METHOD IS COMPLETE
   // let stepsSoFar = currentUserActivity.calculateStepsByDate(now)
