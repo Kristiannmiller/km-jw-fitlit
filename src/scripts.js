@@ -407,7 +407,7 @@ function displayActivityData(event) {
   displayActivityPage()
   allUserActivityRepository = new ActivityRepository(activityData)
   currentUserActivity = new UserActivity(allUserActivityRepository.findUserById(currentUser.id))
-  // displayDailySleepHoursChart(currentUserSleep, allUserSleepRepository)
+  displayDailyStepsChart(currentUserActivity, allUserActivityRepository)
   // displayDailySleepQualityChart(currentUserSleep, allUserSleepRepository)
   // displayWeeklySleepHoursChart(currentUserSleep, allUserSleepRepository)
   // displayWeeklySleepQualityChart(currentUserSleep, allUserSleepRepository)
@@ -451,4 +451,27 @@ function displayActivityPage() {
   <div class="box p">Best Stairs</div>
   </div>`
   currentPage = 'activity'
+}
+
+function displayDailyStepsChart(currentUserActivity, allUserActivityRepository) {
+  console.log(currentUserActivity)
+  let stepsDay = document.getElementById('dailyStepsWidget');
+  let dailyStepsWidget = new Chart(stepsDay, {
+    type: 'doughnut',
+    data: {
+      datasets: [{
+        data: [50, 50],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {}
+  })
 }
