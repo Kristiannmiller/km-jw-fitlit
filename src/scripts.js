@@ -483,8 +483,7 @@ function displayActivityData(event) {
   displayAllTimeStairsChart(currentUserActivity, allUserActivityRepository)
 }
 function displayActivityPage(currentUserActivity, allUserActivityRepository) {
-  // IN WIDGET C: ${currentUserActivity.calculateMilesByDate(now)}
-  // IN BOX B: ${currentUserActivity.calculateAverageWeeklySteps(weekEnd)}
+  // IN WIDGET C: ${currentUserActivity.milesWalked(now, currentUser.id)}
   // IN BOX G: ${currentUserActivity.calculateAverageWeeklyMiles(weekEnd)}
   // IN BOX I: ${currentUserActivity.calculateAvgStairsPerWeek(weekEnd)}
   // IN BOX M: ${currentUserActivity.findStepsRecord()}
@@ -506,7 +505,7 @@ function displayActivityPage(currentUserActivity, allUserActivityRepository) {
     </div>
   </div>`
   weeklySection.innerHTML = `<div class="box b">
-    <h5 id="stepsCounter">You averaged 3000 steps/day for the week ending on ${weekEnd}</h5>
+    <h5 id="stepsCounter">You averaged ${currentUserActivity.calculateAverageWeeklySteps(weekEnd)} steps/day for the week ending on ${weekEnd}</h5>
   <div class="graph">
     <canvas id="weeklyStepsChart" width="100" height="100"></canvas>
   </div>
