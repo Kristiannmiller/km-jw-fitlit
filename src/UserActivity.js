@@ -1,11 +1,13 @@
 class UserActivity {
-  constructor(userActivity){
+  constructor(userActivity, userData){
     this.userActivity = userActivity
+    this.userData = userData
   }
   calculateMiles(date){
-    let milesPerDate = this.userActivity.find
-
-    //we need to access this data from two different databases
+    let userStrideLength = this.userData[0].strideLength
+    let stepsPerDate = this.userActivity.find(stepsTaken.date === date)
+    const milesPerDate = (userStrideLength*stepsPerDate)/5280
+    return milesPerDate
   }
   calculateMinActive(date){
     let minPerDay = this.userActivity.find(minActive => minActive.date === date)

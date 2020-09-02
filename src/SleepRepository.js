@@ -1,4 +1,4 @@
-// const UserSleep = require('../src/UserSleep')
+const UserSleep = require('../src/UserSleep')
 
 class SleepRepository {
   constructor(allUserData){

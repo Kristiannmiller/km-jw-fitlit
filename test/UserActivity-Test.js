@@ -433,24 +433,24 @@ describe('UserActivity', () => {
     let testActivity1 = new UserActivity(activityData[0]);
     expect(testActivity1).to.be.an.instanceof(UserActivity);
   });
-  it.skip('should be able to have a userID property', () => {
-    let testRepository = new ActivityRepository(userData)
-    userActivityIntake = testRepository.findUserById(0)
-    let userActivityStats = new UserActivity(userActivityIntake)
-    expect(testActivity1.userID).to.equal(1);
+  it('should be able to have a userID property', () => {
+    let testRepository = new ActivityRepository(activityData)
+    userActivityData = testRepository.findUserById(1)
+    let userActivityStats = new UserActivity(userActivityData[0])
+    expect(userActivityStats.userID).to.equal(1);
   });
-  it.skip('should be able to have a date property', () => {
-    let testActivity1 = new UserActivity(activityData[0]);
-    expect(testActivity1.date).to.equal("2019/06/15");
+
+  it('should be able to have a date property', () => {
+    let testRepository = new ActivityRepository(activityData)
+    userActivityData = testRepository.findUserById(1);
+    let userActivityStats = new UserActivity(userActivityData);
+
+    expect(userActivityStats.date).to.equal("2019/06/15");
   });
-  it.skip('should be able to count the number of steps', () => {
-    let testActivity1 = new UserActivity(activityData[0]);
-    expect(testActivity1.numSteps).to.equal(3577);
-  });
-  it.skip('should be able to track the number of miles the user has walked for a specific date', () => {
+
+  it('should be able to track the number of miles the user has walked for a specific date', () => {
   let testActivity1 = new UserActivity(activityData[0]);
-  let userData1 = new User(userData[0]);
-  expect(testActivity1.calculateMiles('6/15/19')).to.equal(2.91)
+  expect(testActivity1.calculateMiles('2019/06/15')).to.equal(2.91)
   });
 
   it('should be able to track the number of minutes a given user was active for a specific date as specified by UserId', () => {
