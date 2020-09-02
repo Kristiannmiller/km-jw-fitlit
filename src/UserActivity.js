@@ -1,14 +1,25 @@
+const User = require('../src/User')
+
 class UserActivity {
   constructor(userActivity, userData){
-    this.userActivity = userActivity
+    this.userActivity = userActivity;
     this.userData = userData
   }
   calculateMiles(date){
     let userStrideLength = this.userData[0].strideLength
-    let stepsPerDate = this.userActivity.find(stepsTaken.date === date)
+    console.log(userStrideLength)
+    // let stepsPerDate = this.userActivity.find(numSteps.date === date)???WHERE IS NUMSTEPS
+    console.log(stepsPerDate)
     const milesPerDate = (userStrideLength*stepsPerDate)/5280
+    console.log(milesPerDate)
     return milesPerDate
   }
+
+  calculateStepsTaken(date){
+    let stepsPerDay = this.userActivity.find(stepsTaken => stepsTaken.date === date)
+    return parseFloat((stepsPerDay.numSteps).toFixed(2))
+  }
+
   calculateMinActive(date){
     let minPerDay = this.userActivity.find(minActive => minActive.date === date)
     return parseFloat((minPerDay.minutesActive).toFixed(2))
