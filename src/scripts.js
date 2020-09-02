@@ -483,7 +483,6 @@ function displayActivityData(event) {
   displayAllTimeStairsChart(currentUserActivity, allUserActivityRepository)
 }
 function displayActivityPage(currentUserActivity, allUserActivityRepository) {
-  // IN WIDGET A: ${currentUserActivity.calculateStepsByDate(now)}
   // IN WIDGET C: ${currentUserActivity.calculateMilesByDate(now)}
   // IN BOX B: ${currentUserActivity.calculateAverageWeeklySteps(weekEnd)}
   // IN BOX G: ${currentUserActivity.calculateAverageWeeklyMiles(weekEnd)}
@@ -581,11 +580,9 @@ function displayDailyActiveMinutesChart(currentUserActivity, allUserActivityRepo
 }
 function displayDailyStepsChart(currentUserActivity, allUserActivityRepository) {
   let stepsDay = document.getElementById('dailyStepsWidget');
-  // THIS GOES IN THE DATASETS AFTER METHOD IS COMPLETE
-  // let stepsSoFar = currentUserActivity.calculateStepsByDate(now)
-  // let stepsToGo = currentUser.dailyStepGoal - stepsSoFar > 0 ? stepsToGo = currentUser.dailyStepGoal - stepsSoFar : stepsToGo = 0
-  let stepsSoFar = 8000
-  let stepsToGo = 2000
+  let stepsSoFar = currentUserActivity.calculateStepsTaken(now)
+  let stepsToGo
+  currentUser.dailyStepGoal - stepsSoFar > 0 ? stepsToGo = currentUser.dailyStepGoal - stepsSoFar : stepsToGo = 0
   let dailyStepsWidget = new Chart(stepsDay, {
     type: 'doughnut',
     data: {
