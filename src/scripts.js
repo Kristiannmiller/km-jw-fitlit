@@ -457,13 +457,17 @@ function displayActivityPage() {
 function displayDailyStepsChart(currentUserActivity, allUserActivityRepository) {
   console.log(currentUserActivity)
   let stepsDay = document.getElementById('dailyStepsWidget');
-  let labels = ['Steps to go', 'Steps so far']
+  // THIS GOES IN THE DATASETS AFTER METHOD IS COMPLETE
+  // let stepsSoFar = currentUserActivity.calculateStepsByDate(now)
+  // let stepsToGo = currentUser.dailyStepGoal - currentUserActivity.calculateStepsByDate(now)
+  let stepsSoFar = 8000
+  let stepsToGo = 2000
   let dailyStepsWidget = new Chart(stepsDay, {
     type: 'doughnut',
     data: {
-      labels: labels,
+      labels: ['Steps to go', 'Steps so far'],
       datasets: [{
-        data: [50, 50],
+        data: [stepsToGo, stepsSoFar],
         backgroundColor: [
           'rgba(249, 249, 249, 1)',
           'rgba(116, 204, 195, 1)'
