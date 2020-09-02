@@ -476,6 +476,7 @@ function displayActivityData(event) {
   displayWeeklyStairsChart(currentUserActivity, allUserActivityRepository)
   displayAllTimeStepsChart(currentUserActivity, allUserActivityRepository)
   displayAllTimeActiveMinutesChart(currentUserActivity, allUserActivityRepository)
+  displayAllTimeMilesChart(currentUserActivity, allUserActivityRepository)
 }
 function displayActivityPage(currentUserActivity, allUserActivityRepository) {
   // IN WIDGET A: ${currentUserActivity.calculateStepsByDate(now)}
@@ -486,6 +487,7 @@ function displayActivityPage(currentUserActivity, allUserActivityRepository) {
   // IN BOX I: ${currentUserActivity.calculateAvgStairsPerWeek(weekEnd)}
   // IN BOX M: ${currentUserActivity.findStepsRecord()}
   // IN BOX N: ${currentUserActivity.findActiveMinRecord()}
+  // IN BOX 0: ${currentUserActivity.findMilesRecord()}
   dailySection.innerHTML = `<div class="box e">
   <div class="widgetA"><h5 id="stepsCounter">1000 STEPS!</h5>
     <canvas id="dailyStepsWidget" width="100" height="100"></canvas>
@@ -529,10 +531,15 @@ function displayActivityPage(currentUserActivity, allUserActivityRepository) {
     <h5 class="smallGraphText">15000 steps</h5>
     <canvas id="allTimeStepsRecord" width="100" height="100"></canvas>
   </div>
-  <div class="box n"><h5 class="smallGraphText">Your Active Mins / Day Record</h5>
+  <div class="box n">
+    <h5 class="smallGraphText">Your Active Mins / Day Record</h5>
     <h5 class="smallGraphText">300 minutes</h5>
     <canvas id="allTimeActiveMinutesRecord" width="100" height="100"></canvas>
+  </div>  
   <div class="box o">
+    <h5 class="smallGraphText">Your Miles / Day Record</h5>
+    <h5 class="smallGraphText">50 miles</h5>
+    <canvas id="allTimeMilesRecord" width="100" height="100"></canvas>
   <div class="box p">
   </div>`
   currentPage = 'activity'
@@ -846,13 +853,37 @@ function displayAllTimeStepsChart(currentUserActivity, allUserActivityRepository
 function displayAllTimeActiveMinutesChart(currentUserActivity, allUserActivityRepository) {
   let allTimeActiveMins = document.getElementById('allTimeActiveMinutesRecord');
   //let bestSteps = currentUserActivity.findActiveMinRecord()
-  let bestActiveMins = 15000
+  let bestActiveMins = 300
   let allTimeActiveMinsWidget = new Chart(allTimeActiveMins, {
     type: 'doughnut',
     data: {
       labels: ['', 'Best Daily Active Mins'],
       datasets: [{
         data: [0, bestActiveMins],
+        backgroundColor: [
+          'rgba(249, 249, 249, 1)',
+          'rgba(116, 204, 195, 1)'
+        ],
+        borderColor: [
+          'rgba(204, 204, 204, 1)',
+          'rgba(116, 204, 195, 1)'
+        ],
+        borderWidth: 1,
+      }]
+    },
+    options: {}
+  })
+}
+function displayAllTimeMilesChart(currentUserActivity, allUserActivityRepository) {
+  let allTimeMiles = document.getElementById('allTimeMilesRecord');
+  //let bestMiles = currentUserActivity.findMilesRecord()
+  let bestMiles = 50
+  let allTimeMilesWidget = new Chart(allTimeMiles, {
+    type: 'doughnut',
+    data: {
+      labels: ['', 'Best Daily Miles'],
+      datasets: [{
+        data: [0, bestMiles],
         backgroundColor: [
           'rgba(249, 249, 249, 1)',
           'rgba(116, 204, 195, 1)'
