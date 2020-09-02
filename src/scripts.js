@@ -469,7 +469,7 @@ function displayActivityData(event) {
   displayDailyActiveMinutesChart(currentUserActivity, allUserActivityRepository)
   displayDailyActiveMinutesChart(currentUserActivity, allUserActivityRepository)
   displayDailyMilesChart(currentUserActivity, allUserActivityRepository)
-  displayStairsChart(currentUserActivity, allUserActivityRepository)
+  displayDailyStairsChart(currentUserActivity, allUserActivityRepository)
   displayWeeklyStepsChart(currentUserActivity, allUserActivityRepository)
   displayWeeklyActiveMinsChart(currentUserActivity, allUserActivityRepository)
   displayWeeklyMilesChart(currentUserActivity, allUserActivityRepository)
@@ -610,7 +610,7 @@ function displayDailyMilesChart(currentUserActivity, allUserActivityRepository) 
     options: {}
   })
 }
-function displayStairsChart(currentUserActivity, allUserActivityRepository) {
+function displayDailyStairsChart(currentUserActivity, allUserActivityRepository) {
   let dailyStairs = document.getElementById('dailyStairsClimbedWidget');
   // AFTER METHODS ARE DONE:
   // let stairsSoFar = currentUserActivity.calculateStairsByDate(now)
