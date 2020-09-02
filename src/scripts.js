@@ -473,13 +473,15 @@ function displayActivityData(event) {
   displayWeeklyStepsChart(currentUserActivity, allUserActivityRepository)
   displayWeeklyActiveMinsChart(currentUserActivity, allUserActivityRepository)
   displayWeeklyMilesChart(currentUserActivity, allUserActivityRepository)
-
+  displayWeeklyStairsChart(currentUserActivity, allUserActivityRepository)
+}
 function displayActivityPage(currentUserActivity, allUserActivityRepository) {
   // IN WIDGET A: ${currentUserActivity.calculateStepsByDate(now)}
   // IN WIDGET C: ${currentUserActivity.calculateMiles(now)}
   // IN WIDGET D: ${currentUserActivity.calculateStairsByDate(now)}
   // IN BOX B: ${currentUserActivity.calculateAverageWeeklySteps(weekEnd)}
   // IN BOX G: ${currentUserActivity.calculateAvgMilesPerWeek(weekEnd)}
+  // IN BOX I: ${currentUserActivity.calculateAvgStairsPerWeek(weekEnd)}
   dailySection.innerHTML = `<div class="box e">
   <div class="widgetA"><h5 id="stepsCounter">1000 STEPS!</h5>
     <canvas id="dailyStepsWidget" width="100" height="100"></canvas>
@@ -513,8 +515,9 @@ function displayActivityPage(currentUserActivity, allUserActivityRepository) {
   </div>
   </div>
   <div class="box i">
-  <div class="graphTitle">Name</div>
-  <div class="graph">Stairs Clombed</div>
+    <h5 id="stepsCounter">You averaged 25 flights/day for the week ending on ${weekEnd}</h5>
+  <div class="graph">
+    <canvas id="weeklyStairsChart" width="100" height="100"></canvas>
   </div>`
   allTimeSection.innerHTML = `Personal Bests<div class="box l">
   <div class="box m">Best Steps</div>
@@ -763,4 +766,46 @@ function displayWeeklyMilesChart(currentUserActivity, allUserActivityRepository)
     }
   })
 }
+
+function displayWeeklyStairsChart(currentUserActivity, allUserActivityRepository) {
+  let currentWeek = generateWeekDates()
+  let stairsWeek = document.getElementById('weeklyStairsChart');
+  let stairsData = [20, 30, 43, 50, 20, 10, 50]
+  // let stairsData = currentUserActivity.calculateStairsForWeek(weekEnd)
+  let astairsWeekChart = new Chart(stairsWeek, {
+    type: 'bar',
+    data: {
+      labels: currentWeek,
+      datasets: [{
+        label: 'Flights This Week',
+        data: stairsData,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+          }
+        }]
+      }
+    }
+  })
 }
