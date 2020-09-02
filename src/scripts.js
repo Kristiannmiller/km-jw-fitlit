@@ -469,6 +469,7 @@ function displayActivityData(event) {
   displayDailyActiveMinutesChart(currentUserActivity, allUserActivityRepository)
   displayDailyActiveMinutesChart(currentUserActivity, allUserActivityRepository)
   displayDailyMilesChart(currentUserActivity, allUserActivityRepository)
+  displayStairsChart(currentUserActivity, allUserActivityRepository)
 
   // displayWeeklySleepHoursChart(currentUserSleep, allUserSleepRepository)
   // displayWeeklySleepQualityChart(currentUserSleep, allUserSleepRepository)
@@ -477,6 +478,7 @@ function displayActivityData(event) {
 function displayActivityPage(currentUserActivity, allUserActivityRepository) {
   // IN WIDGET A: ${currentUserActivity.calculateStepsByDate(now)}
   // IN WIDGET C: ${currentUserActivity.calculateMiles(now)}
+  // IN WIDGET D: ${currentUserActivity.calculateStairsByDate(now)}
   dailySection.innerHTML = `<div class="box e">
   <div class="widgetA"><h5 id="stepsCounter">1000 STEPS!</h5>
     <canvas id="dailyStepsWidget" width="100" height="100"></canvas>
@@ -487,7 +489,7 @@ function displayActivityPage(currentUserActivity, allUserActivityRepository) {
   <div class="widgetC"><h5 id="stepsCounter">5 MILES!</h5>
     <canvas id="dailyMilesWidget" width="100" height="100"></canvas>
     </div>
-  <div class="widgetD">
+  <div class="widgetD"><h5 id="stepsCounter">25 FLIGHTS!</h5>
     <canvas id="dailyStairsClimbedWidget" width="100" height="100"></canvas>
     </div>
   </div>
@@ -584,6 +586,34 @@ function displayDailyMilesChart(currentUserActivity, allUserActivityRepository) 
       labels: ['Average User', 'Miles so far'],
       datasets: [{
         data: [remainder, milesSoFar],
+        backgroundColor: [
+          'rgba(249, 249, 249, 1)',
+          'rgba(116, 204, 195, 1)'
+        ],
+        borderColor: [
+          'rgba(204, 204, 204, 1)',
+          'rgba(116, 204, 195, 1)'
+        ],
+        borderWidth: 1,
+      }]
+    },
+    options: {}
+  })
+}
+function displayStairsChart(currentUserActivity, allUserActivityRepository) {
+  let dailyStairs = document.getElementById('dailyStairsClimbedWidget');
+  // AFTER METHODS ARE DONE:
+  // let stairsSoFar = currentUserActivity.calculateStairsByDate(now)
+  let stairsSoFar = 20;
+  let compare = allUserActivityRepository.calculateAverageStairsClimbedbyDate(now) - stairsSoFar
+  let remainder
+  compare > 0 ? remainder = compare : remainder = 0
+  let dailyStairsWidget = new Chart(dailyStairs, {
+    type: 'doughnut',
+    data: {
+      labels: ['Average User', 'Flights so far'],
+      datasets: [{
+        data: [remainder, stairsSoFar],
         backgroundColor: [
           'rgba(249, 249, 249, 1)',
           'rgba(116, 204, 195, 1)'
