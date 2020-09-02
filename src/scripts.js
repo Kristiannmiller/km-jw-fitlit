@@ -468,12 +468,15 @@ function displayActivityData(event) {
   displayDailyStepsChart(currentUserActivity, allUserActivityRepository)
   displayDailyActiveMinutesChart(currentUserActivity, allUserActivityRepository)
   displayDailyActiveMinutesChart(currentUserActivity, allUserActivityRepository)
+  displayDailyMilesChart(currentUserActivity, allUserActivityRepository)
+
   // displayWeeklySleepHoursChart(currentUserSleep, allUserSleepRepository)
   // displayWeeklySleepQualityChart(currentUserSleep, allUserSleepRepository)
 }
 
 function displayActivityPage(currentUserActivity, allUserActivityRepository) {
   // IN WIDGET A: ${currentUserActivity.calculateStepsByDate(now)}
+  // IN WIDGET C: ${currentUserActivity.calculateMiles(now)}
   dailySection.innerHTML = `<div class="box e">
   <div class="widgetA"><h5 id="stepsCounter">1000 STEPS!</h5>
     <canvas id="dailyStepsWidget" width="100" height="100"></canvas>
@@ -481,7 +484,7 @@ function displayActivityPage(currentUserActivity, allUserActivityRepository) {
   <div class="widgetB"><h5 id="stepsCounter">${currentUserActivity.calculateMinActive(now)} ACTIVE MINS!</h5>
     <canvas id="dailyActiveMinutesWidget" width="100" height="100"></canvas>
     </div>
-  <div class="widgetC">
+  <div class="widgetC"><h5 id="stepsCounter">5 MILES!</h5>
     <canvas id="dailyMilesWidget" width="100" height="100"></canvas>
     </div>
   <div class="widgetD">
@@ -549,9 +552,38 @@ function displayDailyStepsChart(currentUserActivity, allUserActivityRepository) 
   let dailyStepsWidget = new Chart(stepsDay, {
     type: 'doughnut',
     data: {
-      labels: ['Steps to go', 'Steps so far'],
+      labels: ['Steps to Goal', 'Steps so far'],
       datasets: [{
         data: [stepsToGo, stepsSoFar],
+        backgroundColor: [
+          'rgba(249, 249, 249, 1)',
+          'rgba(116, 204, 195, 1)'
+        ],
+        borderColor: [
+          'rgba(204, 204, 204, 1)',
+          'rgba(116, 204, 195, 1)'
+        ],
+        borderWidth: 1,
+      }]
+    },
+    options: {}
+  })
+}
+function displayDailyMilesChart(currentUserActivity, allUserActivityRepository) {
+  let dailyMiles = document.getElementById('dailyMilesWidget');
+  // AFTER METHODS ARE DONE:
+  // let milesSoFar = currentUserActivity.calculateMiles(now)
+  // let compare = allUserActivityRepository.calculateAverageMilesActivebyDate(now) - minsSoFar
+  let milesSoFar = 10;
+  let compare = 15
+  let remainder
+  compare > 0 ? remainder = compare : remainder = 0
+  let dailyMilesWidget = new Chart(dailyMiles, {
+    type: 'doughnut',
+    data: {
+      labels: ['Average User', 'Miles so far'],
+      datasets: [{
+        data: [remainder, milesSoFar],
         backgroundColor: [
           'rgba(249, 249, 249, 1)',
           'rgba(116, 204, 195, 1)'
