@@ -414,8 +414,9 @@ function displayActivityData(event) {
 }
 
 function displayActivityPage() {
+  // IN WIDGET A: ${currentUserActivity.calculateStepsByDate(now)}
   dailySection.innerHTML = `<div class="box e">
-  <div class="widgetA">
+  <div class="widgetA"><h5 id="stepsCounter">1000 STEPS TODAY!</h5>
     <canvas id="dailyStepsWidget" width="100" height="100"></canvas>
     </div>
   <div class="widgetB">
@@ -456,20 +457,22 @@ function displayActivityPage() {
 function displayDailyStepsChart(currentUserActivity, allUserActivityRepository) {
   console.log(currentUserActivity)
   let stepsDay = document.getElementById('dailyStepsWidget');
+  let labels = ['Steps to go', 'Steps so far']
   let dailyStepsWidget = new Chart(stepsDay, {
     type: 'doughnut',
     data: {
+      labels: labels,
       datasets: [{
         data: [50, 50],
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)'
+          'rgba(249, 249, 249, 1)',
+          'rgba(116, 204, 195, 1)'
         ],
         borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)'
+          'rgba(204, 204, 204, 1)',
+          'rgba(116, 204, 195, 1)'
         ],
-        borderWidth: 1
+        borderWidth: 1,
       }]
     },
     options: {}
