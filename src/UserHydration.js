@@ -17,9 +17,9 @@ class UserHydration {
     let endingDateIndex = this.userWaterIntake.findIndex(waterData => waterData.date === endingDate)
     let weekOfWater = this.userWaterIntake.slice(endingDateIndex-6, endingDateIndex+1)
     let result = weekOfWater.reduce((weekData, day) => {
-      weekData[day.date] = day.numOunces
+      weekData.push(day.numOunces)
       return weekData
-    }, {})
+    }, [])
     return result
   }
 }

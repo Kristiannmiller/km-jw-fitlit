@@ -1,17 +1,19 @@
-
-
 // ********** PACKAGES **********
-// var Chart = require('../node_modules/chart.js/dist/Chart.js');
-let now = moment('2019/06/15').format('YYYY/DD/MM')
-console.log(now);
+// import datepicker from 'js-datepicker'
+let now = moment('2019/09/22').format('YYYY/MM/DD')
+let weekEnd = moment('2019/09/22').format('YYYY/MM/DD')
+Chart.defaults.global.legend.display = false
+// const picker = datepicker(selector, options)
 
-// ********** GLOBAL VARIABLE **********
+// ********** GLOBAL VARIABLES **********
 var currentUser
 var currentUserRepository
 var allUserRepository
 var allUserHydrationRepository
 var allUserSleepRepository
+var currentUserSleep
 var allUserActivityRepository
+var currentPage = 'activity'
 
 // ********** QUERIES  **********
 const userName = document.querySelector('.username');
@@ -22,20 +24,46 @@ const userSteps = document.getElementById('userSteps')
 const viewTeamButton = document.querySelector('#viewTeam');
 const hydrationMenu = document.querySelector('.hydMenu');
 const hydrationWrapper = document.querySelector('.hydrationWrapper')
-const mainBody = document.querySelector('.mainbody')
+const dailySection = document.querySelector('.dailyWidgets')
+const weeklySection = document.querySelector('.weeklyWidgets')
+const allTimeSection = document.querySelector('.allTime')
+const sleepMenu = document.querySelector('.slpMenu')
+const dailyCalendar = document.querySelector('.dayCal')
+const weeklyCalendar = document.querySelector('.weekCal')
 
 // ********** EVENT LISTENERS **********
 window.addEventListener('load', updateUser);
-userName.addEventListener('click', displayProfile);
+userPhoto.addEventListener('click', displayProfile);
 sideBarContents.addEventListener('click', displayTeamList);
-// myProfileLink.addEventListener('click', displayProfile);
-hydrationMenu.addEventListener('click', displayHydrationData)
-
+hydrationMenu.addEventListener('click', displayHydrationData);
+sleepMenu.addEventListener('click', displaySleepData);
+dailyCalendar.addEventListener('input', changeDate);
+weeklyCalendar.addEventListener('input', changeDate);
 // ******** FUNCTIONS/EVENTHANDLERS **********
 
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
+
+function changeDate(event){
+  event.preventDefault()
+  if(event.target === dailyCalendar) {
+    now = moment(`${dailyCalendar.value}`).format('YYYY/MM/DD')
+  } else if(event.target === weeklyCalendar) {
+    weekEnd = moment(`${weeklyCalendar.value}`).format('YYYY/MM/DD')
+  }
+  refreshPageData(event);
+}
+
+function refreshPageData(event) {
+  if(currentPage === 'hydration') {
+    displayHydrationData()
+  } else if(currentPage === 'sleep') {
+    displaySleepData()
+  }
+}
+
+// ==== ONLOAD ==== //
 
 function updateUser() {
   uploadData()
@@ -48,151 +76,52 @@ function uploadData() {
   currentUser = new User(userData[getRandomIndex(userData)])
   currentUserTeam = currentUser.friends.map(friend => userData[friend-1])
   currentUserTeam.unshift(currentUser) // NOTE: currentUser will always be at [0]
-  // WE CAN CHANGE THIS IF WE NEED TO ^
   currentUserRepository = new UserRepository(currentUserTeam)
   allUserRepository = new UserRepository(userData)
-  console.log(allUserRepository)
 }
 
 function displayUserData() {
-  userName.innerText = `Hello, ${currentUser.displayFirstName()}!`
-  userSteps.innerText = `${currentUser.dailyStepGoal}`// ***update when we do activity**
-  userPhoto.innerHTML = '<img class="userProfilePhoto" src="../assets/userImages/UserImage.jpg" alt="user profile image">'
+  userPhoto.innerHTML = `<img class="userProfilePhoto" src="../assets/userImages/UserImage.jpg" alt="a vibrant orange tiger bathing in a lush green jungle stream">
+  <h3>Hello, ${currentUser.displayFirstName()}!</h3>
+  <div id="userSteps" class="userSteps">
+  <h6>You've walked ${currentUser.dailyStepGoal} steps today</h6></div>`
 }
 
 function displayActivityData() {
-  mainBody.innerHTML = `<div class="box e"> Today's Activity
+  dailySection.innerHTML = `<div class="box e"> Daily Activity
       <div class="widgetA">Steps</div>
       <div class="widgetB">Activity</div>
       <div class="widgetC">Miles Run</div>
       <div class="widgetD">Stairs Climbed</div>
     </div>
-    <div class="box b">
-        <div class="graphTitle">Name</div>
-        <div class="graph">Steps Done Walked</div>
-      </div>
-      <div class="box h">
-        <div class="graphTitle">Name</div>
-        <div class="graph">Minutes Active</div>
-      </div>
-      <div class="box g">
-          <div class="graphTitle">Name</div>
-          <div class="graph">Miles Runned</div>
-        </div>
-      <div class="box i">
-        <div class="graphTitle">Name</div>
-        <div class="graph">Stairs Clombed</div>
-      </div>
-      <div class="box l">
-        <div class="box m">Best Steps</div>
-        <div class="box n">Best Min/active</div>
-        <div class="box o">Best Miles</div>
-        <div class="box p">Best Stairs</div>
-      </div>`
-}
-
-function displayHydrationCharts(user){
-  let ctx
-  let har
-  mainBody.innerHTML = `<div class="hydrationWrapper">
-    <div class="hydrationToday">
-      <canvas id="hydrationChartDay" width="100" height="100"></canvas>
+    <div class="box b">`
+  weeklySection.innerHTML = `<div class="graphTitle">Name</div>
+      <div class="graph">Steps Done Walked</div>
     </div>
-  <div class="hydrationWeek">
-      <canvas id="hydrationChartWeek" width="100" height="100"></canvas>
-  </div>
+    <div class="box h">
+      <div class="graphTitle">Name</div>
+      <div class="graph">Minutes Active</div>
+    </div>
+    <div class="box g">
+        <div class="graphTitle">Name</div>
+        <div class="graph">Miles Runned</div>
+      </div>
+    <div class="box i">
+      <div class="graphTitle">Name</div>
+      <div class="graph">Stairs Clombed</div>
+    </div>`
+  allTimeSection.innerHTML = `Personal Bests<div class="box l">
+    <div class="box m">Best Steps</div>
+    <div class="box n">Best Min/active</div>
+    <div class="box o">Best Miles</div>
+    <div class="box p">Best Stairs</div>
   </div>`
-  ctx = document.getElementById('hydrationChartDay');
-  har = document.getElementById('hydrationChartWeek')
-  let allUserHydrationRepository = new HydrationRepository(hydrationData)
-  currentUserHydration = new UserHydration(allUserHydrationRepository.findUserById(currentUser.id))
-  let numOunces = currentUserHydration.userWaterIntake[currentUserHydration.userWaterIntake.length-1].numOunces
-  var hydrationChartDay = new Chart(ctx, {
-      type: 'horizontalBar',
-      data: {
-          labels: ['Water'],
-          datasets: [{
-              label: 'Fl oz',
-              data: [numOunces],
-              backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-
-              ],
-              borderColor: [
-                  'rgba(5, 99, 132, 1)',
-              ],
-              borderWidth: 1
-          }]
-      },
-      options: {
-          scales: {
-              xAxes: [{
-                  ticks: {
-                      scaleOveride: true,
-                      min: 0,
-                      max: 75,
-                      stepSize: 10,
-                      responsive: false
-                  }
-              }]
-          }
-      }
-  });
-  var hydrationChartWeek = new Chart(har, {
-      type: 'horizontalBar',
-      data: {
-          labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-          datasets: [{
-              label: 'Weekly',
-              data: [120, 70, 69, 82, 200, 35, 84],
-              backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
-              ],
-              borderColor: [
-                  'rgba(255, 99, 132, 1)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
-              ],
-              borderWidth: 1
-          }]
-      },
-      options: {
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero: true,
-
-                  }
-              }]
-          }
-      }
-  });
+  currentPage = 'activity'
 }
 
-function displayHydrationData(event) {
-  displayHydrationCharts()
-  allUserHydrationRepository = new HydrationRepository(hydrationData)
-  currentUserHydration = new UserHydration(allUserHydrationRepository.findUserById(currentUser.id))
-  console.log('This is my favorite ', allUserHydrationRepository)
-  // hydrationWrapper.classList.remove('hidden')
-  // document.querySelector('.e').classList.add('hidden')
-  // document.querySelector('.b').classList.add('hidden')
-  // document.querySelector('.g').classList.add('hidden')
-  // document.querySelector('.h').classList.add('hidden')
-  // document.querySelector('.i').classList.add('hidden')
-  // document.querySelector('.l').classList.add('hidden')
-}
+// *** sidebar display *** //
 
 function displayTeamList() {
-  console.log('team list')
   sideBarContents.innerHTML =
   `<div class="teamHeader">My Team</div>
   <div class="teamStepsHeader">FitLit Community Step Goal Average: ${allUserRepository.calculateAverageStepGoal()}</div>
@@ -214,15 +143,293 @@ function displayProfile() {
   sideBarContents.innerHTML = ''
   sideBarContents.innerHTML =
   `<div class="sidebarHeader">
-    <img class="profileUserPhoto" src="../assets/userImages/UserImage.jpg" alt="user profile image"></div>
-    <div class="profileUser">${currentFirstName}</div>
-    <div class="key profileName">NAME: ${currentUser.name}</div>
-    <div class="key profileAddress">ADDRESS: ${currentUser.address}</div>
-    <div class="key profileEmail">EMAIL: ${currentUser.email}</div>
-    <div class="key profileStride">STRIDE LENGTH: ${currentUser.strideLength}</div>
-    <div class="key profileStepGoal">DAILY STEP GOAL: ${currentUser.dailyStepGoal}</div>
-    <button id="viewTeam" class="viewTeam">View My Team</button>
-    </div>`
+  <img class="profileUserPhoto" src="../assets/userImages/UserImage.jpg" alt="user profile image"></div>
+  <div class="profileUser">${currentFirstName}</div>
+  <div class="key profileName">NAME: ${currentUser.name}</div>
+  <div class="key profileAddress">ADDRESS: ${currentUser.address}</div>
+  <div class="key profileEmail">EMAIL: ${currentUser.email}</div>
+  <div class="key profileStride">STRIDE LENGTH: ${currentUser.strideLength}</div>
+  <div class="key profileStepGoal">DAILY STEP GOAL: ${currentUser.dailyStepGoal}</div>
+  <button id="viewTeam" class="viewTeam">View My Team</button>
+  </div>`
 }
-//****************CHHHHHHAAAARTS*****************//
-//put into function that instantiates chart and inserts innerHTML dynamically rather than hiding and displaying stuff that's already there
+
+// ====== Hydration View ====== //
+
+function displayHydrationData() {
+  displayHydrationPage()
+  allUserHydrationRepository = new HydrationRepository(hydrationData)
+  currentUserHydration = new UserHydration(allUserHydrationRepository.findUserById(currentUser.id))
+  displayDailyHydrationChart(currentUserHydration, allUserHydrationRepository)
+  displayWeeklyHydrationChart(currentUserHydration, allUserHydrationRepository)
+}
+
+function displayHydrationPage() {
+  dailySection.innerHTML = `<div class="hydrationWrapper">
+    <div class="hydrationToday">
+      <canvas id="hydrationChartDay" width="100" height="100"></canvas>
+    </div>`
+  weeklySection.innerHTML = `<div class="hydrationWeek">
+        <canvas id="hydrationChartWeek" width="100" height="100"></canvas>
+    </div>`
+  allTimeSection.innerHTML = ``
+  currentPage = 'hydration'
+}
+
+function generateWeekDates() {
+  let week = ['day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7'];
+  let currentWeek = week.map((day, i) => {
+    return moment(weekEnd).subtract((6 - i), 'days').calendar()
+  });
+  return currentWeek
+}
+
+function displayWeeklyHydrationChart(currentUserHydration, allUserHydrationRepository) {
+  let currentWeek = generateWeekDates()
+  let har = document.getElementById('hydrationChartWeek')
+  let hydrationChartWeek = new Chart(har, {
+    type: 'horizontalBar',
+    data: {
+      labels: currentWeek,
+      datasets: [{
+        data: currentUserHydration.waterForWeek(weekEnd),
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+          }
+        }]
+      }
+    }
+  })
+}
+
+function displayDailyHydrationChart(currentUserHydration, allUserHydrationRepository) {
+  let ctx = document.getElementById('hydrationChartDay');
+  let hydrationChartDay = new Chart(ctx, {
+      type: 'horizontalBar',
+      data: {
+          labels: [moment(now).format('MM/DD/YYYY')],
+          datasets: [{
+              label: 'Fl oz',
+              data: [currentUserHydration.waterByDate(now)],
+              backgroundColor: [
+                  'rgba(116, 204, 195, 1)',
+
+              ],
+              borderColor: [
+                  'rgba(58, 156, 147, 1)',
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              xAxes: [{
+                  ticks: {
+                      scaleOveride: true,
+                      min: 0,
+                      max: 150,
+                      stepSize: 10,
+                      responsive: false
+                  }
+              }]
+          }
+      }
+  });
+}
+
+// ====== Sleep View ====== //
+
+function displaySleepData(event) {
+  displaySleepPage()
+  allUserSleepRepository = new SleepRepository(sleepData)
+  currentUserSleep = new UserSleep(allUserSleepRepository.findUserById(currentUser.id))
+  displayDailySleepHoursChart(currentUserSleep, allUserSleepRepository)
+  displayDailySleepQualityChart(currentUserSleep, allUserSleepRepository)
+  displayWeeklySleepHoursChart(currentUserSleep, allUserSleepRepository)
+  displayWeeklySleepQualityChart(currentUserSleep, allUserSleepRepository)
+}
+function displaySleepPage() {
+  dailySection.innerHTML = `<div class="sleepWrapper">
+    <div class="sleepToday">
+      <canvas id="dailySleepHoursChart" width="100" height="100"></canvas>
+      <canvas id="dailySleepQualityChart" width="100" height="100"></canvas>
+    </div>`
+  weeklySection.innerHTML = `<div class="sleepThisWeek">
+        <canvas id="weeklySleepHoursChart" width="100" height="100"></canvas>
+        <canvas id="weeklySleepQualityChart" width="100" height="100"></canvas>
+      </div>
+    </div>`
+  allTimeSection.innerHTML = `Weekly Summary<div class="box l">
+      <div class="box m">Average Sleep Hours</div>
+      <div class="box n">Average Sleep Quality</div>
+    </div>`
+  currentPage = 'sleep'
+}
+function displayDailySleepHoursChart(currentUserSleep, allUserSleepRepository) {
+  let sleepHrsDaily = document.getElementById('dailySleepHoursChart');
+  let sleepHoursChartDay = new Chart(sleepHrsDaily, {
+      type: 'horizontalBar',
+      data: {
+          labels: [moment(now).format('MM/DD/YYYY')],
+          datasets: [{
+              data: [currentUserSleep.calculateSleepByDate(now)],
+              backgroundColor: [
+                  'rgba(116, 204, 195, 1)',
+              ],
+              borderColor: [
+                  'rgba(58, 156, 147, 1)',
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              xAxes: [{
+                  ticks: {
+                      scaleOveride: true,
+                      min: 0,
+                      max: 15,
+                      stepSize: 1,
+                      responsive: false
+                  }
+              }]
+          }
+      }
+  });
+};
+function displayDailySleepQualityChart(currentUserSleep, allUserSleepRepository) {
+  let sleepQualDaily = document.getElementById('dailySleepQualityChart');
+  let sleepQualChartDay = new Chart(sleepQualDaily, {
+      type: 'horizontalBar',
+      data: {
+          labels: [moment(now).format('MM/DD/YYYY')],
+          datasets: [{
+              label: 'Quality of Sleep',
+              data: [currentUserSleep.calculateSleepQualityByDate(now)],
+              backgroundColor: [
+                  'rgba(116, 204, 195, 1)',
+              ],
+              borderColor: [
+                  'rgba(58, 156, 147, 1)',
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              xAxes: [{
+                  ticks: {
+                      scaleOveride: true,
+                      min: 0,
+                      max: 5,
+                      stepSize: 1,
+                      responsive: false
+                  }
+              }]
+          }
+      }
+  });
+};
+function displayWeeklySleepHoursChart(currentUserSleep, allUserSleepRepository) {
+  let currentWeek = generateWeekDates()
+  let sleepHrsWeek = document.getElementById('weeklySleepHoursChart');
+  let sleepHoursChartWeek = new Chart(sleepHrsWeek, {
+    type: 'horizontalBar',
+    data: {
+      labels: currentWeek,
+      datasets: [{
+        label: 'Hours Slept',
+        data: currentUserSleep.calculateDailySleepHoursForWeek(weekEnd),
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+          }
+        }]
+      }
+    }
+  })
+}
+function displayWeeklySleepQualityChart(currentUserSleep, allUserSleepRepository) {
+  let currentWeek = generateWeekDates()
+  let sleepQualWeek = document.getElementById('weeklySleepQualityChart');
+  let sleepQualChartWeek = new Chart(sleepQualWeek, {
+    type: 'horizontalBar',
+    data: {
+      labels: currentWeek,
+      datasets: [{
+        label: 'Quality of Sleep',
+        data: currentUserSleep.calculateDailySleepQualityForWeek(weekEnd),
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+          }
+        }]
+      }
+    }
+  })
+}
+// ====== Activity View ====== //

@@ -11,6 +11,10 @@ html, body {
 
 /* ~~~~~ GLOBAL RULES ~~~~~ */
 
+h3 {
+  display: inline-grid;
+  margin-bottom: 5px;
+}
 body {
   margin: 40px;
   font-family: Tahoma;
@@ -18,14 +22,10 @@ body {
   display: grid
 }
 
-.hidden {
-  display: none !important;
-}
-
 .wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: .1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 10px;
   background-color: #f9f9f9
   color: #444;
@@ -40,6 +40,9 @@ body {
 }
 
 /* ~~~~~ HEADER ~~~~~ */
+.header {
+
+}
 
 .a {
   grid-column: 1 /span 8;
@@ -67,6 +70,7 @@ body {
 .userProfilePhoto {
   height: 10vh;
   border-radius: 5vh;
+  display: inline-block;
 }
 .username {
   grid-column: 2;
@@ -77,6 +81,10 @@ body {
   grid-row: 2;
 }
 
+#userPhoto {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
 /*=== Menu Options ===*/
 
 .actMenu {
@@ -144,10 +152,6 @@ body {
   display: grid;
   grid-template-columns: 2;
   grid-auto-rows: 2;
-}
-.photo {
-  grid-column: 1;
-  grid-row: 1 / span 2
 }
 .teamImage{
   height: 8vh;

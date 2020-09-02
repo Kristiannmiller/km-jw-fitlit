@@ -109,7 +109,7 @@ describe('UserHydration', () => {
     let userWaterStats = new UserHydration(userWaterIntake)
 
     expect(userWaterStats.waterForWeek("2019/06/21")).to.deep.equal(
-      {"2019/06/15": 75, "2019/06/16": 25, "2019/06/17": 30, "2019/06/18": 50, "2019/06/19": 80, "2019/06/20": 75, "2019/06/21": 75})
+      [75, 25, 30, 50, 80, 75, 75])
   });
 
 });

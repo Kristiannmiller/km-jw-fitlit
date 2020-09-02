@@ -80,6 +80,6 @@ describe('UserRepository', () => {
   })
   it('should be able to return the average step goal amongst all users', () => {
     let testRepository = new UserRepository(userData);
-    expect(testRepository.calculateAverageStepGoal()).to.equal(7250)
+    expect(testRepository.calculateAverageStepGoal()).to.equal('7250')
   })
 });
