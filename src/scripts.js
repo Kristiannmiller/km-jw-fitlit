@@ -13,6 +13,7 @@ var allUserHydrationRepository
 var allUserSleepRepository
 var currentUserSleep
 var allUserActivityRepository
+var currentUserActivity
 var currentPage = 'activity'
 
 // ********** QUERIES  **********
@@ -30,6 +31,7 @@ const allTimeSection = document.querySelector('.allTime')
 const sleepMenu = document.querySelector('.slpMenu')
 const dailyCalendar = document.querySelector('.dayCal')
 const weeklyCalendar = document.querySelector('.weekCal')
+const activityMenu = document.querySelector('.actMenu')
 
 // ********** EVENT LISTENERS **********
 window.addEventListener('load', updateUser);
@@ -39,12 +41,19 @@ hydrationMenu.addEventListener('click', displayHydrationData);
 sleepMenu.addEventListener('click', displaySleepData);
 dailyCalendar.addEventListener('input', changeDate);
 weeklyCalendar.addEventListener('input', changeDate);
+activityMenu.addEventListener('click', displayActivityData);
 // ******** FUNCTIONS/EVENTHANDLERS **********
 
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
 }
-
+function generateWeekDates() {
+  let week = ['day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7'];
+  let currentWeek = week.map((day, i) => {
+    return moment(weekEnd).subtract((6 - i), 'days').calendar()
+  });
+  return currentWeek
+}
 function changeDate(event){
   event.preventDefault()
   if(event.target === dailyCalendar) {
@@ -54,7 +63,6 @@ function changeDate(event){
   }
   refreshPageData(event);
 }
-
 function refreshPageData(event) {
   if(currentPage === 'hydration') {
     displayHydrationData()
@@ -85,38 +93,6 @@ function displayUserData() {
   <h3>Hello, ${currentUser.displayFirstName()}!</h3>
   <div id="userSteps" class="userSteps">
   <h6>You've walked ${currentUser.dailyStepGoal} steps today</h6></div>`
-}
-
-function displayActivityData() {
-  dailySection.innerHTML = `<div class="box e"> Daily Activity
-      <div class="widgetA">Steps</div>
-      <div class="widgetB">Activity</div>
-      <div class="widgetC">Miles Run</div>
-      <div class="widgetD">Stairs Climbed</div>
-    </div>
-    <div class="box b">`
-  weeklySection.innerHTML = `<div class="graphTitle">Name</div>
-      <div class="graph">Steps Done Walked</div>
-    </div>
-    <div class="box h">
-      <div class="graphTitle">Name</div>
-      <div class="graph">Minutes Active</div>
-    </div>
-    <div class="box g">
-        <div class="graphTitle">Name</div>
-        <div class="graph">Miles Runned</div>
-      </div>
-    <div class="box i">
-      <div class="graphTitle">Name</div>
-      <div class="graph">Stairs Clombed</div>
-    </div>`
-  allTimeSection.innerHTML = `Personal Bests<div class="box l">
-    <div class="box m">Best Steps</div>
-    <div class="box n">Best Min/active</div>
-    <div class="box o">Best Miles</div>
-    <div class="box p">Best Stairs</div>
-  </div>`
-  currentPage = 'activity'
 }
 
 // *** sidebar display *** //
@@ -176,13 +152,6 @@ function displayHydrationPage() {
   currentPage = 'hydration'
 }
 
-function generateWeekDates() {
-  let week = ['day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7'];
-  let currentWeek = week.map((day, i) => {
-    return moment(weekEnd).subtract((6 - i), 'days').calendar()
-  });
-  return currentWeek
-}
 
 function displayWeeklyHydrationChart(currentUserHydration, allUserHydrationRepository) {
   let currentWeek = generateWeekDates()
@@ -433,3 +402,45 @@ function displayWeeklySleepQualityChart(currentUserSleep, allUserSleepRepository
   })
 }
 // ====== Activity View ====== //
+
+function displayActivityData(event) {
+  displayActivityPage()
+  allUserActivityRepository = new ActivityRepository(activityData)
+  currentUserActivity = new UserActivity(allUserActivityRepository.findUserById(currentUser.id))
+  // displayDailySleepHoursChart(currentUserSleep, allUserSleepRepository)
+  // displayDailySleepQualityChart(currentUserSleep, allUserSleepRepository)
+  // displayWeeklySleepHoursChart(currentUserSleep, allUserSleepRepository)
+  // displayWeeklySleepQualityChart(currentUserSleep, allUserSleepRepository)
+}
+
+function displayActivityPage() {
+  dailySection.innerHTML = `<div class="box e"> Daily Activity
+  <div class="widgetA">Steps</div>
+  <div class="widgetB">Activity</div>
+  <div class="widgetC">Miles Run</div>
+  <div class="widgetD">Stairs Climbed</div>
+  </div>
+  <div class="box b">`
+  weeklySection.innerHTML = `<div class="graphTitle">Name</div>
+  <div class="graph">Steps Done Walked</div>
+  </div>
+  <div class="box h">
+  <div class="graphTitle">Name</div>
+  <div class="graph">Minutes Active</div>
+  </div>
+  <div class="box g">
+  <div class="graphTitle">Name</div>
+  <div class="graph">Miles Runned</div>
+  </div>
+  <div class="box i">
+  <div class="graphTitle">Name</div>
+  <div class="graph">Stairs Clombed</div>
+  </div>`
+  allTimeSection.innerHTML = `Personal Bests<div class="box l">
+  <div class="box m">Best Steps</div>
+  <div class="box n">Best Min/active</div>
+  <div class="box o">Best Miles</div>
+  <div class="box p">Best Stairs</div>
+  </div>`
+  currentPage = 'activity'
+}
