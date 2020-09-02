@@ -1,12 +1,22 @@
+
 class UserActivity {
   constructor(userActivity){
-    this.userActivity = userActivity
+    this.userActivity = userActivity;
   }
-  calculateMiles(date){
-    let milesPerDate = this.userActivity.find
 
-    //we need to access this data from two different databases
+  milesWalked(date, user) {
+    let dateData = this.userActivity.find(oneDate => oneDate.date == date);
+    let stepsNeeded = 5280/user.strideLength;
+    let roundedStepsNeeded = Math.floor(stepsNeeded);
+    let milesWalked = dateData.numSteps/roundedStepsNeeded;
+    let roundedMilesWalked = Math.floor(milesWalked);
+    return roundedMilesWalked;
   }
+  calculateStepsTaken(date){
+    let stepsPerDay = this.userActivity.find(stepsTaken => stepsTaken.date === date)
+    return parseFloat((stepsPerDay.numSteps).toFixed(2))
+  }
+
   calculateMinActive(date){
     let minPerDay = this.userActivity.find(minActive => minActive.date === date)
     return parseFloat((minPerDay.minutesActive).toFixed(2))
@@ -20,11 +30,11 @@ class UserActivity {
     }, 0)
     return parseFloat((result/weekOfActivity.length).toFixed(2))
   }
-  // calculateStepGoalAchieved(date){
-  //   let stepGoalsAchieved = this.userActivity.find(goalAchieved =>
-  //     goalAchieved.date >
-  //   )
-  // }
+  calculateStepGoalAchieved(date){
+    let stepGoalsAchieved = this.userActivity.find(goalAchieved =>
+      goalAchieved.date > user.dailyStepGoal
+    )
+  }
 
   calculateDaysGoalExceeded(){
     let stepGoalsAchieved = this.userActivity.filter(goalAchieved => goalAchieved)

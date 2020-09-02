@@ -3,6 +3,23 @@ const expect = chai.expect;
 
 const ActivityRepository = require('../src/ActivityRepository')
 const UserActivity = require('../src/UserActivity')
+const User = require('../src/User')
+
+const userData = [
+  {
+    "id": 1,
+    "name": "Luisa Hane",
+    "address": "15195 Nakia Tunnel, Erdmanport VA 19901-1697",
+    "email": "Diana.Hayes1@hotmail.com",
+    "strideLength": 4.3,
+    "dailyStepGoal": 10000,
+    "friends": [
+      16,
+      4,
+      8
+    ]
+  }
+]
 const activityData = [
   {
     "userID": 1,
@@ -431,32 +448,45 @@ describe('UserActivity', () => {
   });
   it('should be an instance of Activity', () => {
     let testActivity1 = new UserActivity(activityData[0]);
+
     expect(testActivity1).to.be.an.instanceof(UserActivity);
   });
-  it.skip('should be able to have a userID property', () => {
-    let testRepository = new ActivityRepository(userData)
-    userActivityIntake = testRepository.findUserById(0)
-    let userActivityStats = new UserActivity(userActivityIntake)
-    expect(testActivity1.userID).to.equal(1);
-  });
-  it.skip('should be able to have a date property', () => {
-    let testActivity1 = new UserActivity(activityData[0]);
-    expect(testActivity1.date).to.equal("2019/06/15");
-  });
-  it.skip('should be able to count the number of steps', () => {
-    let testActivity1 = new UserActivity(activityData[0]);
-    expect(testActivity1.numSteps).to.equal(3577);
-  });
-  it.skip('should be able to track the number of miles the user has walked for a specific date', () => {
-  let testActivity1 = new UserActivity(activityData[0]);
-  let userData1 = new User(userData[0]);
-  expect(testActivity1.calculateMiles('6/15/19')).to.equal(2.91)
+  it('should be able to have a userID property', () => {
+    let testRepository = new ActivityRepository(activityData)
+    userActivityData = testRepository.findUserById(1)
+    let userActivityStats = new UserActivity(userActivityData[0])
+
+    expect(userActivityStats.userID).to.equal(1);
   });
 
+  it('should be able to have a date property', () => {
+    let testRepository = new ActivityRepository(activityData)
+    userActivityData = testRepository.findUserById(1);
+    let userActivityStats = new UserActivity(userActivityData[0]);
+
+    expect(userActivityStats.date).to.equal("2019/06/15");
+  });
+
+  it('should be able to track the number of miles the user has walked for a specific date', () => {
+    let testRepository = new ActivityRepository(activityData)
+    userActivityData = testRepository.findUserById(1);
+    let userActivityStats = new UserActivity(activityData);
+
+    expect(userActivityStats.calculateMiles('2019/06/15', 1)).to.equal(2.91)
+  });
+
+  it('should be able to track the number of steps taken by a given user for a specific date', () => {
+    let testRepository = new ActivityRepository(activityData)
+    userActivityData = testRepository.findUserById(1);
+    let userActivityStats = new UserActivity(userActivityData);
+
+    expect(userActivityStats.calculateStepsTaken('2019/06/15')).to.equal(3577)
+  })
   it('should be able to track the number of minutes a given user was active for a specific date as specified by UserId', () => {
   let testRepository = new ActivityRepository(activityData)
    userActivityData = testRepository.findUserById(1);
   let userActivityStats = new UserActivity(userActivityData);
+
   expect(userActivityStats.calculateMinActive('2019/06/15')).to.equal(140)
   });
 
@@ -466,5 +496,12 @@ describe('UserActivity', () => {
     let userActivityStats = new UserActivity(userActivityData)
 
     expect(userActivityStats.calculateAvgMinActivePerWeek('2019/06/22')).to.deep.equal(168.14)
+  })
+  it('should be able to calculate whether the user has exceeded their daily step goal', () => {
+    let testRepository = new ActivityRepository(activityData)
+    userActivityData = testRepository.findUserById(1);
+    let userActivityStats = new UserActivity(userActivityData)
+
+    expect(userActivityStats.calculateStepGoalAchieved('2019/06/15', 1)).to.equal(false)
   })
 })
