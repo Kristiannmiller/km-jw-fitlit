@@ -462,22 +462,23 @@ function displayAllTimeSleepQualityChart(currentUserSleep, allUserSleepRepositor
 // ====== Activity View ====== //
 
 function displayActivityData(event) {
-  displayActivityPage()
   allUserActivityRepository = new ActivityRepository(activityData)
   currentUserActivity = new UserActivity(allUserActivityRepository.findUserById(currentUser.id))
+  displayActivityPage(currentUserActivity, allUserActivityRepository)
   displayDailyStepsChart(currentUserActivity, allUserActivityRepository)
+  displayDailyActiveMinutesChart(currentUserActivity, allUserActivityRepository)
   displayDailyActiveMinutesChart(currentUserActivity, allUserActivityRepository)
   // displayWeeklySleepHoursChart(currentUserSleep, allUserSleepRepository)
   // displayWeeklySleepQualityChart(currentUserSleep, allUserSleepRepository)
 }
 
-function displayActivityPage() {
+function displayActivityPage(currentUserActivity, allUserActivityRepository) {
   // IN WIDGET A: ${currentUserActivity.calculateStepsByDate(now)}
   dailySection.innerHTML = `<div class="box e">
-  <div class="widgetA"><h5 id="stepsCounter">1000 STEPS TODAY!</h5>
+  <div class="widgetA"><h5 id="stepsCounter">1000 STEPS!</h5>
     <canvas id="dailyStepsWidget" width="100" height="100"></canvas>
     </div>
-  <div class="widgetB">
+  <div class="widgetB"><h5 id="stepsCounter">${currentUserActivity.calculateMinActive(now)} ACTIVE MINS!</h5>
     <canvas id="dailyActiveMinutesWidget" width="100" height="100"></canvas>
     </div>
   <div class="widgetC">
@@ -514,17 +515,16 @@ function displayActivityPage() {
 
 function displayDailyActiveMinutesChart(currentUserActivity, allUserActivityRepository) {
   let activeMins = document.getElementById('dailyActiveMinutesWidget');
-  // THIS GOES IN THE DATASETS AFTER METHOD IS COMPLETE
-  // let stepsSoFar = currentUserActivity.calculateStepsByDate(now)
-  // let stepsToGo = currentUser.dailyStepGoal - currentUserActivity.calculateStepsByDate(now)
   let minsSoFar = currentUserActivity.calculateMinActive(now)
-  let averageUserMins = 300 // YOU LEFT OFF HERE!
+  let compare = allUserActivityRepository.calculateAverageMinutesActivebyDate(now) - minsSoFar
+  let remainder
+  compare > 0 ? remainder = compare : remainder = 0
   let dailyActiveMinutesWidget = new Chart(activeMins, {
     type: 'doughnut',
     data: {
       labels: ['Average User', 'Minutes so far'],
       datasets: [{
-        data: [averageUserMins, minsSoFar],
+        data: [remainder, minsSoFar],
         backgroundColor: [
           'rgba(249, 249, 249, 1)',
           'rgba(116, 204, 195, 1)'
