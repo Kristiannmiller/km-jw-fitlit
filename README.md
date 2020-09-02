@@ -52,29 +52,22 @@ Chart.js
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
 ## Roadmap
+The total allotted time for this project was approximately 10 days. Future features contemplated by the developers included the following: 
 
-See the [open issues](https://github.com/github_username/repo_name/issues) for a list of proposed features (and known issues).
+- More fully responsive DOM;
+- Methods to compare a user's friends' (team) daily stats against another user's friends' stats;
+- Update the data being used with apis and porting the information to a remote server; 
+
+See the [open issues](https://github.com/Kristiannmiller/km-jw-fitlit/issues) for a list of proposed features (and known issues).
 
 
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<!-- CONTACT -->
 ## Contact
 
 Kristi Miller - email
+
 Jeff Woltjen - Jeff.Woltjen@gmail.com
 
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
+Project Link: [https://github.com/Kristiannmiller/km-jw-fitlit](https://github.com/Kristiannmiller/km-jw-fitlit)
 
 ## Acknowledgements
 
