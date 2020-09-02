@@ -414,11 +414,19 @@ function displayActivityData(event) {
 }
 
 function displayActivityPage() {
-  dailySection.innerHTML = `<div class="box e"> Daily Activity
-  <div class="widgetA">Steps</div>
-  <div class="widgetB">Activity</div>
-  <div class="widgetC">Miles Run</div>
-  <div class="widgetD">Stairs Climbed</div>
+  dailySection.innerHTML = `<div class="box e">
+  <div class="widgetA">
+    <canvas id="dailyStepsWidget" width="100" height="100"></canvas>
+    </div>
+  <div class="widgetB">
+    <canvas id="dailyActiveMinutesWidget" width="100" height="100"></canvas>
+    </div>
+  <div class="widgetC">
+    <canvas id="dailyMilesWidget" width="100" height="100"></canvas>
+    </div>
+  <div class="widgetD">
+    <canvas id="dailyStairsClimbedWidget" width="100" height="100"></canvas>
+    </div>
   </div>
   <div class="box b">`
   weeklySection.innerHTML = `<div class="graphTitle">Name</div>
