@@ -1,9 +1,7 @@
 // ********** PACKAGES **********
-// import datepicker from 'js-datepicker'
 let now = moment('2019/09/22').format('YYYY/MM/DD')
 let weekEnd = moment('2019/09/22').format('YYYY/MM/DD')
 Chart.defaults.global.legend.display = false
-// const picker = datepicker(selector, options)
 
 // ********** GLOBAL VARIABLES **********
 var currentUser
@@ -42,7 +40,10 @@ sleepMenu.addEventListener('click', displaySleepData);
 dailyCalendar.addEventListener('input', changeDate);
 weeklyCalendar.addEventListener('input', changeDate);
 activityMenu.addEventListener('click', displayActivityData);
+
 // ******** FUNCTIONS/EVENTHANDLERS **********
+
+// ==== COMMON USE ==== //
 
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
@@ -481,10 +482,10 @@ function displayActivityData(event) {
 }
 function displayActivityPage(currentUserActivity, allUserActivityRepository) {
   // IN WIDGET A: ${currentUserActivity.calculateStepsByDate(now)}
-  // IN WIDGET C: ${currentUserActivity.calculateMiles(now)}
+  // IN WIDGET C: ${currentUserActivity.calculateMilesByDate(now)}
   // IN WIDGET D: ${currentUserActivity.calculateStairsByDate(now)}
   // IN BOX B: ${currentUserActivity.calculateAverageWeeklySteps(weekEnd)}
-  // IN BOX G: ${currentUserActivity.calculateAvgMilesPerWeek(weekEnd)}
+  // IN BOX G: ${currentUserActivity.calculateAverageWeeklyMiles(weekEnd)}
   // IN BOX I: ${currentUserActivity.calculateAvgStairsPerWeek(weekEnd)}
   // IN BOX M: ${currentUserActivity.findStepsRecord()}
   // IN BOX N: ${currentUserActivity.findActiveMinRecord()}
@@ -606,9 +607,8 @@ function displayDailyStepsChart(currentUserActivity, allUserActivityRepository) 
 }
 function displayDailyMilesChart(currentUserActivity, allUserActivityRepository) {
   let dailyMiles = document.getElementById('dailyMilesWidget');
-  // AFTER METHODS ARE DONE:
-  // let milesSoFar = currentUserActivity.calculateMiles(now)
-  // let compare = allUserActivityRepository.calculateAverageMilesActivebyDate(now) - minsSoFar
+  // let milesSoFar = currentUserActivity.calculateMilesByDate(now)
+  // let compare = allUserActivityRepository.calculateAverageMilesByDate(now) - milesSoFar
   let milesSoFar = 10;
   let compare = 15
   let remainder
@@ -635,7 +635,6 @@ function displayDailyMilesChart(currentUserActivity, allUserActivityRepository) 
 }
 function displayDailyStairsChart(currentUserActivity, allUserActivityRepository) {
   let dailyStairs = document.getElementById('dailyStairsClimbedWidget');
-  // AFTER METHODS ARE DONE:
   // let stairsSoFar = currentUserActivity.calculateStairsByDate(now)
   let stairsSoFar = 20;
   let compare = allUserActivityRepository.calculateAverageStairsClimbedbyDate(now) - stairsSoFar
