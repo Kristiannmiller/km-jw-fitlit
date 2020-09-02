@@ -1,20 +1,17 @@
-const User = require('../src/User')
 
 class UserActivity {
-  constructor(userActivity, userData){
+  constructor(userActivity){
     this.userActivity = userActivity;
-    this.userData = userData
-  }
-  calculateMiles(date){
-    let userStrideLength = this.userData[0].strideLength
-    console.log(userStrideLength)
-    // let stepsPerDate = this.userActivity.find(numSteps.date === date)???WHERE IS NUMSTEPS
-    console.log(stepsPerDate)
-    const milesPerDate = (userStrideLength*stepsPerDate)/5280
-    console.log(milesPerDate)
-    return milesPerDate
   }
 
+  milesWalked(date, user) {
+    let dateData = this.userActivity.find(oneDate => oneDate.date == date);
+    let stepsNeeded = 5280/user.strideLength;
+    let roundedStepsNeeded = Math.floor(stepsNeeded);
+    let milesWalked = dateData.numSteps/roundedStepsNeeded;
+    let roundedMilesWalked = Math.floor(milesWalked);
+    return roundedMilesWalked;
+  }
   calculateStepsTaken(date){
     let stepsPerDay = this.userActivity.find(stepsTaken => stepsTaken.date === date)
     return parseFloat((stepsPerDay.numSteps).toFixed(2))
@@ -33,11 +30,11 @@ class UserActivity {
     }, 0)
     return parseFloat((result/weekOfActivity.length).toFixed(2))
   }
-  // calculateStepGoalAchieved(date){
-  //   let stepGoalsAchieved = this.userActivity.find(goalAchieved =>
-  //     goalAchieved.date >
-  //   )
-  // }
+  calculateStepGoalAchieved(date){
+    let stepGoalsAchieved = this.userActivity.find(goalAchieved =>
+      goalAchieved.date > user.dailyStepGoal
+    )
+  }
 
   calculateDaysGoalExceeded(){
     let stepGoalsAchieved = this.userActivity.filter(goalAchieved => goalAchieved)
