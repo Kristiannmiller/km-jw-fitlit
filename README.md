@@ -71,12 +71,9 @@ Project Link: [https://github.com/Kristiannmiller/km-jw-fitlit](https://github.c
 
 ## Acknowledgements
 
-* []()
-* []()
-* []()
+Robert Gu - The developer team would like to thank Turing Module 2 anchor instructor Robert Gu for helping unlock the mysteries and potential of his favorite coding language, Javascript. 
 
-
-
+Travis Rollins - We would also like to thank Turing Module 2 instructor Travis Rollins for his guidance and assistance during this project and the module in general. 
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
