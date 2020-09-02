@@ -471,7 +471,7 @@ function displayActivityData(event) {
   displayDailyMilesChart(currentUserActivity, allUserActivityRepository)
   displayStairsChart(currentUserActivity, allUserActivityRepository)
   displayWeeklyStepsChart(currentUserActivity, allUserActivityRepository)
-  // displayWeeklySleepHoursChart(currentUserSleep, allUserSleepRepository)
+  displayWeeklyActiveMinsChart(currentUserActivity, allUserActivityRepository)
   // displayWeeklySleepQualityChart(currentUserSleep, allUserSleepRepository)
 }
 
@@ -494,19 +494,23 @@ function displayActivityPage(currentUserActivity, allUserActivityRepository) {
     <canvas id="dailyStairsClimbedWidget" width="100" height="100"></canvas>
     </div>
   </div>`
-  weeklySection.innerHTML = `<div class="box b"><div class="graphTitle"></div>
-  <h5 id="stepsCounter">You averaged 3000 steps for the week ending on ${weekEnd}</h5>
+  weeklySection.innerHTML = `<div class="box b">
+    <h5 id="stepsCounter">You averaged 3000 steps/day for the week ending on ${weekEnd}</h5>
   <div class="graph">
     <canvas id="weeklyStepsChart" width="100" height="100"></canvas>
   </div>
   </div>
   <div class="box h">
-  <div class="graphTitle">Name</div>
-  <div class="graph">Minutes Active</div>
+    <h5 id="stepsCounter">You averaged ${currentUserActivity.calculateAvgMinActivePerWeek(weekEnd)} active minutes/day for the week ending on ${weekEnd}</h5>
+  <div class="graph">
+    <canvas id="weeklyActiveMinsChart" width="100" height="100"></canvas>
+  </div>
   </div>
   <div class="box g">
-  <div class="graphTitle">Name</div>
-  <div class="graph">Miles Runned</div>
+    <h5 id="stepsCounter">You averaged ${currentUserActivity.calculateAvgMilesPerWeek(weekEnd)} miles/day for the week ending on ${weekEnd}</h5>
+  <div class="graph">
+    <canvas id="weeklyActiveMinsChart" width="100" height="100"></canvas>
+  </div>
   </div>
   <div class="box i">
   <div class="graphTitle">Name</div>
@@ -644,6 +648,91 @@ function displayWeeklyStepsChart(currentUserActivity, allUserActivityRepository)
       datasets: [{
         label: 'Steps This Week',
         data: stepsData,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+          }
+        }]
+      }
+    }
+  })
+}
+
+function displayWeeklyActiveMinsChart(currentUserActivity, allUserActivityRepository) {
+  let currentWeek = generateWeekDates()
+  let activeMinsWeek = document.getElementById('weeklyActiveMinsChart');
+  let activeMinsData = [100, 150, 162, 254, 10, 382, 450]
+  // let activeMinsData = currentUserActivity.calculateActiveMinsForWeek(weekEnd)
+  let activeMinsWeekChart = new Chart(activeMinsWeek, {
+    type: 'bar',
+    data: {
+      labels: currentWeek,
+      datasets: [{
+        label: 'Steps This Week',
+        data: activeMinsData,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+          }
+        }]
+      }
+    }
+  })
+}
+function displayWeeklyMilesChart(currentUserActivity, allUserActivityRepository) {
+  let currentWeek = generateWeekDates()
+  let activeMilesWeek = document.getElementById('weeklyActiveMinsChart');
+  let activeMinsData = [100, 150, 162, 254, 10, 382, 450]
+  // let activeMinsData = currentUserActivity.calculateActiveMinsForWeek(weekEnd)
+  let activeMinsWeekChart = new Chart(activeMinsWeek, {
+    type: 'bar',
+    data: {
+      labels: currentWeek,
+      datasets: [{
+        label: 'Steps This Week',
+        data: activeMinsData,
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
