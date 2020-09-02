@@ -470,7 +470,7 @@ function displayActivityData(event) {
   displayDailyActiveMinutesChart(currentUserActivity, allUserActivityRepository)
   displayDailyMilesChart(currentUserActivity, allUserActivityRepository)
   displayStairsChart(currentUserActivity, allUserActivityRepository)
-
+  displayWeeklyStepsChart(currentUserActivity, allUserActivityRepository)
   // displayWeeklySleepHoursChart(currentUserSleep, allUserSleepRepository)
   // displayWeeklySleepQualityChart(currentUserSleep, allUserSleepRepository)
 }
@@ -493,8 +493,11 @@ function displayActivityPage(currentUserActivity, allUserActivityRepository) {
     <canvas id="dailyStairsClimbedWidget" width="100" height="100"></canvas>
     </div>
   </div>`
-  weeklySection.innerHTML = `<div class="box b"><div class="graphTitle">Name</div>
-  <div class="graph">Steps Done Walked</div>
+  weeklySection.innerHTML = `<div class="box b"><div class="graphTitle"></div>
+  <h5 id="stepsCounter">Steps for the week ending on ${weekEnd}</h5>
+  <div class="graph">
+    <canvas id="weeklyStepsChart" width="100" height="100"></canvas>
+  </div>
   </div>
   <div class="box h">
   <div class="graphTitle">Name</div>
@@ -625,5 +628,48 @@ function displayStairsChart(currentUserActivity, allUserActivityRepository) {
       }]
     },
     options: {}
+  })
+}
+
+function displayWeeklyStepsChart(currentUserActivity, allUserActivityRepository) {
+  let currentWeek = generateWeekDates()
+  let stepsWeek = document.getElementById('weeklyStepsChart');
+  let stepsData = [1209, 4000, 6000, 5236, 8875, 10394, 15398]
+  // let stepsData = currentUserActivity.calculateStepsForWeek(weekEnd)
+  let stepsChartWeek = new Chart(stepsWeek, {
+    type: 'horizontalBar',
+    data: {
+      labels: currentWeek,
+      datasets: [{
+        label: 'Steps This Week',
+        data: stepsData,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+          }
+        }]
+      }
+    }
   })
 }
