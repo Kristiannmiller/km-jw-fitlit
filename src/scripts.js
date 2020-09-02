@@ -33,7 +33,7 @@ const weeklyCalendar = document.querySelector('.weekCal')
 
 // ********** EVENT LISTENERS **********
 window.addEventListener('load', updateUser);
-userName.addEventListener('click', displayProfile);
+userPhoto.addEventListener('click', displayProfile);
 sideBarContents.addEventListener('click', displayTeamList);
 hydrationMenu.addEventListener('click', displayHydrationData);
 sleepMenu.addEventListener('click', displaySleepData);
@@ -81,9 +81,10 @@ function uploadData() {
 }
 
 function displayUserData() {
-  userName.innerText = `Hello, ${currentUser.displayFirstName()}!`
-  userSteps.innerText = `${currentUser.dailyStepGoal}`// ***update when we do activity**
-  userPhoto.innerHTML = '<img class="userProfilePhoto" src="../assets/userImages/UserImage.jpg" alt="user profile image">'
+  userPhoto.innerHTML = `<img class="userProfilePhoto" src="../assets/userImages/UserImage.jpg" alt="a vibrant orange tiger bathing in a lush green jungle stream">
+  <h3>Hello, ${currentUser.displayFirstName()}!</h3>
+  <div id="userSteps" class="userSteps">
+  <h6>You've walked ${currentUser.dailyStepGoal} steps today</h6></div>`
 }
 
 function displayActivityData() {
