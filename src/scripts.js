@@ -416,7 +416,7 @@ function displayAllTimeSleepHoursChart(currentUserSleep, allUserSleepRepository)
   let allTimeSleepHoursWidget = new Chart(allTimeSleepHrs, {
     type: 'doughnut',
     data: {
-      labels: ['Average User', 'Your Average Sleep Hours'],
+      labels: ['', 'Your Average Sleep Hours'],
       datasets: [{
         data: [0, averageSleepHours],
         backgroundColor: [
@@ -474,6 +474,7 @@ function displayActivityData(event) {
   displayWeeklyActiveMinsChart(currentUserActivity, allUserActivityRepository)
   displayWeeklyMilesChart(currentUserActivity, allUserActivityRepository)
   displayWeeklyStairsChart(currentUserActivity, allUserActivityRepository)
+  displayAllTimeStepsChart(currentUserActivity, allUserActivityRepository)
 }
 function displayActivityPage(currentUserActivity, allUserActivityRepository) {
   // IN WIDGET A: ${currentUserActivity.calculateStepsByDate(now)}
@@ -482,6 +483,7 @@ function displayActivityPage(currentUserActivity, allUserActivityRepository) {
   // IN BOX B: ${currentUserActivity.calculateAverageWeeklySteps(weekEnd)}
   // IN BOX G: ${currentUserActivity.calculateAvgMilesPerWeek(weekEnd)}
   // IN BOX I: ${currentUserActivity.calculateAvgStairsPerWeek(weekEnd)}
+  // IN BOX M: ${currentUserActivity.findStepsRecord()}
   dailySection.innerHTML = `<div class="box e">
   <div class="widgetA"><h5 id="stepsCounter">1000 STEPS!</h5>
     <canvas id="dailyStepsWidget" width="100" height="100"></canvas>
@@ -519,11 +521,15 @@ function displayActivityPage(currentUserActivity, allUserActivityRepository) {
   <div class="graph">
     <canvas id="weeklyStairsChart" width="100" height="100"></canvas>
   </div>`
-  allTimeSection.innerHTML = `Personal Bests<div class="box l">
-  <div class="box m">Best Steps</div>
-  <div class="box n">Best Min/active</div>
-  <div class="box o">Best Miles</div>
-  <div class="box p">Best Stairs</div>
+  allTimeSection.innerHTML = `<h1>All Time Personal Bests</h1><div class="box l">
+  <div class="box m">
+    <div class="box m"><h5 class="smallGraphText">Your Steps / Day Record</h5>
+    <h5 class="smallGraphText">15000 steps</h5>
+    <canvas id="allTimeStepsRecord" width="100" height="100"></canvas>
+  </div>
+  <div class="box n">
+  <div class="box o">
+  <div class="box p">
   </div>`
   currentPage = 'activity'
 }
@@ -807,5 +813,29 @@ function displayWeeklyStairsChart(currentUserActivity, allUserActivityRepository
         }]
       }
     }
+  })
+}
+function displayAllTimeStepsChart(currentUserActivity, allUserActivityRepository) {
+  let allTimeSteps = document.getElementById('allTimeStepsRecord');
+  //let bestSteps = currentUserActivity.findStepsRecord()
+  let bestSteps = 15000
+  let allTimeStepsWidget = new Chart(allTimeSteps, {
+    type: 'doughnut',
+    data: {
+      labels: ['', 'Best Daily Steps'],
+      datasets: [{
+        data: [0, bestSteps],
+        backgroundColor: [
+          'rgba(249, 249, 249, 1)',
+          'rgba(116, 204, 195, 1)'
+        ],
+        borderColor: [
+          'rgba(204, 204, 204, 1)',
+          'rgba(116, 204, 195, 1)'
+        ],
+        borderWidth: 1,
+      }]
+    },
+    options: {}
   })
 }
