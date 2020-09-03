@@ -24,7 +24,7 @@ class UserActivity {
      return acc
    }, 0)
    return parseFloat((result/weekOfActivity.length).toFixed(0))
- }
+  }
   calculateMinActive(date){
     let minPerDay = this.userActivity.find(minActive => minActive.date === date)
     return parseFloat((minPerDay.minutesActive).toFixed(2))
@@ -39,7 +39,6 @@ class UserActivity {
     return parseFloat((result/weekOfActivity.length).toFixed(2))
   }
   calculateStepGoalAchieved(date, user){
-     console.log(user.dailyStepGoal)
     let dailySteps = this.userActivity.find(oneDate => oneDate.date == date);
     if (dailySteps > user.dailyStepGoal){
       return true;
@@ -52,21 +51,21 @@ class UserActivity {
     return parseFloat((stairsPerDay.flightsOfStairs).toFixed(2))
   }
   calculateStairsForWeek(endingDate) {
-  let endingDateIndex = this.userActivity.findIndex(activityRecord => activityRecord.date === endingDate)
-  let weekOfActivity = this.userActivity.slice(endingDateIndex-6, endingDateIndex+1)
-  let result = weekOfActivity.reduce((weekData, day) => {
-    weekData.push(day.flightsOfStairs)
-    return weekData
-  }, [])
+    let endingDateIndex = this.userActivity.findIndex(activityRecord => activityRecord.date === endingDate)
+    let weekOfActivity = this.userActivity.slice(endingDateIndex-6, endingDateIndex+1)
+    let result = weekOfActivity.reduce((weekData, day) => {
+      weekData.push(day.flightsOfStairs)
+      return weekData
+    }, [])
   return result
   }
   calculateAverageStairsPerWeek(endingDate) {
-  let endingDateIndex = this.userActivity.findIndex(activityData => activityData.date === endingDate)
-  let weekOfActivity = this.userActivity.slice(endingDateIndex-6, endingDateIndex+1)
-  let result = weekOfActivity.reduce((acc, currentValue) => {
-    acc += currentValue.flightsOfStairs
-    return acc
-  }, 0)
+    let endingDateIndex = this.userActivity.findIndex(activityData => activityData.date === endingDate)
+    let weekOfActivity = this.userActivity.slice(endingDateIndex-6, endingDateIndex+1)
+    let result = weekOfActivity.reduce((acc, currentValue) => {
+      acc += currentValue.flightsOfStairs
+      return acc
+    }, 0)
   return parseFloat((result/weekOfActivity.length).toFixed(0))
   }
   findStepsRecord() {
