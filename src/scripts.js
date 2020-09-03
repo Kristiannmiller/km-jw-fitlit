@@ -485,7 +485,6 @@ function displayActivityData(event) {
 function displayActivityPage(currentUserActivity, allUserActivityRepository) {
   // IN WIDGET C: ${currentUserActivity.milesWalked(now, currentUser.id)}
   // IN BOX G: ${currentUserActivity.calculateAverageWeeklyMiles(weekEnd)}
-  // IN BOX N: ${currentUserActivity.findActiveMinRecord()}
   // IN BOX 0: ${currentUserActivity.findMilesRecord()}
   dailySection.innerHTML = `<div class="box e">
   <div class="widgetA"><h5 id="stepsCounter">${currentUserActivity.calculateStepsTaken(now)} STEPS!</h5>
@@ -532,7 +531,7 @@ function displayActivityPage(currentUserActivity, allUserActivityRepository) {
   </div>
   <div class="box n">
     <h5 class="smallGraphText">Your Active Mins / Day Record</h5>
-    <h5 class="smallGraphText">300 minutes</h5>
+    <h5 class="smallGraphText">${currentUserActivity.findActiveMinRecord().minutesActive} minutes</h5>
     <canvas id="allTimeActiveMinutesRecord" width="100" height="100"></canvas>
   </div>
   <div class="box o">
@@ -700,8 +699,7 @@ function displayWeeklyStepsChart(currentUserActivity, allUserActivityRepository)
 function displayWeeklyActiveMinsChart(currentUserActivity, allUserActivityRepository) {
   let currentWeek = generateWeekDates()
   let activeMinsWeek = document.getElementById('weeklyActiveMinsChart');
-  let activeMinsData = [100, 150, 162, 254, 10, 382, 450]
-  // let activeMinsData = currentUserActivity.calculateActiveMinsForWeek(weekEnd)
+  let activeMinsData = currentUserActivity.calculateActiveMinsForWeek(weekEnd)
   let activeMinsWeekChart = new Chart(activeMinsWeek, {
     type: 'bar',
     data: {
@@ -848,8 +846,7 @@ function displayAllTimeStepsChart(currentUserActivity, allUserActivityRepository
 }
 function displayAllTimeActiveMinutesChart(currentUserActivity, allUserActivityRepository) {
   let allTimeActiveMins = document.getElementById('allTimeActiveMinutesRecord');
-  //let bestSteps = currentUserActivity.findActiveMinRecord()
-  let bestActiveMins = 300
+  let bestActiveMins = currentUserActivity.findActiveMinRecord().minutesActive
   let allTimeActiveMinsWidget = new Chart(allTimeActiveMins, {
     type: 'doughnut',
     data: {
