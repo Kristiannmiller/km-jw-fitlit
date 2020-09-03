@@ -69,6 +69,8 @@ function refreshPageData(event) {
     displayHydrationData()
   } else if(currentPage === 'sleep') {
     displaySleepData()
+  } else if(currentPage === 'activity') {
+    displayActivityData()
   }
 }
 
@@ -481,18 +483,11 @@ function displayActivityData(event) {
   displayAllTimeStairsChart(currentUserActivity, allUserActivityRepository)
 }
 function displayActivityPage(currentUserActivity, allUserActivityRepository) {
-  // IN WIDGET A: ${currentUserActivity.calculateStepsByDate(now)}
-  // IN WIDGET C: ${currentUserActivity.calculateMilesByDate(now)}
-  // IN WIDGET D: ${currentUserActivity.calculateStairsByDate(now)}
-  // IN BOX B: ${currentUserActivity.calculateAverageWeeklySteps(weekEnd)}
+  // IN WIDGET C: ${currentUserActivity.milesWalked(now, currentUser.id)}
   // IN BOX G: ${currentUserActivity.calculateAverageWeeklyMiles(weekEnd)}
-  // IN BOX I: ${currentUserActivity.calculateAvgStairsPerWeek(weekEnd)}
-  // IN BOX M: ${currentUserActivity.findStepsRecord()}
-  // IN BOX N: ${currentUserActivity.findActiveMinRecord()}
   // IN BOX 0: ${currentUserActivity.findMilesRecord()}
-  // IN BOX P: ${currentUserActivity.findStairsRecord()}
   dailySection.innerHTML = `<div class="box e">
-  <div class="widgetA"><h5 id="stepsCounter">1000 STEPS!</h5>
+  <div class="widgetA"><h5 id="stepsCounter">${currentUserActivity.calculateStepsTaken(now)} STEPS!</h5>
     <canvas id="dailyStepsWidget" width="100" height="100"></canvas>
     </div>
   <div class="widgetB"><h5 id="stepsCounter">${currentUserActivity.calculateMinActive(now)} ACTIVE MINS!</h5>
@@ -501,12 +496,12 @@ function displayActivityPage(currentUserActivity, allUserActivityRepository) {
   <div class="widgetC"><h5 id="stepsCounter">5 MILES!</h5>
     <canvas id="dailyMilesWidget" width="100" height="100"></canvas>
     </div>
-  <div class="widgetD"><h5 id="stepsCounter">25 FLIGHTS!</h5>
+  <div class="widgetD"><h5 id="stepsCounter">${currentUserActivity.calculateStairsByDate(now)} FLIGHTS!</h5>
     <canvas id="dailyStairsClimbedWidget" width="100" height="100"></canvas>
     </div>
   </div>`
   weeklySection.innerHTML = `<div class="box b">
-    <h5 id="stepsCounter">You averaged 3000 steps/day for the week ending on ${weekEnd}</h5>
+    <h5 id="stepsCounter">You averaged ${currentUserActivity.calculateAverageWeeklySteps(weekEnd)} steps/day for the week ending on ${weekEnd}</h5>
   <div class="graph">
     <canvas id="weeklyStepsChart" width="100" height="100"></canvas>
   </div>
@@ -524,19 +519,19 @@ function displayActivityPage(currentUserActivity, allUserActivityRepository) {
   </div>
   </div>
   <div class="box i">
-    <h5 id="stepsCounter">You averaged 25 flights/day for the week ending on ${weekEnd}</h5>
+    <h5 id="stepsCounter">You averaged ${currentUserActivity.calculateAverageStairsPerWeek(weekEnd)} flights/day for the week ending on ${weekEnd}</h5>
   <div class="graph">
     <canvas id="weeklyStairsChart" width="100" height="100"></canvas>
   </div>`
   allTimeSection.innerHTML = `<h1>All Time Personal Bests</h1><div class="box l">
   <div class="box m">
     <h5 class="smallGraphText">Your Steps / Day Record</h5>
-    <h5 class="smallGraphText">15000 steps</h5>
+    <h5 class="smallGraphText">${currentUserActivity.findStepsRecord().numSteps} steps</h5>
     <canvas id="allTimeStepsRecord" width="100" height="100"></canvas>
   </div>
   <div class="box n">
     <h5 class="smallGraphText">Your Active Mins / Day Record</h5>
-    <h5 class="smallGraphText">300 minutes</h5>
+    <h5 class="smallGraphText">${currentUserActivity.findActiveMinRecord().minutesActive} minutes</h5>
     <canvas id="allTimeActiveMinutesRecord" width="100" height="100"></canvas>
   </div>
   <div class="box o">
@@ -546,7 +541,7 @@ function displayActivityPage(currentUserActivity, allUserActivityRepository) {
     </div>
   <div class="box p">
     <h5 class="smallGraphText">Your Stairs / Day Record</h5>
-    <h5 class="smallGraphText">30 flights</h5>
+    <h5 class="smallGraphText">${currentUserActivity.findStairsRecord().flightsOfStairs} flights</h5>
     <canvas id="allTimeStairsRecord" width="100" height="100"></canvas>
   </div>`
   currentPage = 'activity'
@@ -580,11 +575,9 @@ function displayDailyActiveMinutesChart(currentUserActivity, allUserActivityRepo
 }
 function displayDailyStepsChart(currentUserActivity, allUserActivityRepository) {
   let stepsDay = document.getElementById('dailyStepsWidget');
-  // THIS GOES IN THE DATASETS AFTER METHOD IS COMPLETE
-  // let stepsSoFar = currentUserActivity.calculateStepsByDate(now)
-  // let stepsToGo = currentUser.dailyStepGoal - stepsSoFar > 0 ? stepsToGo = currentUser.dailyStepGoal - stepsSoFar : stepsToGo = 0
-  let stepsSoFar = 8000
-  let stepsToGo = 2000
+  let stepsSoFar = currentUserActivity.calculateStepsTaken(now)
+  let stepsToGo
+  currentUser.dailyStepGoal - stepsSoFar > 0 ? stepsToGo = currentUser.dailyStepGoal - stepsSoFar : stepsToGo = 0
   let dailyStepsWidget = new Chart(stepsDay, {
     type: 'doughnut',
     data: {
@@ -635,8 +628,7 @@ function displayDailyMilesChart(currentUserActivity, allUserActivityRepository) 
 }
 function displayDailyStairsChart(currentUserActivity, allUserActivityRepository) {
   let dailyStairs = document.getElementById('dailyStairsClimbedWidget');
-  // let stairsSoFar = currentUserActivity.calculateStairsByDate(now)
-  let stairsSoFar = 20;
+  let stairsSoFar = currentUserActivity.calculateStairsByDate(now);
   let compare = allUserActivityRepository.calculateAverageStairsClimbedbyDate(now) - stairsSoFar
   let remainder
   compare > 0 ? remainder = compare : remainder = 0
@@ -664,8 +656,7 @@ function displayDailyStairsChart(currentUserActivity, allUserActivityRepository)
 function displayWeeklyStepsChart(currentUserActivity, allUserActivityRepository) {
   let currentWeek = generateWeekDates()
   let stepsWeek = document.getElementById('weeklyStepsChart');
-  let stepsData = [1209, 4000, 6000, 5236, 8875, 10394, 15398]
-  // let stepsData = currentUserActivity.calculateStepsForWeek(weekEnd)
+  let stepsData = currentUserActivity.calculateStepsForWeek(weekEnd)
   let stepsChartWeek = new Chart(stepsWeek, {
     type: 'bar',
     data: {
@@ -707,8 +698,7 @@ function displayWeeklyStepsChart(currentUserActivity, allUserActivityRepository)
 function displayWeeklyActiveMinsChart(currentUserActivity, allUserActivityRepository) {
   let currentWeek = generateWeekDates()
   let activeMinsWeek = document.getElementById('weeklyActiveMinsChart');
-  let activeMinsData = [100, 150, 162, 254, 10, 382, 450]
-  // let activeMinsData = currentUserActivity.calculateActiveMinsForWeek(weekEnd)
+  let activeMinsData = currentUserActivity.calculateActiveMinsForWeek(weekEnd)
   let activeMinsWeekChart = new Chart(activeMinsWeek, {
     type: 'bar',
     data: {
@@ -750,7 +740,7 @@ function displayWeeklyMilesChart(currentUserActivity, allUserActivityRepository)
   let currentWeek = generateWeekDates()
   let activeMilesWeek = document.getElementById('weeklyMilesChart');
   let activeMilesData = [10, 15, 30, 4, 20, 15, 40]
-  // let activeMinsData = currentUserActivity.calculateMilesForWeek(weekEnd)
+  // let activeMilesData = currentUserActivity.calculateMilesForWeek(weekEnd)
   let activeMilesWeekChart = new Chart(activeMilesWeek, {
     type: 'bar',
     data: {
@@ -792,9 +782,8 @@ function displayWeeklyMilesChart(currentUserActivity, allUserActivityRepository)
 function displayWeeklyStairsChart(currentUserActivity, allUserActivityRepository) {
   let currentWeek = generateWeekDates()
   let stairsWeek = document.getElementById('weeklyStairsChart');
-  let stairsData = [20, 30, 43, 50, 20, 10, 50]
-  // let stairsData = currentUserActivity.calculateStairsForWeek(weekEnd)
-  let astairsWeekChart = new Chart(stairsWeek, {
+  let stairsData = currentUserActivity.calculateStairsForWeek(weekEnd)
+  let stairsWeekChart = new Chart(stairsWeek, {
     type: 'bar',
     data: {
       labels: currentWeek,
@@ -833,8 +822,7 @@ function displayWeeklyStairsChart(currentUserActivity, allUserActivityRepository
 }
 function displayAllTimeStepsChart(currentUserActivity, allUserActivityRepository) {
   let allTimeSteps = document.getElementById('allTimeStepsRecord');
-  //let bestSteps = currentUserActivity.findStepsRecord()
-  let bestSteps = 15000
+  let bestSteps = currentUserActivity.findStepsRecord().numSteps
   let allTimeStepsWidget = new Chart(allTimeSteps, {
     type: 'doughnut',
     data: {
@@ -857,8 +845,7 @@ function displayAllTimeStepsChart(currentUserActivity, allUserActivityRepository
 }
 function displayAllTimeActiveMinutesChart(currentUserActivity, allUserActivityRepository) {
   let allTimeActiveMins = document.getElementById('allTimeActiveMinutesRecord');
-  //let bestSteps = currentUserActivity.findActiveMinRecord()
-  let bestActiveMins = 300
+  let bestActiveMins = currentUserActivity.findActiveMinRecord().minutesActive
   let allTimeActiveMinsWidget = new Chart(allTimeActiveMins, {
     type: 'doughnut',
     data: {
@@ -905,8 +892,7 @@ function displayAllTimeMilesChart(currentUserActivity, allUserActivityRepository
 }
 function displayAllTimeStairsChart(currentUserActivity, allUserActivityRepository) {
   let allTimeStairs = document.getElementById('allTimeStairsRecord');
-  //let bestStairs = currentUserActivity.findStairsRecord()
-  let bestStairs = 30
+  let bestStairs = currentUserActivity.findStairsRecord().flightsOfStairs
   let allTimeStairsWidget = new Chart(allTimeStairs, {
     type: 'doughnut',
     data: {
