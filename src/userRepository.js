@@ -1,3 +1,5 @@
+
+
 class UserRepository {
   constructor(data){
     this.data = data
@@ -11,6 +13,7 @@ class UserRepository {
       let averageStepGoal = allStepGoals.reduce((a, b) => (a + b)) / this.data.length
       return averageStepGoal.toFixed(0)
     }
+
 
 }
 if (typeof module !== 'undefined') {
