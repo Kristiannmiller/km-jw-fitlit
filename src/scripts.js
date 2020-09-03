@@ -656,8 +656,7 @@ function displayDailyStairsChart(currentUserActivity, allUserActivityRepository)
 function displayWeeklyStepsChart(currentUserActivity, allUserActivityRepository) {
   let currentWeek = generateWeekDates()
   let stepsWeek = document.getElementById('weeklyStepsChart');
-  let stepsData = [1209, 4000, 6000, 5236, 8875, 10394, 15398]
-  // let stepsData = currentUserActivity.calculateStepsForWeek(weekEnd)
+  let stepsData = currentUserActivity.calculateStepsForWeek(weekEnd)
   let stepsChartWeek = new Chart(stepsWeek, {
     type: 'bar',
     data: {
@@ -741,7 +740,7 @@ function displayWeeklyMilesChart(currentUserActivity, allUserActivityRepository)
   let currentWeek = generateWeekDates()
   let activeMilesWeek = document.getElementById('weeklyMilesChart');
   let activeMilesData = [10, 15, 30, 4, 20, 15, 40]
-  // let activeMinsData = currentUserActivity.calculateMilesForWeek(weekEnd)
+  // let activeMilesData = currentUserActivity.calculateMilesForWeek(weekEnd)
   let activeMilesWeekChart = new Chart(activeMilesWeek, {
     type: 'bar',
     data: {
