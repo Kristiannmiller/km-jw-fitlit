@@ -164,6 +164,7 @@ function displayWeeklyHydrationChart(currentUserHydration, allUserHydrationRepos
     data: {
       labels: currentWeek,
       datasets: [{
+        label: 'Fl oz',
         data: currentUserHydration.waterForWeek(weekEnd),
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
@@ -275,6 +276,7 @@ function displayDailySleepHoursChart(currentUserSleep, allUserSleepRepository) {
       data: {
           labels: [moment(now).format('MM/DD/YYYY')],
           datasets: [{
+              label: 'Hours Slept',
               data: [currentUserSleep.calculateSleepByDate(now)],
               backgroundColor: [
                   'rgba(116, 204, 195, 1)',
@@ -341,7 +343,7 @@ function displayWeeklySleepHoursChart(currentUserSleep, allUserSleepRepository) 
     data: {
       labels: currentWeek,
       datasets: [{
-        label: 'Hours Slept',
+        label: 'Hours Slept This Day',
         data: currentUserSleep.calculateDailySleepHoursForWeek(weekEnd),
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
@@ -381,7 +383,7 @@ function displayWeeklySleepQualityChart(currentUserSleep, allUserSleepRepository
     data: {
       labels: currentWeek,
       datasets: [{
-        label: 'Quality of Sleep',
+        label: 'Quality of Sleep this Day',
         data: currentUserSleep.calculateDailySleepQualityForWeek(weekEnd),
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
@@ -660,7 +662,7 @@ function displayWeeklyStepsChart(currentUserActivity, allUserActivityRepository)
     data: {
       labels: currentWeek,
       datasets: [{
-        label: 'Steps This Week',
+        label: 'Steps This Day',
         data: stepsData,
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
@@ -702,7 +704,7 @@ function displayWeeklyActiveMinsChart(currentUserActivity, allUserActivityReposi
     data: {
       labels: currentWeek,
       datasets: [{
-        label: 'Steps This Week',
+        label: 'Minutes Active This Day',
         data: activeMinsData,
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
@@ -744,7 +746,7 @@ function displayWeeklyMilesChart(currentUserActivity, allUserActivityRepository)
     data: {
       labels: currentWeek,
       datasets: [{
-        label: 'Miles This Week',
+        label: 'Miles This Day',
         data: activeMilesData,
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
@@ -786,7 +788,7 @@ function displayWeeklyStairsChart(currentUserActivity, allUserActivityRepository
     data: {
       labels: currentWeek,
       datasets: [{
-        label: 'Flights This Week',
+        label: 'Flights This Day',
         data: stairsData,
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
