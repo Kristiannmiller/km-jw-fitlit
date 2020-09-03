@@ -483,7 +483,7 @@ function displayActivityData(event) {
   displayAllTimeStairsChart(currentUserActivity, allUserActivityRepository)
 }
 function displayActivityPage(currentUserActivity, allUserActivityRepository) {
-  // IN WIDGET C: ${currentUserActivity.milesWalked(now, currentUser.id)}
+  // IN WIDGET C:
   // IN BOX G: ${currentUserActivity.calculateAverageWeeklyMiles(weekEnd)}
   // IN BOX 0: ${currentUserActivity.findMilesRecord()}
   dailySection.innerHTML = `<div class="box e">
@@ -493,7 +493,7 @@ function displayActivityPage(currentUserActivity, allUserActivityRepository) {
   <div class="widgetB"><h5 id="stepsCounter">${currentUserActivity.calculateMinActive(now)} ACTIVE MINS!</h5>
     <canvas id="dailyActiveMinutesWidget" width="100" height="100"></canvas>
     </div>
-  <div class="widgetC"><h5 id="stepsCounter">5 MILES!</h5>
+  <div class="widgetC"><h5 id="stepsCounter">${currentUserActivity.calculateMiles(now, currentUser)} MILES!</h5>
     <canvas id="dailyMilesWidget" width="100" height="100"></canvas>
     </div>
   <div class="widgetD"><h5 id="stepsCounter">${currentUserActivity.calculateStairsByDate(now)} FLIGHTS!</h5>
@@ -600,12 +600,11 @@ function displayDailyStepsChart(currentUserActivity, allUserActivityRepository) 
 }
 function displayDailyMilesChart(currentUserActivity, allUserActivityRepository) {
   let dailyMiles = document.getElementById('dailyMilesWidget');
-  // let milesSoFar = currentUserActivity.calculateMilesByDate(now)
-  // let compare = allUserActivityRepository.calculateAverageMilesByDate(now) - milesSoFar
-  let milesSoFar = 10;
-  let compare = 15
+  let milesSoFar = currentUserActivity.calculateMiles(now, currentUser);
+  let compare = allUserActivityRepository.calculateAverageMilesByDate(now) - milesSoFar
   let remainder
   compare > 0 ? remainder = compare : remainder = 0
+  console.log(allUserActivityRepository.calculateAverageMilesByDate(now))
   let dailyMilesWidget = new Chart(dailyMiles, {
     type: 'doughnut',
     data: {

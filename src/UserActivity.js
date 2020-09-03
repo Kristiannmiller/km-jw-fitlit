@@ -12,6 +12,7 @@ class UserActivity {
     let milesWalked = dateData.numSteps/stepsNeeded;
     return parseFloat((milesWalked).toFixed(2));
   }
+  
   calculateStepsTaken(date){
     let stepsPerDay = this.userActivity.find(stepsTaken => stepsTaken.date === date)
     return parseFloat((stepsPerDay.numSteps).toFixed(2))

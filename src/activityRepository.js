@@ -8,6 +8,10 @@ class ActivityRepository {
     let userActivityData = this.allActivityData.filter(activityData => activityData.userID === id)
     return userActivityData
   }
+  calculateAverageMilesByDate(date) {
+    let averageMiles = (this.calculateAverageStepsTakenbyDate(date) * 3.5) / 5280
+    return averageMiles
+  }
   calculateAverageStairsClimbedbyDate(date) {
     let targetDateData = this.allActivityData.filter(activityData => activityData.date === date)
     let averageStairsClimbed = targetDateData.reduce((acc, user) => {
