@@ -3,6 +3,7 @@ const expect = chai.expect;
 
 const ActivityRepository = require('../src/ActivityRepository')
 const UserActivity = require('../src/UserActivity')
+const User = require('../src/User')
 
 const userData = [
   {
@@ -468,10 +469,11 @@ describe('UserActivity', () => {
   });
 
   it('should be able to track the number of miles the user has walked for a specific date', () => {
+    let testUser = new User(userData[0])
     let testRepository = new ActivityRepository(activityData)
     let userActivityStats = new UserActivity(activityData);
 
-    expect(userActivityStats.calculateMiles('2019/06/15', 1)).to.equal(2.91)
+    expect(userActivityStats.calculateMiles('2019/06/15', testUser)).to.equal(2.91)
   });
 
   it('should be able to track the number of steps taken by a given user for a specific date', () => {
@@ -489,6 +491,14 @@ describe('UserActivity', () => {
     expect(userActivityStats.calculateMinActive('2019/06/15')).to.equal(140)
   });
 
+  it('should be able to calculate how many steps the user averaged for a given week', () => {
+   let testRepository = new ActivityRepository(activityData)
+   userActivityData = testRepository.findUserById(1);
+   let userActivityStats = new UserActivity(userActivityData)
+   console.log(userActivityStats)
+   expect(userActivityStats.calculateAverageWeeklySteps('2019/06/21')).to.deep.equal(8376)
+  });
+
   it('should be able to calculate how many minutes active the user averaged for a given week', () => {
     let testRepository = new ActivityRepository(activityData)
     let userActivityData = testRepository.findUserById(1);
@@ -497,17 +507,47 @@ describe('UserActivity', () => {
     expect(userActivityStats.calculateAvgMinActivePerWeek('2019/06/22')).to.deep.equal(168.14)
   });
   it('should be able to calculate whether the user has exceeded their daily step goal', () => {
+    let testUser = new User(userData[0])
     let testRepository = new ActivityRepository(activityData)
-    let userActivityData = testRepository.findUserById(1);
-    let userActivityStats = new UserActivity(userActivityData)
+    let userActivityStats = new UserActivity(activityData[0]);
 
-    expect(userActivityStats.calculateStepGoalAchieved('2019/06/15', 1)).to.equal(false)
+    expect(userActivityStats.stepGoalAchieved('2019/06/15', testUser)).to.equal(false)
   });
   it('should be able to track the number of stairs taken by a given user for a specific date', () => {
+    let testUser = new User(userData[0])
     let testRepository = new ActivityRepository(activityData)
     let userActivityData = testRepository.findUserById(1);
     let userActivityStats = new UserActivity(userActivityData);
 
-    expect(userActivityStats.calculateStairsByDate('2019/06/15')).to.equal(16)
+    expect(userActivityStats.calculateStairsByDate('2019/06/15', testUser)).to.equal(16)
   });
+  it('should return flights for each day over a week', () => {
+   let testRepository = new ActivityRepository(activityData)
+   userActivityData = testRepository.findUserById(1)
+   let userActivityStats = new UserActivity(userActivityData)
+
+   expect(userActivityStats.calculateStairsForWeek("2019/06/21")).to.deep.equal(
+     [16, 36, 18, 33, 2, 12, 6])
+   });
+   it('should be able to calculate how many flights of stairs the user averaged for a given week', () => {
+    let testRepository = new ActivityRepository(activityData)
+    userActivityData = testRepository.findUserById(1);
+    let userActivityStats = new UserActivity(userActivityData)
+
+    expect(userActivityStats.calculateAverageStairsPerWeek('2019/06/21')).to.equal(18)
+  });
+  it('should return the record of the users highest daily step count', () => {
+    let testRepository = new ActivityRepository(activityData)
+    userActivityData = testRepository.findUserById(1);
+    let userActivityStats = new UserActivity(userActivityData)
+
+    expect(userActivityStats.findStepsRecord()).to.deep.equal({"userID": 1, "date": "2019/06/20", "numSteps": 14478, "minutesActive": 140, "flightsOfStairs": 12})
+  });
+  it('should return the record of the users highest daily stair count', () => {
+    let testRepository = new ActivityRepository(activityData)
+    userActivityData = testRepository.findUserById(1);
+    let userActivityStats = new UserActivity(userActivityData)
+
+    expect(userActivityStats.findStairsRecord()).to.deep.equal({"userID": 1, "date": "2019/06/27", "numSteps": 3303, "minutesActive": 79, "flightsOfStairs": 39})
+  })
 })

@@ -26,6 +26,7 @@ class ActivityRepository {
   }
   calculateAverageMinutesActivebyDate(date) {
     const targetDateData = this.allActivityData.filter(activityData => activityData.date === date)
+    console.log(targetDateData)
     const averageMinActive = targetDateData.reduce((acc, user) => {
       acc += user.minutesActive
       return acc
