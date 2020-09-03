@@ -10,7 +10,7 @@ class ActivityRepository {
   }
   calculateAverageMilesByDate(date) {
     let averageMiles = (this.calculateAverageStepsTakenbyDate(date) * 3.5) / 5280
-    return averageMiles
+    return parseFloat(averageMiles).toFixed(2)
   }
   calculateAverageStairsClimbedbyDate(date) {
     let targetDateData = this.allActivityData.filter(activityData => activityData.date === date)

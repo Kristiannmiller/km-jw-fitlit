@@ -483,20 +483,19 @@ function displayActivityData(event) {
   displayAllTimeStairsChart(currentUserActivity, allUserActivityRepository)
 }
 function displayActivityPage(currentUserActivity, allUserActivityRepository) {
-  // IN WIDGET C:
   // IN BOX G: ${currentUserActivity.calculateAverageWeeklyMiles(weekEnd)}
   // IN BOX 0: ${currentUserActivity.findMilesRecord()}
   dailySection.innerHTML = `<div class="box e">
-  <div class="widgetA"><h5 id="stepsCounter">${currentUserActivity.calculateStepsTaken(now)} STEPS!</h5>
+  <div class="widgetA"><h5 id="stepsCounter">${currentUserActivity.calculateStepsTaken(now)} STEPS! / Your Goal: ${currentUser.dailyStepGoal}</h5>
     <canvas id="dailyStepsWidget" width="100" height="100"></canvas>
     </div>
-  <div class="widgetB"><h5 id="stepsCounter">${currentUserActivity.calculateMinActive(now)} ACTIVE MINS!</h5>
+  <div class="widgetB"><h5 id="stepsCounter">${currentUserActivity.calculateMinActive(now)} ACTIVE MINS! / Average User Today: ${allUserActivityRepository.calculateAverageMinutesActivebyDate(now)}</h5>
     <canvas id="dailyActiveMinutesWidget" width="100" height="100"></canvas>
     </div>
-  <div class="widgetC"><h5 id="stepsCounter">${currentUserActivity.calculateMiles(now, currentUser)} MILES!</h5>
+  <div class="widgetC"><h5 id="stepsCounter">${currentUserActivity.calculateMiles(now, currentUser)} MILES! / Average User Today: ${allUserActivityRepository.calculateAverageMilesByDate(now)}</h5>
     <canvas id="dailyMilesWidget" width="100" height="100"></canvas>
     </div>
-  <div class="widgetD"><h5 id="stepsCounter">${currentUserActivity.calculateStairsByDate(now)} FLIGHTS!</h5>
+  <div class="widgetD"><h5 id="stepsCounter">${currentUserActivity.calculateStairsByDate(now)} FLIGHTS! / Average User Today: ${allUserActivityRepository.calculateAverageStairsClimbedbyDate(now)}</h5>
     <canvas id="dailyStairsClimbedWidget" width="100" height="100"></canvas>
     </div>
   </div>`
