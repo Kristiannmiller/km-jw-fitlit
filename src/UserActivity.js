@@ -1,5 +1,5 @@
-const User = require('../src/User')
-const UserRepository = require('../src/UserRepository')
+// const User = require('../src/User')
+// const UserRepository = require('../src/UserRepository')
 
 class UserActivity {
   constructor(userActivity, userData){
@@ -12,6 +12,7 @@ class UserActivity {
     let milesWalked = dateData.numSteps/stepsNeeded;
     return parseFloat((milesWalked).toFixed(2));
   }
+  
   calculateStepsTaken(date){
     let stepsPerDay = this.userActivity.find(stepsTaken => stepsTaken.date === date)
     return parseFloat((stepsPerDay.numSteps).toFixed(2))
@@ -91,6 +92,15 @@ class UserActivity {
     let weekOfActivity = this.userActivity.slice(endingDateIndex-6, endingDateIndex+1)
     let result = weekOfActivity.reduce((weekData, day) => {
       weekData.push(day.minutesActive)
+      return weekData
+    }, [])
+    return result
+  }
+  calculateStepsForWeek(endingDate) {
+    let endingDateIndex = this.userActivity.findIndex(activityRecord => activityRecord.date === endingDate)
+    let weekOfActivity = this.userActivity.slice(endingDateIndex-6, endingDateIndex+1)
+    let result = weekOfActivity.reduce((weekData, day) => {
+      weekData.push(day.numSteps)
       return weekData
     }, [])
     return result

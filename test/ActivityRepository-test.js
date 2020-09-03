@@ -518,4 +518,9 @@ describe('ActivityRepository', () => {
     let testRepository = new ActivityRepository(activityData);
     expect(testRepository.findBestClimber('2019/06/15')).to.deep.equal(testRepository.allActivityData[2])
   });
+  it ('should calculate the average number of miles walked by all users on a given date', () => {
+    let testRepository = new ActivityRepository(activityData);
+    expect(testRepository.calculateAverageStepsTakenbyDate('2019/06/15')).to.equal(4689.75)
+  });
+
 })
