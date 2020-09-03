@@ -565,4 +565,12 @@ describe('UserActivity', () => {
     expect(userActivityStats.calculateActiveMinsForWeek("2019/06/21")).to.deep.equal(
       [140, 175, 168, 165, 275, 140, 135])
   });
+  it('should return number of steps for each day over a week', () => {
+    let testRepository = new ActivityRepository(activityData)
+    userActivityData = testRepository.findUserById(1)
+    let userActivityStats = new UserActivity(userActivityData)
+
+    expect(userActivityStats.calculateStepsForWeek("2019/06/21")).to.deep.equal(
+      [3577, 6637, 14329, 4419, 8429, 14478, 6760])
+  });
 })
