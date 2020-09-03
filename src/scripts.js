@@ -155,7 +155,6 @@ function displayHydrationPage() {
   currentPage = 'hydration'
 }
 
-
 function displayWeeklyHydrationChart(currentUserHydration, allUserHydrationRepository) {
   let currentWeek = generateWeekDates()
   let har = document.getElementById('hydrationChartWeek')
@@ -208,7 +207,6 @@ function displayDailyHydrationChart(currentUserHydration, allUserHydrationReposi
               data: [currentUserHydration.waterByDate(now)],
               backgroundColor: [
                   'rgba(116, 204, 195, 1)',
-
               ],
               borderColor: [
                   'rgba(58, 156, 147, 1)',
@@ -245,6 +243,7 @@ function displaySleepData(event) {
   displayAllTimeSleepHoursChart(currentUserSleep, allUserSleepRepository)
   displayAllTimeSleepQualityChart(currentUserSleep, allUserSleepRepository)
 }
+
 function displaySleepPage(currentUserSleep, allUserSleepRepository) {
   dailySection.innerHTML = `<div class="sleepWrapper">
     <div class="sleepToday">
@@ -269,6 +268,7 @@ function displaySleepPage(currentUserSleep, allUserSleepRepository) {
     </div>`
   currentPage = 'sleep'
 }
+
 function displayDailySleepHoursChart(currentUserSleep, allUserSleepRepository) {
   let sleepHrsDaily = document.getElementById('dailySleepHoursChart');
   let sleepHoursChartDay = new Chart(sleepHrsDaily, {
@@ -301,7 +301,8 @@ function displayDailySleepHoursChart(currentUserSleep, allUserSleepRepository) {
           }
       }
   });
-};
+}
+
 function displayDailySleepQualityChart(currentUserSleep, allUserSleepRepository) {
   let sleepQualDaily = document.getElementById('dailySleepQualityChart');
   let sleepQualChartDay = new Chart(sleepQualDaily, {
@@ -334,7 +335,8 @@ function displayDailySleepQualityChart(currentUserSleep, allUserSleepRepository)
           }
       }
   });
-};
+}
+
 function displayWeeklySleepHoursChart(currentUserSleep, allUserSleepRepository) {
   let currentWeek = generateWeekDates()
   let sleepHrsWeek = document.getElementById('weeklySleepHoursChart');
@@ -375,6 +377,7 @@ function displayWeeklySleepHoursChart(currentUserSleep, allUserSleepRepository) 
     }
   })
 }
+
 function displayWeeklySleepQualityChart(currentUserSleep, allUserSleepRepository) {
   let currentWeek = generateWeekDates()
   let sleepQualWeek = document.getElementById('weeklySleepQualityChart');
@@ -415,6 +418,7 @@ function displayWeeklySleepQualityChart(currentUserSleep, allUserSleepRepository
     }
   })
 }
+
 function displayAllTimeSleepHoursChart(currentUserSleep, allUserSleepRepository) {
   let allTimeSleepHrs = document.getElementById('allTimeSleepHoursChart');
   let averageSleepHours = currentUserSleep.calculateAverageSleepHours()
@@ -438,6 +442,7 @@ function displayAllTimeSleepHoursChart(currentUserSleep, allUserSleepRepository)
     options: {}
   })
 }
+
 function displayAllTimeSleepQualityChart(currentUserSleep, allUserSleepRepository) {
   let allTimeSleepQuality = document.getElementById('allTimeSleepQualityChart');
   let averageSleepQuality = currentUserSleep.calculateAverageSleepQuality()
@@ -484,9 +489,8 @@ function displayActivityData(event) {
   displayAllTimeMilesChart(currentUserActivity, allUserActivityRepository)
   displayAllTimeStairsChart(currentUserActivity, allUserActivityRepository)
 }
+
 function displayActivityPage(currentUserActivity, allUserActivityRepository) {
-  // IN BOX G: ${currentUserActivity.calculateAverageWeeklyMiles(weekEnd)}
-  // IN BOX 0: ${currentUserActivity.findMilesRecord()}
   dailySection.innerHTML = `<div class="box e">
   <div class="widgetA"><h5 id="stepsCounter">${currentUserActivity.calculateStepsTaken(now)} STEPS! / Your Goal: ${currentUser.dailyStepGoal}</h5>
     <canvas id="dailyStepsWidget" width="100" height="100"></canvas>
@@ -574,6 +578,7 @@ function displayDailyActiveMinutesChart(currentUserActivity, allUserActivityRepo
     options: {}
   })
 }
+
 function displayDailyStepsChart(currentUserActivity, allUserActivityRepository) {
   let stepsDay = document.getElementById('dailyStepsWidget');
   let stepsSoFar = currentUserActivity.calculateStepsTaken(now)
@@ -599,6 +604,7 @@ function displayDailyStepsChart(currentUserActivity, allUserActivityRepository) 
     options: {}
   })
 }
+
 function displayDailyMilesChart(currentUserActivity, allUserActivityRepository) {
   let dailyMiles = document.getElementById('dailyMilesWidget');
   let milesSoFar = currentUserActivity.calculateMiles(now, currentUser);
@@ -626,6 +632,7 @@ function displayDailyMilesChart(currentUserActivity, allUserActivityRepository) 
     options: {}
   })
 }
+
 function displayDailyStairsChart(currentUserActivity, allUserActivityRepository) {
   let dailyStairs = document.getElementById('dailyStairsClimbedWidget');
   let stairsSoFar = currentUserActivity.calculateStairsByDate(now);
@@ -736,6 +743,7 @@ function displayWeeklyActiveMinsChart(currentUserActivity, allUserActivityReposi
     }
   })
 }
+
 function displayWeeklyMilesChart(currentUserActivity, allUserActivityRepository) {
   let currentWeek = generateWeekDates()
   let activeMilesWeek = document.getElementById('weeklyMilesChart');
@@ -820,6 +828,7 @@ function displayWeeklyStairsChart(currentUserActivity, allUserActivityRepository
     }
   })
 }
+
 function displayAllTimeStepsChart(currentUserActivity, allUserActivityRepository) {
   let allTimeSteps = document.getElementById('allTimeStepsRecord');
   let bestSteps = currentUserActivity.findStepsRecord().numSteps
@@ -843,6 +852,7 @@ function displayAllTimeStepsChart(currentUserActivity, allUserActivityRepository
     options: {}
   })
 }
+
 function displayAllTimeActiveMinutesChart(currentUserActivity, allUserActivityRepository) {
   let allTimeActiveMins = document.getElementById('allTimeActiveMinutesRecord');
   let bestActiveMins = currentUserActivity.findActiveMinRecord().minutesActive
@@ -866,9 +876,9 @@ function displayAllTimeActiveMinutesChart(currentUserActivity, allUserActivityRe
     options: {}
   })
 }
+
 function displayAllTimeMilesChart(currentUserActivity, allUserActivityRepository) {
   let allTimeMiles = document.getElementById('allTimeMilesRecord');
-  //let bestMiles = currentUserActivity.findMilesRecord()
   let bestMiles = 50
   let allTimeMilesWidget = new Chart(allTimeMiles, {
     type: 'doughnut',
@@ -890,6 +900,7 @@ function displayAllTimeMilesChart(currentUserActivity, allUserActivityRepository
     options: {}
   })
 }
+
 function displayAllTimeStairsChart(currentUserActivity, allUserActivityRepository) {
   let allTimeStairs = document.getElementById('allTimeStairsRecord');
   let bestStairs = currentUserActivity.findStairsRecord().flightsOfStairs

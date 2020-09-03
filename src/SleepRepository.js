@@ -13,11 +13,6 @@ class SleepRepository {
       let week = this.allUserData.slice(endingDateIndex.date-6, endingDateIndex.date+1)
       return week
     }
-    //filter the user data to include only unique IDs
-    //have the weekly average thingy run on each of those arrays
-    //put them results into an array
-    //.sort() on those results
-    //return ... the ones more than 3.
     getSleepQualityAverage(){
       let averageSleepQuality = this.allUserData.reduce((acc, user) => {
         acc += user.sleepQuality
