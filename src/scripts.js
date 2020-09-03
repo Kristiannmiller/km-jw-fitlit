@@ -529,7 +529,7 @@ function displayActivityPage(currentUserActivity, allUserActivityRepository) {
   allTimeSection.innerHTML = `<h1>All Time Personal Bests</h1><div class="box l">
   <div class="box m">
     <h5 class="smallGraphText">Your Steps / Day Record</h5>
-    <h5 class="smallGraphText">15000 steps</h5>
+    <h5 class="smallGraphText">${currentUserActivity.findStepsRecord().numSteps} steps</h5>
     <canvas id="allTimeStepsRecord" width="100" height="100"></canvas>
   </div>
   <div class="box n">
@@ -827,8 +827,7 @@ function displayWeeklyStairsChart(currentUserActivity, allUserActivityRepository
 }
 function displayAllTimeStepsChart(currentUserActivity, allUserActivityRepository) {
   let allTimeSteps = document.getElementById('allTimeStepsRecord');
-  //let bestSteps = currentUserActivity.findStepsRecord()
-  let bestSteps = 15000
+  let bestSteps = currentUserActivity.findStepsRecord().numSteps
   let allTimeStepsWidget = new Chart(allTimeSteps, {
     type: 'doughnut',
     data: {
