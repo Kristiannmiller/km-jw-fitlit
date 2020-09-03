@@ -485,7 +485,6 @@ function displayActivityData(event) {
 function displayActivityPage(currentUserActivity, allUserActivityRepository) {
   // IN WIDGET C: ${currentUserActivity.milesWalked(now, currentUser.id)}
   // IN BOX G: ${currentUserActivity.calculateAverageWeeklyMiles(weekEnd)}
-  // IN BOX I: ${currentUserActivity.calculateAvgStairsPerWeek(weekEnd)}
   // IN BOX M: ${currentUserActivity.findStepsRecord()}
   // IN BOX N: ${currentUserActivity.findActiveMinRecord()}
   // IN BOX 0: ${currentUserActivity.findMilesRecord()}
@@ -523,7 +522,7 @@ function displayActivityPage(currentUserActivity, allUserActivityRepository) {
   </div>
   </div>
   <div class="box i">
-    <h5 id="stepsCounter">You averaged 25 flights/day for the week ending on ${weekEnd}</h5>
+    <h5 id="stepsCounter">You averaged ${currentUserActivity.calculateAverageStairsPerWeek(weekEnd)} flights/day for the week ending on ${weekEnd}</h5>
   <div class="graph">
     <canvas id="weeklyStairsChart" width="100" height="100"></canvas>
   </div>`
