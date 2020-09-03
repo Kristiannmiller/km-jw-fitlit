@@ -549,5 +549,20 @@ describe('UserActivity', () => {
     let userActivityStats = new UserActivity(userActivityData)
 
     expect(userActivityStats.findStairsRecord()).to.deep.equal({"userID": 1, "date": "2019/06/27", "numSteps": 3303, "minutesActive": 79, "flightsOfStairs": 39})
-  })
+  });
+  it('should return the record of the users highest daily active minutes count', () => {
+    let testRepository = new ActivityRepository(activityData)
+    userActivityData = testRepository.findUserById(1);
+    let userActivityStats = new UserActivity(userActivityData)
+
+    expect(userActivityStats.findActiveMinRecord()).to.deep.equal({"userID": 1, "date": "2019/06/19", "numSteps": 8429, "minutesActive": 275, "flightsOfStairs": 2})
+  });
+  it('should return minutes active for each day over a week', () => {
+    let testRepository = new ActivityRepository(activityData)
+    userActivityData = testRepository.findUserById(1)
+    let userActivityStats = new UserActivity(userActivityData)
+
+    expect(userActivityStats.calculateActiveMinsForWeek("2019/06/21")).to.deep.equal(
+      [140, 175, 168, 165, 275, 140, 135])
+  });
 })

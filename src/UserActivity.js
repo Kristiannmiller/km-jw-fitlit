@@ -39,7 +39,7 @@ class UserActivity {
     return parseFloat((result/weekOfActivity.length).toFixed(2))
   }
   calculateStepGoalAchieved(date, user){
-    console.log("this is the user", user.dailyStepGoal)
+     console.log(user.dailyStepGoal)
     let dailySteps = this.userActivity.find(oneDate => oneDate.date == date);
     if (dailySteps > user.dailyStepGoal){
       return true;
@@ -80,7 +80,22 @@ class UserActivity {
      return b.flightsOfStairs - a.flightsOfStairs
    })
    return bestClimb[0]
- }
+  }
+  findActiveMinRecord() {
+  let bestActiveMin = this.userActivity.sort((a,b) => {
+    return b.minutesActive - a.minutesActive
+  })
+  return bestActiveMin[0]
+  }
+  calculateActiveMinsForWeek(endingDate) {
+    let endingDateIndex = this.userActivity.findIndex(activityRecord => activityRecord.date === endingDate)
+    let weekOfActivity = this.userActivity.slice(endingDateIndex-6, endingDateIndex+1)
+    let result = weekOfActivity.reduce((weekData, day) => {
+      weekData.push(day.minutesActive)
+      return weekData
+    }, [])
+    return result
+  }
 }
 
 if (typeof module !== 'undefined') {
