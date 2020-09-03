@@ -485,10 +485,8 @@ function displayActivityData(event) {
 function displayActivityPage(currentUserActivity, allUserActivityRepository) {
   // IN WIDGET C: ${currentUserActivity.milesWalked(now, currentUser.id)}
   // IN BOX G: ${currentUserActivity.calculateAverageWeeklyMiles(weekEnd)}
-  // IN BOX M: ${currentUserActivity.findStepsRecord()}
   // IN BOX N: ${currentUserActivity.findActiveMinRecord()}
   // IN BOX 0: ${currentUserActivity.findMilesRecord()}
-  // IN BOX P: ${currentUserActivity.findStairsRecord()}
   dailySection.innerHTML = `<div class="box e">
   <div class="widgetA"><h5 id="stepsCounter">${currentUserActivity.calculateStepsTaken(now)} STEPS!</h5>
     <canvas id="dailyStepsWidget" width="100" height="100"></canvas>
@@ -544,7 +542,7 @@ function displayActivityPage(currentUserActivity, allUserActivityRepository) {
     </div>
   <div class="box p">
     <h5 class="smallGraphText">Your Stairs / Day Record</h5>
-    <h5 class="smallGraphText">30 flights</h5>
+    <h5 class="smallGraphText">${currentUserActivity.findStairsRecord().flightsOfStairs} flights</h5>
     <canvas id="allTimeStairsRecord" width="100" height="100"></canvas>
   </div>`
   currentPage = 'activity'
@@ -898,8 +896,7 @@ function displayAllTimeMilesChart(currentUserActivity, allUserActivityRepository
 }
 function displayAllTimeStairsChart(currentUserActivity, allUserActivityRepository) {
   let allTimeStairs = document.getElementById('allTimeStairsRecord');
-  //let bestStairs = currentUserActivity.findStairsRecord()
-  let bestStairs = 30
+  let bestStairs = currentUserActivity.findStairsRecord().flightsOfStairs
   let allTimeStairsWidget = new Chart(allTimeStairs, {
     type: 'doughnut',
     data: {
