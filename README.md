@@ -2,7 +2,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/Kristiannmiller/km-jw-fitlit">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="assets/FitLitInAction.gif" alt="Logo" width="600">
   </a>
 
   <h3 align="center">Fitlit</h3>
@@ -28,7 +28,7 @@
 
 ## About The Project
 
-This project is part of Turing Software and Design's Front-End Program, Module 2. The project focused on building an application using test-driven-development (TDD) every step of the way. The program was implemented with ES6 syntax and exclusively uses array-prototype methods whenever iterations need to be performed. There are no for loops used in the program. Four distince databases were originally supplied, each representing large chunks of data for 50 randomly generated "users". Our task was to create several objects containing methods which would dynamically display a given users' data on the DOM when selected. 
+This project is part of Turing Software and Design's Front-End Program, Module 2. The project focused on building an application using test-driven-development (TDD) every step of the way. The program was implemented with ES6 syntax and exclusively uses array-prototype methods whenever iterations need to be performed. There are no for loops used in the program. Four distince databases were originally supplied, each representing large chunks of data for 50 randomly generated "users". Our task was to create several objects containing methods which would dynamically display a given users' data on the DOM when selected.
 
 ### Built With
 
@@ -52,11 +52,11 @@ Chart.js
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
 ## Roadmap
-The total allotted time for this project was approximately 10 days. Future features contemplated by the developers included the following: 
+The total allotted time for this project was approximately 10 days. Future features contemplated by the developers included the following:
 
 - More fully responsive DOM;
 - Methods to compare a user's friends' (team) daily stats against another user's friends' stats;
-- Update the data being used with apis and porting the information to a remote server; 
+- Update the data being used with apis and porting the information to a remote server;
 
 See the [open issues](https://github.com/Kristiannmiller/km-jw-fitlit/issues) for a list of proposed features (and known issues).
 
@@ -71,9 +71,9 @@ Project Link: [https://github.com/Kristiannmiller/km-jw-fitlit](https://github.c
 
 ## Acknowledgements
 
-Robert Gu - The developer team would like to thank Turing Module 2 anchor instructor Robert Gu for helping unlock the mysteries and potential of his favorite coding language, Javascript. 
+Robert Gu - The developer team would like to thank Turing Module 2 anchor instructor Robert Gu for helping unlock the mysteries and potential of his favorite coding language, Javascript.
 
-Travis Rollins - We would also like to thank Turing Module 2 instructor Travis Rollins for his guidance and assistance during this project and the module in general. 
+Travis Rollins - We would also like to thank Turing Module 2 instructor Travis Rollins for his guidance and assistance during this project and the module in general.
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
